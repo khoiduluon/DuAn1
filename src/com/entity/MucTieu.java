@@ -10,5 +10,5 @@ package com.entity;
  * @author trantrung
  */
 public class MucTieu {
-    
+    String tenMT;
 }
