@@ -5,31 +5,31 @@
  */
 package com.UI;
 
-
-
-
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.Graphics;
+import java.awt.Insets;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
+import sun.lwawt.macosx.CocoaConstants;
 
 public class DangNhap extends javax.swing.JFrame {
-    
 
     public DangNhap() {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        this.setBackground(new Color(0,0,0,0));
-        jPanel1.setBackground(new Color(57,52,103));
-        lblQuenMK.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        lblDangKy.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        btnDangNhap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        this.setBackground(new Color(0, 0, 0, 0));
+        jPanel1.setBackground(new Color(141, 181, 150));
+        this.mouseHover();
+
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,6 +46,7 @@ public class DangNhap extends javax.swing.JFrame {
         lblQuenMK = new javax.swing.JLabel();
         lblMatKhau = new javax.swing.JLabel();
         lblDangKy = new javax.swing.JLabel();
+        lblExit = new javax.swing.JLabel();
         btnDangNhap = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -87,6 +88,20 @@ public class DangNhap extends javax.swing.JFrame {
         lblDangKy.setText("<html>\n<body>\n<u>Bạn chưa có tài khoản ?</u>\n</body>\n</html>");
         jPanel1.add(lblDangKy, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 350, -1, 30));
 
+        lblExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/delete.png"))); // NOI18N
+        lblExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblExitMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblExitMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblExitMouseEntered(evt);
+            }
+        });
+        jPanel1.add(lblExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, 30));
+
         btnDangNhap.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         btnDangNhap.setText("Đăng nhập");
         btnDangNhap.setPreferredSize(new java.awt.Dimension(114, 30));
@@ -97,23 +112,53 @@ public class DangNhap extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void lblExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_lblExitMouseClicked
+
+    private void lblExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseEntered
+        setColor(lblExit);
+    }//GEN-LAST:event_lblExitMouseEntered
+
+    private void lblExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseExited
+        reSetColor(lblExit);
+    }//GEN-LAST:event_lblExitMouseExited
+
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDangNhap;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblDangKy;
     private javax.swing.JLabel lblDangNhap;
+    private javax.swing.JLabel lblExit;
     private javax.swing.JLabel lblMatKhau;
     private javax.swing.JLabel lblQuenMK;
     private javax.swing.JTextField txtDangNhap;
     private javax.swing.JTextField txtMatKhau;
     // End of variables declaration//GEN-END:variables
+
+    public void mouseHover() {
+        lblQuenMK.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        lblDangKy.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        btnDangNhap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        lblExit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        
+    }
     
     
+    public void setColor(JLabel l){
+//        l.setBackground(new Color(255,0,51));
+        l.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, new Color(162,10,10), new Color(255,163,108)));
+
+    }
+    
+    public void reSetColor(JLabel l){
+//        l.setBackground(new Color(141, 181, 150));
+        l.setBorder(BorderFactory.createEmptyBorder());
+        
+    }
+
 }
-
-
