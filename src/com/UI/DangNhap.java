@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
-import sun.lwawt.macosx.CocoaConstants;
+//import sun.lwawt.macosx.CocoaConstants;
 
 public class DangNhap extends javax.swing.JFrame {
 
