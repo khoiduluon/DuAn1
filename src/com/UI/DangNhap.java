@@ -5,6 +5,7 @@
  */
 package com.UI;
 
+import util.setColorLabel;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
@@ -16,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
-import sun.lwawt.macosx.CocoaConstants;
+//import sun.lwawt.macosx.CocoaConstants;
 
 public class DangNhap extends javax.swing.JFrame {
 
@@ -77,6 +78,14 @@ public class DangNhap extends javax.swing.JFrame {
         lblQuenMK.setFont(new java.awt.Font("Arial", 2, 12)); // NOI18N
         lblQuenMK.setForeground(new java.awt.Color(0, 102, 255));
         lblQuenMK.setText("<html>\n<body>\n<u>Quên mật khẩu ?</u>\n</body>\n</html>");
+        lblQuenMK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblQuenMKMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblQuenMKMouseExited(evt);
+            }
+        });
         jPanel1.add(lblQuenMK, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, -1, -1));
 
         lblMatKhau.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
@@ -86,6 +95,14 @@ public class DangNhap extends javax.swing.JFrame {
         lblDangKy.setFont(new java.awt.Font("Arial", 2, 12)); // NOI18N
         lblDangKy.setForeground(new java.awt.Color(0, 102, 255));
         lblDangKy.setText("<html>\n<body>\n<u>Bạn chưa có tài khoản ?</u>\n</body>\n</html>");
+        lblDangKy.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblDangKyMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblDangKyMouseExited(evt);
+            }
+        });
         jPanel1.add(lblDangKy, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 350, -1, 30));
 
         lblExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/delete.png"))); // NOI18N
@@ -117,12 +134,34 @@ public class DangNhap extends javax.swing.JFrame {
     }//GEN-LAST:event_lblExitMouseClicked
 
     private void lblExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseEntered
-        setColor(lblExit);
+        setColorLabel cl = new setColorLabel();
+        cl.setBorder(lblExit);
     }//GEN-LAST:event_lblExitMouseEntered
 
     private void lblExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseExited
-        reSetColor(lblExit);
+        setColorLabel cl = new setColorLabel();
+        cl.reSetBorder(lblExit);
     }//GEN-LAST:event_lblExitMouseExited
+
+    private void lblQuenMKMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuenMKMouseEntered
+       setColorLabel cl = new setColorLabel();
+       cl.setColor(lblQuenMK);
+    }//GEN-LAST:event_lblQuenMKMouseEntered
+
+    private void lblQuenMKMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuenMKMouseExited
+         setColorLabel cl = new setColorLabel();
+         cl.resetColor(lblQuenMK);
+    }//GEN-LAST:event_lblQuenMKMouseExited
+
+    private void lblDangKyMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDangKyMouseEntered
+         setColorLabel cl = new setColorLabel();
+         cl.setColor(lblDangKy);
+    }//GEN-LAST:event_lblDangKyMouseEntered
+
+    private void lblDangKyMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDangKyMouseExited
+         setColorLabel cl = new setColorLabel();
+         cl.resetColor(lblDangKy);
+    }//GEN-LAST:event_lblDangKyMouseExited
 
     /**
      * @param args the command line arguments
@@ -147,17 +186,5 @@ public class DangNhap extends javax.swing.JFrame {
         lblExit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
     
-    
-    public void setColor(JLabel l){
-//        l.setBackground(new Color(255,0,51));
-        l.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, new Color(162,10,10), new Color(255,163,108)));
-
-    }
-    
-    public void reSetColor(JLabel l){
-//        l.setBackground(new Color(141, 181, 150));
-        l.setBorder(BorderFactory.createEmptyBorder());
-        
-    }
 
 }
