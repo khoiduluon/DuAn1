@@ -145,7 +145,6 @@ public class DangNhap extends javax.swing.JFrame {
         lblDangKy.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         btnDangNhap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         lblExit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        
     }
     
     
