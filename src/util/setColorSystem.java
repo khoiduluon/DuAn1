@@ -8,13 +8,14 @@ package util;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
 /**
  *
  * @author ldbl
  */
-public class setColorLabel {
+public class setColorSystem {
 
     public void setBorder(JLabel l) {
 //        l.setBackground(new Color(255,0,51));
@@ -34,5 +35,13 @@ public class setColorLabel {
 //        l.setBackground(new Color(141, 181, 150));
         l.setBorder(BorderFactory.createEmptyBorder());
 
+    }
+    
+    public void setColor(JPanel p){
+         p.setBackground(new Color(57,72,103));
+    }
+    
+    public void resetColor(JPanel p){
+        p.setBackground(new Color(73,84,100));
     }
 }

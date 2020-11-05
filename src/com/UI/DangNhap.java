@@ -5,7 +5,7 @@
  */
 package com.UI;
 
-import util.setColorLabel;
+import util.setColorSystem;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
@@ -26,7 +26,7 @@ public class DangNhap extends javax.swing.JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setBackground(new Color(0, 0, 0, 0));
-        jPanel1.setBackground(new Color(141, 181, 150));
+        jPanel1.setBackground(new Color(232,232,232));
         this.mouseHover();
 
     }
@@ -124,7 +124,7 @@ public class DangNhap extends javax.swing.JFrame {
         btnDangNhap.setPreferredSize(new java.awt.Dimension(114, 30));
         jPanel1.add(btnDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 280, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 380));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -134,32 +134,32 @@ public class DangNhap extends javax.swing.JFrame {
     }//GEN-LAST:event_lblExitMouseClicked
 
     private void lblExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseEntered
-        setColorLabel cl = new setColorLabel();
+        setColorSystem cl = new setColorSystem();
         cl.setBorder(lblExit);
     }//GEN-LAST:event_lblExitMouseEntered
 
     private void lblExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseExited
-        setColorLabel cl = new setColorLabel();
+        setColorSystem cl = new setColorSystem();
         cl.reSetBorder(lblExit);
     }//GEN-LAST:event_lblExitMouseExited
 
     private void lblQuenMKMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuenMKMouseEntered
-       setColorLabel cl = new setColorLabel();
+       setColorSystem cl = new setColorSystem();
        cl.setColor(lblQuenMK);
     }//GEN-LAST:event_lblQuenMKMouseEntered
 
     private void lblQuenMKMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuenMKMouseExited
-         setColorLabel cl = new setColorLabel();
+         setColorSystem cl = new setColorSystem();
          cl.resetColor(lblQuenMK);
     }//GEN-LAST:event_lblQuenMKMouseExited
 
     private void lblDangKyMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDangKyMouseEntered
-         setColorLabel cl = new setColorLabel();
+         setColorSystem cl = new setColorSystem();
          cl.setColor(lblDangKy);
     }//GEN-LAST:event_lblDangKyMouseEntered
 
     private void lblDangKyMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDangKyMouseExited
-         setColorLabel cl = new setColorLabel();
+         setColorSystem cl = new setColorSystem();
          cl.resetColor(lblDangKy);
     }//GEN-LAST:event_lblDangKyMouseExited
 
