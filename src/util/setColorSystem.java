@@ -38,10 +38,10 @@ public class setColorSystem {
     }
     
     public void setColor(JPanel p){
-         p.setBackground(new Color(57,72,103));
+         p.setBackground(new Color(128,180,159));
     }
     
     public void resetColor(JPanel p){
-        p.setBackground(new Color(73,84,100));
+        p.setBackground(new Color(154,211,188));
     }
 }

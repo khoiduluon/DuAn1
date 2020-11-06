@@ -8,6 +8,14 @@ package com.UI;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.ProgressBar;
 import util.setColorSystem;
 
@@ -20,7 +28,7 @@ public class QuanLy extends javax.swing.JFrame {
     /**
      * Creates new form QuanLy
      */
-    public QuanLy() {
+    public QuanLy(){
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
@@ -28,6 +36,7 @@ public class QuanLy extends javax.swing.JFrame {
         pnlBg.setBackground(new Color(0, 0, 0, 0));
         cardLayout = (CardLayout) pnlTabs.getLayout();
         mouseHover();
+
     }
 
     /**
@@ -92,14 +101,14 @@ public class QuanLy extends javax.swing.JFrame {
         pnlBg.setPreferredSize(new java.awt.Dimension(700, 474));
         pnlBg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnlleft.setBackground(new java.awt.Color(73, 84, 100));
+        pnlleft.setBackground(new java.awt.Color(154, 211, 188));
         pnlleft.setPreferredSize(new java.awt.Dimension(150, 100));
         pnlleft.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblLogo.setText("Logo");
         pnlleft.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
 
-        pnlKeHoach.setBackground(new java.awt.Color(73, 84, 100));
+        pnlKeHoach.setBackground(new java.awt.Color(154, 211, 188));
         pnlKeHoach.setPreferredSize(new java.awt.Dimension(150, 40));
         pnlKeHoach.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -115,18 +124,18 @@ public class QuanLy extends javax.swing.JFrame {
         pnlKeHoach.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblLogoQL.setBackground(new java.awt.Color(255, 255, 255));
-        lblLogoQL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-a_home.png"))); // NOI18N
+        lblLogoQL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/home_25px.png"))); // NOI18N
         pnlKeHoach.add(lblLogoQL, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 30, 40));
 
         lblQuanLy.setBackground(new java.awt.Color(204, 204, 204));
-        lblQuanLy.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        lblQuanLy.setFont(new java.awt.Font("Quicksand", 1, 16)); // NOI18N
         lblQuanLy.setForeground(new java.awt.Color(255, 255, 255));
         lblQuanLy.setText("Quản Lý");
         pnlKeHoach.add(lblQuanLy, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, -1, 40));
 
         pnlleft.add(pnlKeHoach, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 150, 40));
 
-        pnlThongKe.setBackground(new java.awt.Color(73, 84, 100));
+        pnlThongKe.setBackground(new java.awt.Color(154, 211, 188));
         pnlThongKe.setPreferredSize(new java.awt.Dimension(150, 40));
         pnlThongKe.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -142,7 +151,7 @@ public class QuanLy extends javax.swing.JFrame {
         pnlThongKe.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblLogoQL1.setBackground(new java.awt.Color(255, 255, 255));
-        lblLogoQL1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-delivery_settings.png"))); // NOI18N
+        lblLogoQL1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/increase_25px.png"))); // NOI18N
         pnlThongKe.add(lblLogoQL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, 40));
 
         lblThongKe.setBackground(new java.awt.Color(204, 204, 204));
@@ -153,7 +162,7 @@ public class QuanLy extends javax.swing.JFrame {
 
         pnlleft.add(pnlThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 150, 40));
 
-        pnlLichSu.setBackground(new java.awt.Color(73, 84, 100));
+        pnlLichSu.setBackground(new java.awt.Color(154, 211, 188));
         pnlLichSu.setPreferredSize(new java.awt.Dimension(150, 40));
         pnlLichSu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -169,7 +178,7 @@ public class QuanLy extends javax.swing.JFrame {
         pnlLichSu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblLogoLS.setBackground(new java.awt.Color(255, 255, 255));
-        lblLogoLS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-activity_history.png"))); // NOI18N
+        lblLogoLS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/activity_history_25px.png"))); // NOI18N
         pnlLichSu.add(lblLogoLS, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, 40));
 
         lblLichSu.setBackground(new java.awt.Color(204, 204, 204));
@@ -187,7 +196,7 @@ public class QuanLy extends javax.swing.JFrame {
 
         pnlTabs.setLayout(new java.awt.CardLayout());
 
-        pnltop.setBackground(new java.awt.Color(187, 191, 202));
+        pnltop.setBackground(new java.awt.Color(219, 246, 233));
         pnltop.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTenMT.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
@@ -213,6 +222,10 @@ public class QuanLy extends javax.swing.JFrame {
 
         cboThoiGianTK.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 tháng", "3 tháng", "6 tháng", "12 tháng" }));
         pnltop.add(cboThoiGianTK, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 140, 30));
+
+        pnlButton.setBackground(new java.awt.Color(219, 246, 233));
+
+        jPanel1.setBackground(new java.awt.Color(219, 246, 233));
 
         lblExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/delete.png"))); // NOI18N
         lblExit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -243,24 +256,55 @@ public class QuanLy extends javax.swing.JFrame {
                 .addComponent(lblExit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        pnlButton.add(jPanel1);
-
         btnThem.setText("Thêm mới");
-        pnlButton.add(btnThem);
 
         btnSua.setText("Chỉnh sửa");
-        pnlButton.add(btnSua);
 
         btnXoa.setText("Xoá MTK");
-        pnlButton.add(btnXoa);
 
         btnTietKiem.setText("Tiết Kiệm");
-        pnlButton.add(btnTietKiem);
+
+        javax.swing.GroupLayout pnlButtonLayout = new javax.swing.GroupLayout(pnlButton);
+        pnlButton.setLayout(pnlButtonLayout);
+        pnlButtonLayout.setHorizontalGroup(
+            pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlButtonLayout.createSequentialGroup()
+                .addGroup(pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlButtonLayout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlButtonLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(btnThem))
+                    .addGroup(pnlButtonLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnSua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnXoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnTietKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(5, 5, 5))
+        );
+        pnlButtonLayout.setVerticalGroup(
+            pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlButtonLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(btnThem)
+                .addGap(5, 5, 5)
+                .addComponent(btnSua)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnXoa)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnTietKiem)
+                .addContainerGap())
+        );
 
         pnltop.add(pnlButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, 160, 190));
 
         pnlbottom.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tblDanhSach.setBackground(new java.awt.Color(219, 246, 233));
         tblDanhSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -532,7 +576,6 @@ public class QuanLy extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new QuanLy().setVisible(true);
             }
         });
     }
