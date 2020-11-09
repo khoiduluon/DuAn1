@@ -134,9 +134,10 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="66" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;body&gt;&#xa;&lt;u&gt;B&#x1ea1;n ch&#x1b0;a c&#xf3; t&#xe0;i kho&#x1ea3;n ?&lt;/u&gt;&#xa;&lt;/body&gt;&#xa;&lt;/html&gt;"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;body&gt; &lt;u&gt;B&#x1ea1;n ch&#x1b0;a c&#xf3; t&#xe0;i kho&#x1ea3;n ?&lt;/u&gt; &lt;/body&gt; &lt;/html&gt;"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblDangKyMouseClicked"/>
             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblDangKyMouseEntered"/>
             <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblDangKyMouseExited"/>
           </Events>

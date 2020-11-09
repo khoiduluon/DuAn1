@@ -8,12 +8,6 @@ package com.UI;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.ProgressBar;
@@ -28,7 +22,7 @@ public class QuanLy extends javax.swing.JFrame {
     /**
      * Creates new form QuanLy
      */
-    public QuanLy(){
+    public QuanLy() {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
@@ -59,6 +53,7 @@ public class QuanLy extends javax.swing.JFrame {
         lblThongKe = new javax.swing.JLabel();
         pnlLichSu = new javax.swing.JPanel();
         lblLogoLS = new javax.swing.JLabel();
+        lblLichSu = new javax.swing.JLabel();
         btnExit = new javax.swing.JButton();
         pnlTabs = new javax.swing.JPanel();
         pnlTab1 = new javax.swing.JPanel();
@@ -72,14 +67,13 @@ public class QuanLy extends javax.swing.JFrame {
         pnlButton = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         lblExit = new javax.swing.JLabel();
-        btnThem = new javax.swing.JButton();
-        btnSua = new javax.swing.JButton();
-        btnXoa = new javax.swing.JButton();
-        btnTietKiem = new javax.swing.JButton();
+        btnThem = new javax.swing.JLabel();
+        btnSua = new javax.swing.JLabel();
+        btnXoa = new javax.swing.JLabel();
+        btnTietKiem = new javax.swing.JLabel();
         pnlbottom = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDanhSach = new javax.swing.JTable();
-        lblLichSu = new javax.swing.JLabel();
         pnlTab2 = new javax.swing.JPanel();
         lblMucTietKiem = new javax.swing.JLabel();
         cboMucTietKiem = new javax.swing.JComboBox<>();
@@ -128,7 +122,7 @@ public class QuanLy extends javax.swing.JFrame {
         pnlKeHoach.add(lblLogoQL, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 30, 40));
 
         lblQuanLy.setBackground(new java.awt.Color(204, 204, 204));
-        lblQuanLy.setFont(new java.awt.Font("Quicksand", 1, 16)); // NOI18N
+        lblQuanLy.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         lblQuanLy.setForeground(new java.awt.Color(255, 255, 255));
         lblQuanLy.setText("Quản Lý");
         pnlKeHoach.add(lblQuanLy, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, -1, 40));
@@ -168,11 +162,11 @@ public class QuanLy extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlLichSuMouseClicked(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pnlLichSuMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnlLichSuMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnlLichSuMouseExited(evt);
             }
         });
         pnlLichSu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -180,6 +174,12 @@ public class QuanLy extends javax.swing.JFrame {
         lblLogoLS.setBackground(new java.awt.Color(255, 255, 255));
         lblLogoLS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/activity_history_25px.png"))); // NOI18N
         pnlLichSu.add(lblLogoLS, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, 40));
+
+        lblLichSu.setBackground(new java.awt.Color(204, 204, 204));
+        lblLichSu.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        lblLichSu.setForeground(new java.awt.Color(255, 255, 255));
+        lblLichSu.setText("Lịch sử");
+        pnlLichSu.add(lblLichSu, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 60, -1));
 
         pnlleft.add(pnlLichSu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 150, 40));
 
@@ -219,6 +219,7 @@ public class QuanLy extends javax.swing.JFrame {
 
         pnlButton.setBackground(new java.awt.Color(219, 246, 233));
         pnlButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlButton.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(219, 246, 233));
 
@@ -251,49 +252,63 @@ public class QuanLy extends javax.swing.JFrame {
                 .addComponent(lblExit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        btnThem.setText("Thêm mới");
+        pnlButton.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 7, -1, -1));
 
-        btnSua.setText("Chỉnh sửa");
+        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/createMT.png"))); // NOI18N
+        btnThem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnThemMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnThemMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnThemMouseExited(evt);
+            }
+        });
+        pnlButton.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
-        btnXoa.setText("Xoá MTK");
+        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/createMT – 1.png"))); // NOI18N
+        btnSua.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSuaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSuaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSuaMouseExited(evt);
+            }
+        });
+        pnlButton.add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
-        btnTietKiem.setText("Tiết Kiệm");
+        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/createMT – 2.png"))); // NOI18N
+        btnXoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnXoaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnXoaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnXoaMouseExited(evt);
+            }
+        });
+        pnlButton.add(btnXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
 
-        javax.swing.GroupLayout pnlButtonLayout = new javax.swing.GroupLayout(pnlButton);
-        pnlButton.setLayout(pnlButtonLayout);
-        pnlButtonLayout.setHorizontalGroup(
-            pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlButtonLayout.createSequentialGroup()
-                .addGroup(pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlButtonLayout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlButtonLayout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(btnThem))
-                    .addGroup(pnlButtonLayout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addGroup(pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnSua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnXoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnTietKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(5, 5, 5))
-        );
-        pnlButtonLayout.setVerticalGroup(
-            pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlButtonLayout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(btnThem)
-                .addGap(5, 5, 5)
-                .addComponent(btnSua)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnXoa)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnTietKiem)
-                .addContainerGap())
-        );
+        btnTietKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/createMT – 3.png"))); // NOI18N
+        btnTietKiem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTietKiemMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnTietKiemMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnTietKiemMouseExited(evt);
+            }
+        });
+        pnlButton.add(btnTietKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
 
         pnltop.add(pnlButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, 160, 190));
 
@@ -314,12 +329,6 @@ public class QuanLy extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblDanhSach);
 
         pnlbottom.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 280));
-
-        lblLichSu.setBackground(new java.awt.Color(204, 204, 204));
-        lblLichSu.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        lblLichSu.setForeground(new java.awt.Color(255, 255, 255));
-        lblLichSu.setText("Lịch sử");
-        pnlbottom.add(lblLichSu, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 60, -1));
 
         javax.swing.GroupLayout pnlTab1Layout = new javax.swing.GroupLayout(pnlTab1);
         pnlTab1.setLayout(pnlTab1Layout);
@@ -520,32 +529,89 @@ public class QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_lblExitMouseEntered
 
     private void pnlThongKeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongKeMouseEntered
-          setColorSystem cl = new setColorSystem();
+        setColorSystem cl = new setColorSystem();
         cl.setColor(pnlThongKe);
     }//GEN-LAST:event_pnlThongKeMouseEntered
 
     private void pnlThongKeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongKeMouseExited
-          setColorSystem cl = new setColorSystem();
+        setColorSystem cl = new setColorSystem();
         cl.resetColor(pnlThongKe);
     }//GEN-LAST:event_pnlThongKeMouseExited
 
     private void pnlThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongKeMouseClicked
-         cardLayout.show(pnlTabs, "card2");
+        cardLayout.show(pnlTabs, "card2");
     }//GEN-LAST:event_pnlThongKeMouseClicked
 
     private void pnlLichSuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLichSuMouseEntered
-          setColorSystem cl = new setColorSystem();
+        setColorSystem cl = new setColorSystem();
         cl.setColor(pnlLichSu);
     }//GEN-LAST:event_pnlLichSuMouseEntered
 
     private void pnlLichSuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLichSuMouseExited
-         setColorSystem cl = new setColorSystem();
+        setColorSystem cl = new setColorSystem();
         cl.resetColor(pnlLichSu);
     }//GEN-LAST:event_pnlLichSuMouseExited
 
     private void pnlLichSuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLichSuMouseClicked
-         cardLayout.show(pnlTabs, "card3");
+        cardLayout.show(pnlTabs, "card3");
     }//GEN-LAST:event_pnlLichSuMouseClicked
+
+    private void btnThemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseEntered
+        setColorSystem cl = new setColorSystem();
+        cl.setBorder(btnThem);
+    }//GEN-LAST:event_btnThemMouseEntered
+
+    private void btnThemMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseExited
+        setColorSystem cl = new setColorSystem();
+        cl.reSetBorder(btnThem);
+    }//GEN-LAST:event_btnThemMouseExited
+
+    private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
+
+    }//GEN-LAST:event_btnThemMouseClicked
+
+    private void btnSuaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaMouseEntered
+        setColorSystem cl = new setColorSystem();
+        cl.setBorder(btnSua);
+    }//GEN-LAST:event_btnSuaMouseEntered
+
+    private void btnSuaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaMouseExited
+        setColorSystem cl = new setColorSystem();
+        cl.reSetBorder(btnSua);
+    }//GEN-LAST:event_btnSuaMouseExited
+
+    private void btnSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSuaMouseClicked
+
+    private void btnXoaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaMouseEntered
+        setColorSystem cl = new setColorSystem();
+        cl.setBorder(btnXoa);
+    }//GEN-LAST:event_btnXoaMouseEntered
+
+    private void btnXoaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaMouseExited
+        setColorSystem cl = new setColorSystem();
+        cl.reSetBorder(btnXoa);
+    }//GEN-LAST:event_btnXoaMouseExited
+
+    private void btnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnXoaMouseClicked
+
+    private void btnTietKiemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTietKiemMouseEntered
+        setColorSystem cl = new setColorSystem();
+        cl.setBorder(btnTietKiem,240,84,84);
+    }//GEN-LAST:event_btnTietKiemMouseEntered
+
+    private void btnTietKiemMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTietKiemMouseExited
+
+        setColorSystem cl = new setColorSystem();
+        cl.reSetBorder(btnTietKiem);
+    }//GEN-LAST:event_btnTietKiemMouseExited
+
+    private void btnTietKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTietKiemMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTietKiemMouseClicked
 
     /**
      * @param args the command line arguments
@@ -577,17 +643,18 @@ public class QuanLy extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                new QuanLy().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;
-    private javax.swing.JButton btnSua;
-    private javax.swing.JButton btnThem;
-    private javax.swing.JButton btnTietKiem;
+    private javax.swing.JLabel btnSua;
+    private javax.swing.JLabel btnThem;
+    private javax.swing.JLabel btnTietKiem;
     private javax.swing.JButton btnTimKiem;
-    private javax.swing.JButton btnXoa;
+    private javax.swing.JLabel btnXoa;
     private javax.swing.JComboBox<String> cboMucTietKiem;
     private javax.swing.JComboBox<String> cboThoiGianTK;
     private javax.swing.JPanel jPanel1;
@@ -629,8 +696,9 @@ public class QuanLy extends javax.swing.JFrame {
     private javax.swing.JTextField txtTienDaTK;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
-    
+
     CardLayout cardLayout;
+
     public void mouseHover() {
         pnlKeHoach.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         pnlThongKe.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

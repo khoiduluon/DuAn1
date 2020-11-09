@@ -203,4 +203,22 @@ public class DangKy extends javax.swing.JFrame {
     private javax.swing.JTextField txtNhapLaiMK;
     private javax.swing.JTextField txtTenDN;
     // End of variables declaration//GEN-END:variables
+
+
+    public void addToDataBase(){
+        
+    }
+    
+    public void thongBao(){
+        
+    }
+    
+    public void checkLoi(){
+        //trung id
+        //mk ko trung
+        //bo trong
+        //
+    }
+    
+    
 }

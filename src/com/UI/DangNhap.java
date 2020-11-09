@@ -94,8 +94,11 @@ public class DangNhap extends javax.swing.JFrame {
 
         lblDangKy.setFont(new java.awt.Font("Arial", 2, 12)); // NOI18N
         lblDangKy.setForeground(new java.awt.Color(0, 102, 255));
-        lblDangKy.setText("<html>\n<body>\n<u>Bạn chưa có tài khoản ?</u>\n</body>\n</html>");
+        lblDangKy.setText("<html> <body> <u>Bạn chưa có tài khoản ?</u> </body> </html>");
         lblDangKy.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblDangKyMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblDangKyMouseEntered(evt);
             }
@@ -163,6 +166,11 @@ public class DangNhap extends javax.swing.JFrame {
          cl.resetColor(lblDangKy);
     }//GEN-LAST:event_lblDangKyMouseExited
 
+    private void lblDangKyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDangKyMouseClicked
+        new DangKy().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lblDangKyMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -186,5 +194,18 @@ public class DangNhap extends javax.swing.JFrame {
         lblExit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
     
+    
+    public void openDangNhap(){
+        new DangNhap().setVisible(true);
+    }
+    
+    public void thongBao(){
+        //loi
+    }
+    
+    public void checkLoi(){
+        //detrong
+        //mk,taikhoan
+    }
 
 }
