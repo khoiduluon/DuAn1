@@ -32,6 +32,6 @@ public class Main {
                 new DangNhap().setVisible(true);
             }
         });
-        System.out.println("Hello");
+        System.out.println("Hello Trang");
     }
 }

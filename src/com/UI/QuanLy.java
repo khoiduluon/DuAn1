@@ -9,6 +9,13 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.ProgressBar;
 import util.setColorSystem;
 
@@ -21,7 +28,7 @@ public class QuanLy extends javax.swing.JFrame {
     /**
      * Creates new form QuanLy
      */
-    public QuanLy() {
+    public QuanLy(){
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
@@ -29,6 +36,7 @@ public class QuanLy extends javax.swing.JFrame {
         pnlBg.setBackground(new Color(0, 0, 0, 0));
         cardLayout = (CardLayout) pnlTabs.getLayout();
         mouseHover();
+
     }
 
     /**
@@ -120,7 +128,7 @@ public class QuanLy extends javax.swing.JFrame {
         pnlKeHoach.add(lblLogoQL, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 30, 40));
 
         lblQuanLy.setBackground(new java.awt.Color(204, 204, 204));
-        lblQuanLy.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        lblQuanLy.setFont(new java.awt.Font("Quicksand", 1, 16)); // NOI18N
         lblQuanLy.setForeground(new java.awt.Color(255, 255, 255));
         lblQuanLy.setText("Quản Lý");
         pnlKeHoach.add(lblQuanLy, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, -1, 40));
@@ -248,19 +256,49 @@ public class QuanLy extends javax.swing.JFrame {
                 .addComponent(lblExit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        pnlButton.add(jPanel1);
-
         btnThem.setText("Thêm mới");
-        pnlButton.add(btnThem);
 
         btnSua.setText("Chỉnh sửa");
-        pnlButton.add(btnSua);
 
         btnXoa.setText("Xoá MTK");
-        pnlButton.add(btnXoa);
 
         btnTietKiem.setText("Tiết Kiệm");
-        pnlButton.add(btnTietKiem);
+
+        javax.swing.GroupLayout pnlButtonLayout = new javax.swing.GroupLayout(pnlButton);
+        pnlButton.setLayout(pnlButtonLayout);
+        pnlButtonLayout.setHorizontalGroup(
+            pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlButtonLayout.createSequentialGroup()
+                .addGroup(pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlButtonLayout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlButtonLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(btnThem))
+                    .addGroup(pnlButtonLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnSua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnXoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnTietKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(5, 5, 5))
+        );
+        pnlButtonLayout.setVerticalGroup(
+            pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlButtonLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(btnThem)
+                .addGap(5, 5, 5)
+                .addComponent(btnSua)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnXoa)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnTietKiem)
+                .addContainerGap())
+        );
 
         pnltop.add(pnlButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, 160, 190));
 
@@ -538,7 +576,6 @@ public class QuanLy extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new QuanLy().setVisible(true);
             }
         });
     }
