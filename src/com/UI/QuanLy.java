@@ -54,6 +54,9 @@ public class QuanLy extends javax.swing.JFrame {
         pnlLichSu = new javax.swing.JPanel();
         lblLogoLS = new javax.swing.JLabel();
         lblLichSu = new javax.swing.JLabel();
+        pnlGiaoDich = new javax.swing.JPanel();
+        lblThuChi = new javax.swing.JLabel();
+        lblLogoGD = new javax.swing.JLabel();
         btnExit = new javax.swing.JButton();
         pnlTabs = new javax.swing.JPanel();
         pnlTab1 = new javax.swing.JPanel();
@@ -88,6 +91,12 @@ public class QuanLy extends javax.swing.JFrame {
         btnTimKiem = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblLichSu = new javax.swing.JTable();
+        pnlTab4 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -182,6 +191,48 @@ public class QuanLy extends javax.swing.JFrame {
         pnlLichSu.add(lblLichSu, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 60, -1));
 
         pnlleft.add(pnlLichSu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 150, 40));
+
+        pnlGiaoDich.setBackground(new java.awt.Color(154, 211, 188));
+        pnlGiaoDich.setPreferredSize(new java.awt.Dimension(150, 40));
+        pnlGiaoDich.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnlGiaoDichMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnlGiaoDichMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pnlGiaoDichMouseEntered(evt);
+            }
+        });
+
+        lblThuChi.setForeground(new java.awt.Color(255, 255, 255));
+        lblThuChi.setText("Thu/Chi");
+
+        lblLogoGD.setText("jLabel1");
+
+        javax.swing.GroupLayout pnlGiaoDichLayout = new javax.swing.GroupLayout(pnlGiaoDich);
+        pnlGiaoDich.setLayout(pnlGiaoDichLayout);
+        pnlGiaoDichLayout.setHorizontalGroup(
+            pnlGiaoDichLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlGiaoDichLayout.createSequentialGroup()
+                .addContainerGap(9, Short.MAX_VALUE)
+                .addComponent(lblLogoGD)
+                .addGap(18, 18, 18)
+                .addComponent(lblThuChi)
+                .addGap(26, 26, 26))
+        );
+        pnlGiaoDichLayout.setVerticalGroup(
+            pnlGiaoDichLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlGiaoDichLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlGiaoDichLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblThuChi)
+                    .addComponent(lblLogoGD))
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        pnlleft.add(pnlGiaoDich, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 150, 40));
 
         btnExit.setText("Thoát");
         pnlleft.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, -1, -1));
@@ -457,7 +508,9 @@ public class QuanLy extends javax.swing.JFrame {
             .addGroup(pnlTab3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlTab3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
+                    .addGroup(pnlTab3Layout.createSequentialGroup()
+                        .addGap(106, 106, 106)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE))
                     .addGroup(pnlTab3Layout.createSequentialGroup()
                         .addComponent(txtTimKiem)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -477,6 +530,61 @@ public class QuanLy extends javax.swing.JFrame {
         );
 
         pnlTabs.add(pnlTab3, "card3");
+
+        jLabel1.setText("Số dư:");
+
+        jLabel2.setText("jLabel2");
+
+        jLabel3.setText("Thêm giao dịch");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Tên giao dịch", "Ngày", "Số tiền"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(jTable1);
+
+        javax.swing.GroupLayout pnlTab4Layout = new javax.swing.GroupLayout(pnlTab4);
+        pnlTab4.setLayout(pnlTab4Layout);
+        pnlTab4Layout.setHorizontalGroup(
+            pnlTab4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTab4Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(62, 62, 62))
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+        );
+        pnlTab4Layout.setVerticalGroup(
+            pnlTab4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlTab4Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(pnlTab4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        pnlTabs.add(pnlTab4, "card4");
 
         pnlBg.add(pnlTabs, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 550, 470));
 
@@ -600,7 +708,7 @@ public class QuanLy extends javax.swing.JFrame {
 
     private void btnTietKiemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTietKiemMouseEntered
         setColorSystem cl = new setColorSystem();
-        cl.setBorder(btnTietKiem,240,84,84);
+        cl.setBorder(btnTietKiem, 240, 84, 84);
     }//GEN-LAST:event_btnTietKiemMouseEntered
 
     private void btnTietKiemMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTietKiemMouseExited
@@ -612,6 +720,20 @@ public class QuanLy extends javax.swing.JFrame {
     private void btnTietKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTietKiemMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_btnTietKiemMouseClicked
+
+    private void pnlGiaoDichMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlGiaoDichMouseEntered
+        setColorSystem cl = new setColorSystem();
+        cl.setColor(pnlGiaoDich);
+    }//GEN-LAST:event_pnlGiaoDichMouseEntered
+
+    private void pnlGiaoDichMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlGiaoDichMouseExited
+        setColorSystem cl = new setColorSystem();
+        cl.resetColor(pnlGiaoDich);
+    }//GEN-LAST:event_pnlGiaoDichMouseExited
+
+    private void pnlGiaoDichMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlGiaoDichMouseClicked
+        new GiaoDich().setVisible(true);
+    }//GEN-LAST:event_pnlGiaoDichMouseClicked
 
     /**
      * @param args the command line arguments
@@ -657,13 +779,19 @@ public class QuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel btnXoa;
     private javax.swing.JComboBox<String> cboMucTietKiem;
     private javax.swing.JComboBox<String> cboThoiGianTK;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblExit;
     private javax.swing.JLabel lblLichSu;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblLogoGD;
     private javax.swing.JLabel lblLogoLS;
     private javax.swing.JLabel lblLogoQL;
     private javax.swing.JLabel lblLogoQL1;
@@ -674,15 +802,18 @@ public class QuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel lblTenMT2;
     private javax.swing.JLabel lblThoiGianCon;
     private javax.swing.JLabel lblThongKe;
+    private javax.swing.JLabel lblThuChi;
     private javax.swing.JLabel lblTienDaTK;
     private javax.swing.JProgressBar pgbTienDo;
     private javax.swing.JPanel pnlBg;
     private javax.swing.JPanel pnlButton;
+    private javax.swing.JPanel pnlGiaoDich;
     private javax.swing.JPanel pnlKeHoach;
     private javax.swing.JPanel pnlLichSu;
     private javax.swing.JPanel pnlTab1;
     private javax.swing.JPanel pnlTab2;
     private javax.swing.JPanel pnlTab3;
+    private javax.swing.JPanel pnlTab4;
     private javax.swing.JPanel pnlTabs;
     private javax.swing.JPanel pnlThongKe;
     private javax.swing.JPanel pnlbottom;

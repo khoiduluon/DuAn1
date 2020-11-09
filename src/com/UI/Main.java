@@ -29,7 +29,9 @@ public class Main {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new DangNhap().setVisible(true);
+                DangNhap dn = new DangNhap();
+                //com.sun.awt.AWTUtilities.setWindowOpacity(dn, (float) 0.7f);
+                dn.setVisible(true);
             }
         });
         System.out.println("Hello Trang");

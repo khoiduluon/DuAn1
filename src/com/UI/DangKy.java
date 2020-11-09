@@ -21,9 +21,7 @@ public class DangKy extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        this.setBackground(new Color(0, 0, 0, 0));
-        jPanel1.setBackground(new Color(0, 0, 0, 0));
-
+//        this.setBackground(new Color(1.0f,1.0f,1.0f,0.5f));    
     }
 
     /**
@@ -114,23 +112,20 @@ public class DangKy extends javax.swing.JFrame {
         jPanel1.add(lblExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, 30));
 
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/Background_dangky.png"))); // NOI18N
-        jPanel1.add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, -1));
+        jPanel1.add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
         );
 
         pack();
@@ -180,7 +175,9 @@ public class DangKy extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DangKy().setVisible(true);
+                DangKy dk = new DangKy();
+                dk.setVisible(true);
+                
             }
         });
     }
@@ -204,21 +201,19 @@ public class DangKy extends javax.swing.JFrame {
     private javax.swing.JTextField txtTenDN;
     // End of variables declaration//GEN-END:variables
 
+    public void addToDataBase() {
 
-    public void addToDataBase(){
-        
     }
-    
-    public void thongBao(){
-        
+
+    public void thongBao() {
+
     }
-    
-    public void checkLoi(){
+
+    public void checkLoi() {
         //trung id
         //mk ko trung
         //bo trong
         //
     }
-    
-    
+
 }
