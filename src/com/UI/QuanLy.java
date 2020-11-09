@@ -51,7 +51,6 @@ public class QuanLy extends javax.swing.JFrame {
         lblThongKe = new javax.swing.JLabel();
         pnlLichSu = new javax.swing.JPanel();
         lblLogoLS = new javax.swing.JLabel();
-        lblLichSu = new javax.swing.JLabel();
         btnExit = new javax.swing.JButton();
         pnlTabs = new javax.swing.JPanel();
         pnlTab1 = new javax.swing.JPanel();
@@ -72,6 +71,7 @@ public class QuanLy extends javax.swing.JFrame {
         pnlbottom = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDanhSach = new javax.swing.JTable();
+        lblLichSu = new javax.swing.JLabel();
         pnlTab2 = new javax.swing.JPanel();
         lblMucTietKiem = new javax.swing.JLabel();
         cboMucTietKiem = new javax.swing.JComboBox<>();
@@ -173,12 +173,6 @@ public class QuanLy extends javax.swing.JFrame {
         lblLogoLS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/activity_history_25px.png"))); // NOI18N
         pnlLichSu.add(lblLogoLS, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, 40));
 
-        lblLichSu.setBackground(new java.awt.Color(204, 204, 204));
-        lblLichSu.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
-        lblLichSu.setForeground(new java.awt.Color(255, 255, 255));
-        lblLichSu.setText("Lịch sử");
-        pnlLichSu.add(lblLichSu, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 60, -1));
-
         pnlleft.add(pnlLichSu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 150, 40));
 
         btnExit.setText("Thoát");
@@ -216,6 +210,7 @@ public class QuanLy extends javax.swing.JFrame {
         pnltop.add(cboThoiGianTK, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 140, 30));
 
         pnlButton.setBackground(new java.awt.Color(219, 246, 233));
+        pnlButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jPanel1.setBackground(new java.awt.Color(219, 246, 233));
 
@@ -281,6 +276,12 @@ public class QuanLy extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblDanhSach);
 
         pnlbottom.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 280));
+
+        lblLichSu.setBackground(new java.awt.Color(204, 204, 204));
+        lblLichSu.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        lblLichSu.setForeground(new java.awt.Color(255, 255, 255));
+        lblLichSu.setText("Lịch sử");
+        pnlbottom.add(lblLichSu, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 60, -1));
 
         javax.swing.GroupLayout pnlTab1Layout = new javax.swing.GroupLayout(pnlTab1);
         pnlTab1.setLayout(pnlTab1Layout);
