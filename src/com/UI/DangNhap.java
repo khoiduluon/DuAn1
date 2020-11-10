@@ -57,7 +57,7 @@ public class DangNhap extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblDangNhap.setBackground(new java.awt.Color(102, 102, 102));
-        lblDangNhap.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        lblDangNhap.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         lblDangNhap.setText("Tên đăng nhập:");
         jPanel1.add(lblDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
 
@@ -88,7 +88,7 @@ public class DangNhap extends javax.swing.JFrame {
         });
         jPanel1.add(lblQuenMK, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, -1, -1));
 
-        lblMatKhau.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        lblMatKhau.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         lblMatKhau.setText("Mật khẩu:");
         jPanel1.add(lblMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
 

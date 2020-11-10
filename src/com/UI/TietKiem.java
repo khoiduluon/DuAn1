@@ -52,22 +52,36 @@ public class TietKiem extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(302, 400));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lblMucTietKiem.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         lblMucTietKiem.setText("Mục tiết kiệm:");
         jPanel1.add(lblMucTietKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 120, -1));
 
+        jLabel1.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         jLabel1.setText("Giá trị:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
+
+        jTextField1.setEditable(false);
+        jTextField1.setEnabled(false);
+        jTextField1.setPreferredSize(new java.awt.Dimension(14, 30));
         jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 280, -1));
 
+        jLabel3.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         jLabel3.setText("Thời gian tiết kiệm:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
+
+        jTextField2.setEditable(false);
+        jTextField2.setEnabled(false);
+        jTextField2.setPreferredSize(new java.awt.Dimension(14, 30));
         jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 280, -1));
 
+        jLabel4.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         jLabel4.setText("Số tiền tiết kiệm:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
+
+        jTextField3.setPreferredSize(new java.awt.Dimension(14, 30));
         jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 280, -1));
 
         jButton1.setText("Tiết kiệm");

@@ -56,7 +56,7 @@ public class DangKy extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(293, 444));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblTenDN.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        lblTenDN.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         lblTenDN.setText("Tên đăng nhập:");
         jPanel1.add(lblTenDN, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
@@ -66,31 +66,33 @@ public class DangKy extends javax.swing.JFrame {
         txtMatKhau.setPreferredSize(new java.awt.Dimension(84, 30));
         jPanel1.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 260, -1));
 
-        lblMatKhau.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        lblMatKhau.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         lblMatKhau.setText("Mật khẩu:");
         jPanel1.add(lblMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
 
         txtNhapLaiMK.setPreferredSize(new java.awt.Dimension(84, 30));
         jPanel1.add(txtNhapLaiMK, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 260, -1));
 
-        lblNhapLaiMK.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        lblNhapLaiMK.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         lblNhapLaiMK.setText("Nhập lại mật khẩu:");
         jPanel1.add(lblNhapLaiMK, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
 
         txtHoTen.setPreferredSize(new java.awt.Dimension(84, 30));
         jPanel1.add(txtHoTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 260, -1));
 
-        lblHoTen.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        lblHoTen.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         lblHoTen.setText("Họ và tên:");
         jPanel1.add(lblHoTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
 
-        lblGioiTinh.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        lblGioiTinh.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         lblGioiTinh.setText("Giới tính:");
         jPanel1.add(lblGioiTinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, -1));
 
+        rdoNam.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         rdoNam.setText("Nam");
         jPanel1.add(rdoNam, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, -1, -1));
 
+        rdoNu.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         rdoNu.setText("Nữ");
         jPanel1.add(rdoNu, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, -1, -1));
 

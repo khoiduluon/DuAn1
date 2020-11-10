@@ -250,17 +250,17 @@ public class QuanLy extends javax.swing.JFrame {
         pnltop.setBackground(new java.awt.Color(219, 246, 233));
         pnltop.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblTenMT.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        lblTenMT.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         lblTenMT.setForeground(new java.awt.Color(51, 51, 51));
         lblTenMT.setText("Thời gian tiết kiệm:");
         pnltop.add(lblTenMT, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
-        lblTenMT1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        lblTenMT1.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         lblTenMT1.setForeground(new java.awt.Color(51, 51, 51));
         lblTenMT1.setText("Tên mục tiết kiệm:");
         pnltop.add(lblTenMT1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
-        lblTenMT2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        lblTenMT2.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         lblTenMT2.setForeground(new java.awt.Color(51, 51, 51));
         lblTenMT2.setText("Giá trị:");
         pnltop.add(lblTenMT2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
@@ -371,7 +371,8 @@ public class QuanLy extends javax.swing.JFrame {
 
         pnlbottom.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tblDanhSach.setBackground(new java.awt.Color(219, 246, 233));
+        tblDanhSach.setBackground(new java.awt.Color(204, 204, 204));
+        tblDanhSach.setFont(new java.awt.Font("Quicksand", 0, 12)); // NOI18N
         tblDanhSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -380,9 +381,17 @@ public class QuanLy extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Tên mục tiêt kiệm", "Giá trị", "Thời gian tiết kiệm", "Số tiền đã tiết kiệm"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblDanhSach);
 
         pnlbottom.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 280));
@@ -414,14 +423,20 @@ public class QuanLy extends javax.swing.JFrame {
 
         pnlTabs.add(pnlTab1, "card1");
 
+        jTabbedPane1.setFont(new java.awt.Font("Quicksand", 0, 13)); // NOI18N
+
+        lblMucTietKiem.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         lblMucTietKiem.setText("Mục tiết kiệm:");
 
+        cboMucTietKiem.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         cboMucTietKiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        lblTienDaTK.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         lblTienDaTK.setText("Số tiền đã tiết kiệm được:");
 
+        lblThoiGianCon.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         lblThoiGianCon.setText("Thời gian còn lại:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -434,10 +449,9 @@ public class QuanLy extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblThoiGianCon)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtTienDaTK, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblTienDaTK))
-                    .addComponent(txtThoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblTienDaTK)
+                    .addComponent(txtThoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTienDaTK, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(95, 95, 95))
         );
         jPanel2Layout.setVerticalGroup(
@@ -480,7 +494,7 @@ public class QuanLy extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMucTietKiem)
                     .addComponent(cboMucTietKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
@@ -491,11 +505,11 @@ public class QuanLy extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 545, Short.MAX_VALUE)
+            .addGap(0, 541, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 431, Short.MAX_VALUE)
+            .addGap(0, 430, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Thống kê Thu/Chi", jPanel4);
@@ -506,8 +520,8 @@ public class QuanLy extends javax.swing.JFrame {
             pnlTab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTab2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlTab2Layout.setVerticalGroup(
             pnlTab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -519,19 +533,29 @@ public class QuanLy extends javax.swing.JFrame {
 
         pnlTabs.add(pnlTab2, "card2");
 
+        btnTimKiem.setFont(new java.awt.Font("Quicksand", 0, 13)); // NOI18N
         btnTimKiem.setText("Tìm Kiếm");
 
+        tblLichSu.setFont(new java.awt.Font("Quicksand", 0, 12)); // NOI18N
         tblLichSu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Mục tiết kiệm", "Ngày ", "Số tiền"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tblLichSu);
 
         javax.swing.GroupLayout pnlTab3Layout = new javax.swing.GroupLayout(pnlTab3);
@@ -543,7 +567,7 @@ public class QuanLy extends javax.swing.JFrame {
                 .addGroup(pnlTab3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane2)
                     .addGroup(pnlTab3Layout.createSequentialGroup()
-                        .addComponent(txtTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnTimKiem)))
                 .addContainerGap())
@@ -562,12 +586,14 @@ public class QuanLy extends javax.swing.JFrame {
 
         pnlTabs.add(pnlTab3, "card3");
 
+        jLabel1.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         jLabel1.setText("Số dư:");
 
         jLabel2.setText("jLabel2");
 
         jLabel3.setText("Thêm giao dịch");
 
+        jTable1.setFont(new java.awt.Font("Quicksand", 0, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -611,7 +637,7 @@ public class QuanLy extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 

@@ -60,6 +60,7 @@ public class GiaoDich extends javax.swing.JFrame {
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
         buttonGroup1.add(rdoThu);
+        rdoThu.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         rdoThu.setText("Thu");
         rdoThu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -74,6 +75,7 @@ public class GiaoDich extends javax.swing.JFrame {
         jPanel1.add(rdoThu, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, -1, -1));
 
         buttonGroup1.add(rdoChi);
+        rdoChi.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         rdoChi.setText("Chi");
         rdoChi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -98,6 +100,7 @@ public class GiaoDich extends javax.swing.JFrame {
         btnThem.setText("Thêm giao dịch");
         jPanel1.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, -1, -1));
 
+        cboThu.setFont(new java.awt.Font("Quicksand", 0, 13)); // NOI18N
         cboThu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lương", "Bán đồ", "Thưởng", "Khoản thu khác", " " }));
         cboThu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
