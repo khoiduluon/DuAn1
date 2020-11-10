@@ -78,6 +78,8 @@ public class QuanLy extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDanhSach = new javax.swing.JTable();
         pnlTab2 = new javax.swing.JPanel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel3 = new javax.swing.JPanel();
         lblMucTietKiem = new javax.swing.JLabel();
         cboMucTietKiem = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
@@ -86,6 +88,7 @@ public class QuanLy extends javax.swing.JFrame {
         txtTienDaTK = new javax.swing.JTextField();
         lblThoiGianCon = new javax.swing.JLabel();
         txtThoiGian = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
         pnlTab3 = new javax.swing.JPanel();
         txtTimKiem = new javax.swing.JTextField();
         btnTimKiem = new javax.swing.JButton();
@@ -97,9 +100,11 @@ public class QuanLy extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlBg.setPreferredSize(new java.awt.Dimension(700, 474));
         pnlBg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -131,7 +136,7 @@ public class QuanLy extends javax.swing.JFrame {
         pnlKeHoach.add(lblLogoQL, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 30, 40));
 
         lblQuanLy.setBackground(new java.awt.Color(204, 204, 204));
-        lblQuanLy.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        lblQuanLy.setFont(new java.awt.Font("Quicksand", 1, 16)); // NOI18N
         lblQuanLy.setForeground(new java.awt.Color(255, 255, 255));
         lblQuanLy.setText("Quản Lý");
         pnlKeHoach.add(lblQuanLy, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, -1, 40));
@@ -158,10 +163,10 @@ public class QuanLy extends javax.swing.JFrame {
         pnlThongKe.add(lblLogoQL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, 40));
 
         lblThongKe.setBackground(new java.awt.Color(204, 204, 204));
-        lblThongKe.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        lblThongKe.setFont(new java.awt.Font("Quicksand", 1, 16)); // NOI18N
         lblThongKe.setForeground(new java.awt.Color(255, 255, 255));
         lblThongKe.setText("Thống kê");
-        pnlThongKe.add(lblThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, 20));
+        pnlThongKe.add(lblThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 10, 80, 20));
 
         pnlleft.add(pnlThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 150, 40));
 
@@ -185,7 +190,7 @@ public class QuanLy extends javax.swing.JFrame {
         pnlLichSu.add(lblLogoLS, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, 40));
 
         lblLichSu.setBackground(new java.awt.Color(204, 204, 204));
-        lblLichSu.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        lblLichSu.setFont(new java.awt.Font("Quicksand", 1, 16)); // NOI18N
         lblLichSu.setForeground(new java.awt.Color(255, 255, 255));
         lblLichSu.setText("Lịch sử");
         pnlLichSu.add(lblLichSu, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 60, -1));
@@ -206,6 +211,7 @@ public class QuanLy extends javax.swing.JFrame {
             }
         });
 
+        lblThuChi.setFont(new java.awt.Font("Quicksand", 1, 16)); // NOI18N
         lblThuChi.setForeground(new java.awt.Color(255, 255, 255));
         lblThuChi.setText("Thu/Chi");
 
@@ -216,11 +222,11 @@ public class QuanLy extends javax.swing.JFrame {
         pnlGiaoDichLayout.setHorizontalGroup(
             pnlGiaoDichLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlGiaoDichLayout.createSequentialGroup()
-                .addContainerGap(9, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblLogoGD)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblThuChi)
-                .addGap(26, 26, 26))
+                .addGap(38, 38, 38))
         );
         pnlGiaoDichLayout.setVerticalGroup(
             pnlGiaoDichLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,7 +235,7 @@ public class QuanLy extends javax.swing.JFrame {
                 .addGroup(pnlGiaoDichLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblThuChi)
                     .addComponent(lblLogoGD))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pnlleft.add(pnlGiaoDich, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 150, 40));
@@ -423,22 +429,16 @@ public class QuanLy extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(76, 76, 76)
+                .addGap(92, 92, 92)
                 .addComponent(pgbTienDo, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtThoiGian)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(lblThoiGianCon)
-                                .addGap(0, 53, Short.MAX_VALUE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblTienDaTK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtTienDaTK))))
-                .addGap(224, 224, 224))
+                    .addComponent(lblThoiGianCon)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txtTienDaTK, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblTienDaTK))
+                    .addComponent(txtThoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(95, 95, 95))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -457,31 +457,64 @@ public class QuanLy extends javax.swing.JFrame {
                 .addContainerGap(130, Short.MAX_VALUE))
         );
 
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(lblMucTietKiem)
+                        .addGap(37, 37, 37)
+                        .addComponent(cboMucTietKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblMucTietKiem)
+                    .addComponent(cboMucTietKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
+        );
+
+        jTabbedPane1.addTab("Thống kê mục tiết kiệm", jPanel3);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 545, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 431, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Thống kê Thu/Chi", jPanel4);
+
         javax.swing.GroupLayout pnlTab2Layout = new javax.swing.GroupLayout(pnlTab2);
         pnlTab2.setLayout(pnlTab2Layout);
         pnlTab2Layout.setHorizontalGroup(
             pnlTab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTab2Layout.createSequentialGroup()
-                .addGroup(pnlTab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlTab2Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(lblMucTietKiem)
-                        .addGap(18, 18, 18)
-                        .addComponent(cboMucTietKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlTab2Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(20, 20, 20))
+                .addContainerGap()
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
         pnlTab2Layout.setVerticalGroup(
             pnlTab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTab2Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addGroup(pnlTab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMucTietKiem)
-                    .addComponent(cboMucTietKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         pnlTabs.add(pnlTab2, "card2");
@@ -505,14 +538,12 @@ public class QuanLy extends javax.swing.JFrame {
         pnlTab3.setLayout(pnlTab3Layout);
         pnlTab3Layout.setHorizontalGroup(
             pnlTab3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTab3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTab3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlTab3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlTab3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2)
                     .addGroup(pnlTab3Layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE))
-                    .addGroup(pnlTab3Layout.createSequentialGroup()
-                        .addComponent(txtTimKiem)
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnTimKiem)))
                 .addContainerGap())
@@ -588,22 +619,22 @@ public class QuanLy extends javax.swing.JFrame {
 
         pnlBg.add(pnlTabs, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 550, 470));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlBg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        getContentPane().add(pnlBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 30, -1, -1));
+
+        jPanel5.setBackground(new java.awt.Color(255, 102, 102));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlBg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
         );
+
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 0, 100, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -784,9 +815,13 @@ public class QuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblExit;
     private javax.swing.JLabel lblLichSu;
