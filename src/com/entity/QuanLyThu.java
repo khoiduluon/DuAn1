@@ -15,16 +15,18 @@ public class QuanLyThu {
     private String loaiGD;
     private String ngayGD;
     private double soTien;
+    private String nhomGD;
 
     public QuanLyThu() {
     }
 
-    public QuanLyThu(int idThu, String username, String loaiGD, String ngayGD, double soTien) {
+    public QuanLyThu(int idThu, String username, String loaiGD, String ngayGD, double soTien,String nhomGD) {
         this.idThu = idThu;
         this.username = username;
         this.loaiGD = loaiGD;
         this.ngayGD = ngayGD;
         this.soTien = soTien;
+        this.nhomGD = nhomGD;
     }
 
     /**
@@ -95,6 +97,14 @@ public class QuanLyThu {
      */
     public void setSoTien(double soTien) {
         this.soTien = soTien;
+    }
+
+    public String getNhomGD() {
+        return nhomGD;
+    }
+
+    public void setNhomGD(String nhomGD) {
+        this.nhomGD = nhomGD;
     }
     
 }

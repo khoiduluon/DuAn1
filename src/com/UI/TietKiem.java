@@ -5,7 +5,11 @@
  */
 package com.UI;
 
+import com.dao.MucTieuTietKiemDAO;
+import com.entity.MucTieu;
 import java.awt.Color;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import util.setColorSystem;
 
 /**
@@ -35,14 +39,14 @@ public class TietKiem extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         lblMucTietKiem = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cboMTK = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtGiaTri = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtThoiGian = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtSoTienTietKiem = new javax.swing.JTextField();
+        btnTietKiem = new javax.swing.JButton();
         lblExit = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
@@ -56,36 +60,36 @@ public class TietKiem extends javax.swing.JFrame {
         lblMucTietKiem.setText("Mục tiết kiệm:");
         jPanel1.add(lblMucTietKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 120, -1));
+        cboMTK.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(cboMTK, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 120, -1));
 
         jLabel1.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         jLabel1.setText("Giá trị:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
-        jTextField1.setEditable(false);
-        jTextField1.setEnabled(false);
-        jTextField1.setPreferredSize(new java.awt.Dimension(14, 30));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 280, -1));
+        txtGiaTri.setEditable(false);
+        txtGiaTri.setEnabled(false);
+        txtGiaTri.setPreferredSize(new java.awt.Dimension(14, 30));
+        jPanel1.add(txtGiaTri, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 280, -1));
 
         jLabel3.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         jLabel3.setText("Thời gian tiết kiệm:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
 
-        jTextField2.setEditable(false);
-        jTextField2.setEnabled(false);
-        jTextField2.setPreferredSize(new java.awt.Dimension(14, 30));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 280, -1));
+        txtThoiGian.setEditable(false);
+        txtThoiGian.setEnabled(false);
+        txtThoiGian.setPreferredSize(new java.awt.Dimension(14, 30));
+        jPanel1.add(txtThoiGian, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 280, -1));
 
         jLabel4.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         jLabel4.setText("Số tiền tiết kiệm:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
 
-        jTextField3.setPreferredSize(new java.awt.Dimension(14, 30));
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 280, -1));
+        txtSoTienTietKiem.setPreferredSize(new java.awt.Dimension(14, 30));
+        jPanel1.add(txtSoTienTietKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 280, -1));
 
-        jButton1.setText("Tiết kiệm");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, -1, -1));
+        btnTietKiem.setText("Tiết kiệm");
+        jPanel1.add(btnTietKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, -1, -1));
 
         lblExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/delete.png"))); // NOI18N
         lblExit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -175,16 +179,39 @@ public class TietKiem extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnTietKiem;
+    private javax.swing.JComboBox<String> cboMTK;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel lblExit;
     private javax.swing.JLabel lblMucTietKiem;
+    private javax.swing.JTextField txtGiaTri;
+    private javax.swing.JTextField txtSoTienTietKiem;
+    private javax.swing.JTextField txtThoiGian;
     // End of variables declaration//GEN-END:variables
+    MucTieuTietKiemDAO mtkdao = new MucTieuTietKiemDAO();
+    
+    public void fillComboBox(){
+        DefaultComboBoxModel combobox = (DefaultComboBoxModel) cboMTK.getModel();
+        combobox.removeAllElements();
+        List<MucTieu> list = mtkdao.selectAll();
+        for(MucTieu mt : list){
+            combobox.addElement(mt);
+        }
+    }
+    
+    public void fillInFo(){
+          MucTieu muctieu = (MucTieu) cboMTK.getSelectedItem();
+          txtGiaTri.setText(String.valueOf(muctieu.getGiaTri()));
+          //Sua lai 3,6 tháng
+          txtThoiGian.setText(String.valueOf(muctieu.getThoiHan()));
+    }
+    
+    public void addTietKiem(){
+        MucTieu muctieu = (MucTieu) cboMTK.getSelectedItem();
+        muctieu.setSoTienDaTK(Double.valueOf(txtSoTienTietKiem.getText()));
+    }
+    
 }

@@ -5,12 +5,20 @@
  */
 package com.UI;
 
+import com.dao.LichSuDAO;
+import com.dao.MucTieuTietKiemDAO;
+import com.entity.LichSuTK;
+import com.entity.MucTieu;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.ProgressBar;
+import javax.swing.table.DefaultTableModel;
+import util.Auth;
+import util.MsgBox;
 import util.setColorSystem;
 
 /**
@@ -210,33 +218,15 @@ public class QuanLy extends javax.swing.JFrame {
                 pnlGiaoDichMouseEntered(evt);
             }
         });
+        pnlGiaoDich.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblThuChi.setFont(new java.awt.Font("Quicksand", 1, 16)); // NOI18N
         lblThuChi.setForeground(new java.awt.Color(255, 255, 255));
         lblThuChi.setText("Thu/Chi");
+        pnlGiaoDich.add(lblThuChi, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, -1));
 
-        lblLogoGD.setText("jLabel1");
-
-        javax.swing.GroupLayout pnlGiaoDichLayout = new javax.swing.GroupLayout(pnlGiaoDich);
-        pnlGiaoDich.setLayout(pnlGiaoDichLayout);
-        pnlGiaoDichLayout.setHorizontalGroup(
-            pnlGiaoDichLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlGiaoDichLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblLogoGD)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblThuChi)
-                .addGap(38, 38, 38))
-        );
-        pnlGiaoDichLayout.setVerticalGroup(
-            pnlGiaoDichLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlGiaoDichLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlGiaoDichLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblThuChi)
-                    .addComponent(lblLogoGD))
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
+        lblLogoGD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/currency_exchange_25px.png"))); // NOI18N
+        pnlGiaoDich.add(lblLogoGD, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 6, -1, -1));
 
         pnlleft.add(pnlGiaoDich, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 150, 40));
 
@@ -375,17 +365,17 @@ public class QuanLy extends javax.swing.JFrame {
         tblDanhSach.setFont(new java.awt.Font("Quicksand", 0, 12)); // NOI18N
         tblDanhSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Tên mục tiêt kiệm", "Giá trị", "Thời gian tiết kiệm", "Số tiền đã tiết kiệm"
+                "STT", "Tên mục tiêt kiệm", "Giá trị", "Thời gian tiết kiệm", "Số tiền đã tiết kiệm"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -528,7 +518,7 @@ public class QuanLy extends javax.swing.JFrame {
             .addGroup(pnlTab2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlTabs.add(pnlTab2, "card2");
@@ -539,17 +529,17 @@ public class QuanLy extends javax.swing.JFrame {
         tblLichSu.setFont(new java.awt.Font("Quicksand", 0, 12)); // NOI18N
         tblLichSu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Mục tiết kiệm", "Ngày ", "Số tiền"
+                "STT", "Mục tiết kiệm", "Ngày ", "Số tiền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -732,7 +722,7 @@ public class QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThemMouseExited
 
     private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
-
+        addMtkToDaTaBase();
     }//GEN-LAST:event_btnThemMouseClicked
 
     private void btnSuaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaMouseEntered
@@ -890,10 +880,66 @@ public class QuanLy extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     CardLayout cardLayout;
+    MucTieuTietKiemDAO mtkDAO = new MucTieuTietKiemDAO();
+    LichSuDAO lsDAO = new LichSuDAO();
 
     public void mouseHover() {
         pnlKeHoach.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         pnlThongKe.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         pnlLichSu.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }
+
+    public void fillTableMucTieu() {
+        DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
+        model.setRowCount(0);
+        try {
+            List<MucTieu> list = mtkDAO.selectAll();
+            for(MucTieu mt :list){
+                Object row[] ={
+                    mt.getIdMucTieu(),mt.getTenMucTieu(),mt.getGiaTri(),mt.getThoiHan(),mt.getSoTienDaTK()
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Loi truy van du lieu");
+            e.printStackTrace();
+        }
+    }
+    
+    public void fillTableLichSu(){
+        DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
+        model.setRowCount(0);
+        try{
+             List<LichSuTK> list = lsDAO.selectAll();
+            for(LichSuTK ls :list){
+                Object row[] ={
+                   // ls.getIdLichSu(),
+                };
+                model.addRow(row);
+            }
+        } catch(Exception e){
+             MsgBox.alert(this, "Loi truy van du lieu");
+            e.printStackTrace();
+        }
+    }
+
+    public void addMtkToDaTaBase() {
+        MucTieu mt = getInFo();
+        mtkDAO.insert(mt);
+    }
+
+    public void clear() {
+        txtTenMTK.setText("");
+        txtGiaTri.setText("");
+        cboThoiGianTK.setSelectedIndex(0);
+    }
+
+    MucTieu getInFo() {
+        MucTieu mt = new MucTieu();
+        mt.setUsername(Auth.user.getUser());
+        mt.setTenMucTieu(txtTenMTK.getText());
+        mt.setGiaTri(Double.parseDouble(txtGiaTri.getText()));
+        mt.setThoiHan(cboThoiGianTK.getSelectedIndex());
+        return mt;
     }
 }

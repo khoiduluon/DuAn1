@@ -17,8 +17,8 @@ import util.JDBC;
  */
 public class QuanLyChiDAO extends dadDAO<QuanLyChi, Integer>{
     
-    String INSERT_SQL = "insert into QuanLyChi(Username,LoaiGD,SoTien,NgayGD) values(?,?,?,?)";
-    String UPDATE_SQL = "update QuanLyChi set LoaiGD=?, SoTien=?, NgayGD=? where IDChi = ?";
+    String INSERT_SQL = "insert into QuanLyChi(Username,LoaiGD,SoTien,NgayGD,nhomGD) values(?,?,?,?)";
+    String UPDATE_SQL = "update QuanLyChi set LoaiGD=?, SoTien=?, NgayGD=?, nhomGD where IDChi = ?";
     String DELETE_SQL = "delete from QuanLyChi where IDChi=?";
     String SELECT_ALL_SQL = "select * from QuanLyChi";
     String SELECT_BY_ID_SQL = "select * from QuanLyChi where IDChi=?";
@@ -26,7 +26,7 @@ public class QuanLyChiDAO extends dadDAO<QuanLyChi, Integer>{
     @Override
     public void insert(QuanLyChi entity) {
         try {
-            JDBC.update(INSERT_SQL,entity.getUsername(),entity.getLoaiGD(),entity.getSoTien(),entity.getNgayGD());
+            JDBC.update(INSERT_SQL,entity.getUsername(),entity.getLoaiGD(),entity.getSoTien(),entity.getNgayGD(),entity.getNhomGD());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -35,7 +35,7 @@ public class QuanLyChiDAO extends dadDAO<QuanLyChi, Integer>{
     @Override
     public void update(QuanLyChi entity) {
         try {
-            JDBC.update(UPDATE_SQL,entity.getLoaiGD(),entity.getSoTien(),entity.getNgayGD(),entity.getIdChi());
+            JDBC.update(UPDATE_SQL,entity.getLoaiGD(),entity.getSoTien(),entity.getNgayGD(),entity.getIdChi(),entity.getNhomGD());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -76,6 +76,7 @@ public class QuanLyChiDAO extends dadDAO<QuanLyChi, Integer>{
                 entity.setLoaiGD(rs.getString("LoaiGD"));
                 entity.setSoTien(rs.getDouble("SoTien"));
                 entity.setNgayGD(rs.getString("NgayGD"));
+                entity.setNhomGD(rs.getString("nhomGD"));
                 list.add(entity);
             }
             rs.getStatement().getConnection().close();

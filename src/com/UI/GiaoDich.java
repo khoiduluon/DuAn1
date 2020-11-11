@@ -5,7 +5,12 @@
  */
 package com.UI;
 
+import com.entity.QuanLyChi;
+import com.entity.QuanLyThu;
 import java.awt.CardLayout;
+import javax.swing.JRadioButton;
+import util.Auth;
+import utils.fmDate;
 
 /**
  *
@@ -19,6 +24,7 @@ public class GiaoDich extends javax.swing.JFrame {
     public GiaoDich() {
         initComponents();
         rdoThu.setSelected(true);
+
     }
 
     /**
@@ -42,6 +48,7 @@ public class GiaoDich extends javax.swing.JFrame {
         btnThem = new javax.swing.JButton();
         cboThu = new javax.swing.JComboBox<>();
         cboChi = new javax.swing.JComboBox<>();
+        dcsNgay = new com.toedter.calendar.JDateChooser();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -53,7 +60,7 @@ public class GiaoDich extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         jLabel2.setText("Số tiền:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, 20));
-        jPanel1.add(txtSoTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 200, -1));
+        jPanel1.add(txtSoTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 210, -1));
 
         jLabel3.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         jLabel3.setText("Loại giao dịch:");
@@ -111,6 +118,7 @@ public class GiaoDich extends javax.swing.JFrame {
 
         cboChi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tiền nhà", "Điện, nước, gas", "Giải trí", "Di chuyển", "Mua sắm", "Khoản thu khác" }));
         jPanel1.add(cboChi, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 170, -1));
+        jPanel1.add(dcsNgay, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 210, -1));
         jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 310, 308));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -134,7 +142,7 @@ public class GiaoDich extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cboThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboThuActionPerformed
-  
+
     }//GEN-LAST:event_cboThuActionPerformed
 
     private void rdoThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoThuActionPerformed
@@ -148,11 +156,11 @@ public class GiaoDich extends javax.swing.JFrame {
     }//GEN-LAST:event_rdoChiActionPerformed
 
     private void rdoThuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdoThuMouseClicked
-  
+
     }//GEN-LAST:event_rdoThuMouseClicked
 
     private void rdoChiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdoChiMouseClicked
- 
+
     }//GEN-LAST:event_rdoChiMouseClicked
 
     /**
@@ -196,6 +204,7 @@ public class GiaoDich extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboChi;
     private javax.swing.JComboBox<String> cboThu;
+    private com.toedter.calendar.JDateChooser dcsNgay;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -206,4 +215,32 @@ public class GiaoDich extends javax.swing.JFrame {
     private javax.swing.JTextField txtSoTien;
     // End of variables declaration//GEN-END:variables
 
+    QuanLyChi getInfoGiaoDichChi() {
+        QuanLyChi qlc = new QuanLyChi();
+        qlc.setUsername(Auth.user.getUser());
+        qlc.setSoTien(Double.valueOf(txtSoTien.getText()));
+        qlc.setLoaiGD(rdoChi.getText());
+        qlc.setNgayGD(fmDate.toString(dcsNgay.getDate(), "dd-MM-yyyy"));
+        qlc.setNhomGD((String) cboChi.getSelectedItem());
+        return qlc;
+    }
+
+    QuanLyThu getInfoGiaoDichThu() {
+        QuanLyThu qlt = new QuanLyThu();
+        qlt.setUsername(Auth.user.getUser());
+        qlt.setSoTien(Double.valueOf(txtSoTien.getText()));
+        qlt.setLoaiGD(rdoChi.getText());
+        qlt.setNgayGD(fmDate.toString(dcsNgay.getDate(), "dd-MM-yyyy"));
+        qlt.setNhomGD((String) cboChi.getSelectedItem());
+        return qlt;
+    }
+
+    public void clear() {
+        rdoThu.setSelected(true);
+
+    }
+
+    public void checkError() {
+
+    }
 }
