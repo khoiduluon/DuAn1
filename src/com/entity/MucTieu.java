@@ -15,16 +15,20 @@ public class MucTieu {
     private double soTienDaTK;
     private int thoiHan;
     private String ngayTao;
+    private int idMucTieu;
+    private String username;
 
     public MucTieu() {
     }
 
-    public MucTieu(String tenMucTieu, double giaTri, double soTienDaTK, int thoiHan, String ngayTao) {
+    public MucTieu(String tenMucTieu, double giaTri, double soTienDaTK, int thoiHan, String ngayTao, int idMucTieu, String username) {
         this.tenMucTieu = tenMucTieu;
         this.giaTri = giaTri;
         this.soTienDaTK = soTienDaTK;
         this.thoiHan = thoiHan;
         this.ngayTao = ngayTao;
+        this.idMucTieu = idMucTieu;
+        this.username = username;
     }
 
     /**
@@ -95,6 +99,34 @@ public class MucTieu {
      */
     public void setNgayTao(String ngayTao) {
         this.ngayTao = ngayTao;
+    }
+
+    /**
+     * @return the idMucTieu
+     */
+    public int getIdMucTieu() {
+        return idMucTieu;
+    }
+
+    /**
+     * @param idMucTieu the idMucTieu to set
+     */
+    public void setIdMucTieu(int idMucTieu) {
+        this.idMucTieu = idMucTieu;
+    }
+
+    /**
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * @param username the username to set
+     */
+    public void setUsername(String username) {
+        this.username = username;
     }
     
 }
