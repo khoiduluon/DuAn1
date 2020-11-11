@@ -29,8 +29,8 @@ create table MucTieuTietKiem(
 	TenMT nvarchar(100) not null,
 	GiaTri float not null,
 	ThoiHan int not null,
-	SoTienDaTK float null,
-	NgayDK date Default(Getdate())
+	SoTienDaTK float default(0),
+	NgayTao date Default(Getdate())
 )
 
 create table ThongKeTienDo(

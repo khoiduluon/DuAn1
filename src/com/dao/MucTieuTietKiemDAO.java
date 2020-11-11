@@ -16,7 +16,7 @@ import util.JDBC;
  * @author Rom
  */
 public class MucTieuTietKiemDAO extends dadDAO<MucTieu, Integer>{
-    String INSERT_SQL = "insert into MucTieuTietKiem(Username,tenMT,GiaTri,ThoiHan,SoTienDaTK) values (?,?,?,?,?)";
+    String INSERT_SQL = "insert into MucTieuTietKiem(Username,tenMT,GiaTri,ThoiHan) values (?,?,?,?)";
     String UPDATE_SQL = "update MucTieuTietKiem set TenMT=?, GiaTri=?, ThoiHan=? where IDMucTieu = ?";
     String DELETE_SQL = "delete from MucTieuTietKiem where IDMucTieu = ?";
     String SELECT_ALL_SQL = "select * from MucTieuTietKiem";
@@ -25,7 +25,7 @@ public class MucTieuTietKiemDAO extends dadDAO<MucTieu, Integer>{
     @Override
     public void insert(MucTieu entity) {
         try {
-            JDBC.update(INSERT_SQL,entity.getUsername(),entity.getTenMucTieu(),entity.getGiaTri(),entity.getThoiHan(),entity.getSoTienDaTK());
+            JDBC.update(INSERT_SQL,entity.getUsername(),entity.getTenMucTieu(),entity.getGiaTri(),entity.getThoiHan());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -76,7 +76,7 @@ public class MucTieuTietKiemDAO extends dadDAO<MucTieu, Integer>{
                 entity.setGiaTri(rs.getDouble("GiaTri"));
                 entity.setThoiHan(rs.getInt("ThoiHan"));
                 entity.setSoTienDaTK(rs.getDouble("SoTienDaTK"));
-                entity.setNgayTao(rs.getString("NgayDK"));
+                entity.setNgayTao(rs.getString("NgayTao"));
                 list.add(entity);
             }
             rs.getStatement().getConnection().close();
