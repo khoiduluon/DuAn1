@@ -72,11 +72,11 @@ public class NguoiDungDAO extends dadDAO<NguoiDung, String> {
             ResultSet rs = JDBC.query(sql, args);
             while (rs.next()) {
                 NguoiDung entity = new NguoiDung();
-                entity.setUser(rs.getString(1));
-                entity.setTenND(rs.getString(2));
-                entity.setGioiTinh(rs.getBoolean(3));
-                entity.setMatKhau(rs.getString(4));
-                entity.setSoDu(rs.getDouble(5));
+                entity.setUser(rs.getString("Username"));
+                entity.setTenND(rs.getString("TenND"));
+                entity.setGioiTinh(rs.getBoolean("GioiTinh"));
+                entity.setMatKhau(rs.getString("Pass"));
+                entity.setSoDu(rs.getDouble("SoDu"));
                 list.add(entity);
             }
             rs.getStatement().getConnection().close();

@@ -5,6 +5,8 @@
  */
 package com.dao;
 import com.entity.LichSuTK;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import util.JDBC;
 /**
@@ -31,7 +33,7 @@ public class LichSuDAO extends dadDAO<LichSuTK, Integer>{
     @Override
     public void update(LichSuTK entity) {
         try {
-            
+            JDBC.update(UPDATE_SQL,entity.getIdMucTieu(),entity.getNgayTK(),entity.getNgayTK(),entity.getSoTienTK(),entity.getIdLichSu());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -40,7 +42,7 @@ public class LichSuDAO extends dadDAO<LichSuTK, Integer>{
     @Override
     public void delete(Integer id) {
         try {
-            
+            JDBC.update(DELETE_SQL,id);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -48,17 +50,36 @@ public class LichSuDAO extends dadDAO<LichSuTK, Integer>{
 
     @Override
     public LichSuTK selectByid(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<LichSuTK> list = this.selectBySql(SELECT_BY_ID_SQL, id);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
 
     @Override
     public List<LichSuTK> selectAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.selectBySql(SELECT_ALL_SQL);
     }
 
     @Override
     protected List<LichSuTK> selectBySql(String sql, Object... args) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<LichSuTK> list = new ArrayList<LichSuTK>();
+        try {
+            ResultSet rs = JDBC.query(sql, args);
+            while (rs.next()) {
+                LichSuTK entity = new LichSuTK();
+                entity.setIdLichSu(rs.getInt("IDLichSu"));
+                entity.setIdMucTieu(rs.getInt("IDMucTieu"));
+                entity.setNgayTK(rs.getString("NgayTK"));
+                entity.setSoTienTK(rs.getDouble("SoTienTK"));
+                list.add(entity);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
     
 }
