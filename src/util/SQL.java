@@ -79,10 +79,10 @@ add constraint FK_LS_MTTK
 foreign key (IDMucTieu)
 references MucTieuTietKiem(IDMucTieu)
 
-alter table MucTieuTietKiem
+alter table ThongKeTienDo
 add constraint FK_MTTK_TKTD
 foreign key (IDMucTieu)
-references ThongKeTienDo(IDMucTieu)
+references MucTieuTietKiem(IDMucTieu)
 
 alter table QuanLyThu
 add constraint FK_QLT_ND

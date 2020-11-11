@@ -6,42 +6,84 @@
 package com.dao;
 
 import com.entity.MucTieu;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
+import util.JDBC;
 
 /**
  *
  * @author Rom
  */
 public class MucTieuTietKiemDAO extends dadDAO<MucTieu, Integer>{
-
+    String INSERT_SQL = "insert into MucTieuTietKiem(Username,tenMT,GiaTri,ThoiHan,SoTienDaTK) values (?,?,?,?,?)";
+    String UPDATE_SQL = "update MucTieuTietKiem set TenMT=?, GiaTri=?, ThoiHan=? where IDMucTieu = ?";
+    String DELETE_SQL = "delete from MucTieuTietKiem where IDMucTieu = ?";
+    String SELECT_ALL_SQL = "select * from MucTieuTietKiem";
+    String SELECT_BY_ID_SQL = "select * from MucTieuTietKiem where IDMucTieu = ?";
+    
     @Override
     public void insert(MucTieu entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            JDBC.update(INSERT_SQL,entity.getUsername(),entity.getTenMucTieu(),entity.getGiaTri(),entity.getThoiHan(),entity.getSoTienDaTK());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void update(MucTieu entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            JDBC.update(UPDATE_SQL,entity.getTenMucTieu(),entity.getGiaTri(),entity.getThoiHan(),entity.getIdMucTieu());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void delete(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            JDBC.update(DELETE_SQL,id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public MucTieu selectByid(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<MucTieu> list = this.selectBySql(SELECT_BY_ID_SQL, id);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
 
     @Override
     public List<MucTieu> selectAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.selectBySql(SELECT_ALL_SQL);
     }
 
     @Override
     protected List<MucTieu> selectBySql(String sql, Object... args) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<MucTieu> list = new ArrayList<MucTieu>();
+        try {
+            ResultSet rs = JDBC.query(sql, args);
+            while (rs.next()) {
+                MucTieu entity = new MucTieu();
+                entity.setIdMucTieu(rs.getInt("IDMucTieu"));
+                entity.setUsername(rs.getString("Username"));
+                entity.setTenMucTieu(rs.getString("TenMT"));
+                entity.setGiaTri(rs.getDouble("GiaTri"));
+                entity.setThoiHan(rs.getInt("ThoiHan"));
+                entity.setSoTienDaTK(rs.getDouble("SoTienDaTK"));
+                entity.setNgayTao(rs.getString("NgayDK"));
+                list.add(entity);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
     
 }

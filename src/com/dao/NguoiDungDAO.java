@@ -9,6 +9,7 @@ import com.entity.NguoiDung;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import util.JDBC;
 
 /**
@@ -17,25 +18,37 @@ import util.JDBC;
  */
 public class NguoiDungDAO extends dadDAO<NguoiDung, String> {
 
-    String INSERT_SQL = "insert into NguoiDung(idND, tenND, gioitinh, matKhau, soDu) values(?,?,?,?,?)";
-    String UPDATE_SQL = "update NhanVien set tenND=?, gioitinh=?, matkhau=?, soDu = ?, where idND = ?";
-    String DELETE_SQL = "delete from NguoiDung where idND=?";
+    String INSERT_SQL = "insert into NguoiDung(Username, tenND, gioitinh, pass, soDu) values(?,?,?,?,?)";
+    String UPDATE_SQL = "update NguoiDung set tenND=?, gioitinh=?, pass=?, soDu = ?, where Username = ?";
+    String DELETE_SQL = "delete from NguoiDung where Username=?";
     String SELECT_ALL_SQL = "select * from NguoiDung";
-    String SELECT_BY_ID_SQL = "select * from NguoiDung where idND=?";
+    String SELECT_BY_ID_SQL = "select * from NguoiDung where Username=?";
 
     @Override
     public void insert(NguoiDung entity) {
-        JDBC.update(INSERT_SQL, entity.getUser(), entity.getTenND(), entity.isGioiTinh(), entity.getMatKhau(), entity.getSoDu());
+        try {
+            JDBC.update(INSERT_SQL, entity.getUser(), entity.getTenND(), entity.isGioiTinh(), entity.getMatKhau(), entity.getSoDu());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void update(NguoiDung entity) {
-        JDBC.update(UPDATE_SQL, entity.getTenND(), entity.isGioiTinh(), entity.getMatKhau(), entity.getSoDu(), entity.getUser());
+        try {
+            JDBC.update(UPDATE_SQL, entity.getTenND(), entity.isGioiTinh(), entity.getMatKhau(), entity.getSoDu(), entity.getUser());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void delete(String id) {
-        JDBC.update(DELETE_SQL, id);
+        try {
+            JDBC.update(DELETE_SQL, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
