@@ -6,42 +6,81 @@
 package com.dao;
 
 import com.entity.ThongKeChiTieu;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
+import util.JDBC;
 
 /**
  *
  * @author Rom
  */
 public class ThongKeChiTieuDAO extends dadDAO<ThongKeChiTieu, Integer>{
-
+    String INSERT_SQL = "insert into ThongKeChiTieu(Username,TongThu,TongChi,SoDu) values(?,?,?,?)";
+    String UPDATE_SQL = "update ThongKeChiTieu set TongThu=?, TongChi=?, SoDu=? where Username = ?";
+    String DELETE_SQL = "delete from ThongKeChiTieu where Username=?";
+    String SELECT_ALL_SQL = "select * from ThongKeChiTieu";
+    String SELECT_BY_ID_SQL = "select * from ThongKeChiTieu where Username=?";
+    
     @Override
     public void insert(ThongKeChiTieu entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            JDBC.update(INSERT_SQL, entity.getUsername(),entity.getTongThu(),entity.getTongChi(),entity.getSoDu());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void update(ThongKeChiTieu entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            JDBC.update(UPDATE_SQL, entity.getTongThu(),entity.getTongChi(),entity.getSoDu(),entity.getUsername());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void delete(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            JDBC.update(DELETE_SQL, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public ThongKeChiTieu selectByid(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       List<ThongKeChiTieu> list = this.selectBySql(SELECT_BY_ID_SQL, id);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
 
     @Override
     public List<ThongKeChiTieu> selectAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.selectBySql(SELECT_ALL_SQL);
     }
 
     @Override
     protected List<ThongKeChiTieu> selectBySql(String sql, Object... args) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<ThongKeChiTieu> list = new ArrayList<ThongKeChiTieu>();
+        try {
+            ResultSet rs = JDBC.query(sql, args);
+            while (rs.next()) {
+                ThongKeChiTieu entity = new ThongKeChiTieu();
+                entity.setUsername(rs.getString("Username"));
+                entity.setTongThu(rs.getDouble("TongThu"));
+                entity.setTongChi(rs.getDouble("TongChi"));
+                entity.setSoDu(rs.getDouble("SoDu"));
+                list.add(entity);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
     
 }

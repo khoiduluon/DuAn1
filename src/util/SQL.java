@@ -98,5 +98,18 @@ alter table ThongKeChiTieu
 add constraint FK_TKCT_ND
 foreign key (Username)
 references NguoiDung(Username)
+    
+create proc LichSuMTK
+as
+begin
+	select IDLichSu,MucTieuTietKiem.TenMT,NgayTK,SoTienTK from LichSu inner join MucTieuTietKiem on LichSu.IDMucTieu=MucTieuTietKiem.IDMucTieu
+end;
+
+create proc LichSuMTK2 @TenMTK nvarchar(50)
+as
+begin
+	select IDLichSu,MucTieuTietKiem.TenMT,NgayTK,SoTienTK from LichSu inner join MucTieuTietKiem on LichSu.IDMucTieu=MucTieuTietKiem.IDMucTieu
+	where MucTieuTietKiem.TenMT=@TenMTK
+end;
     */
 }

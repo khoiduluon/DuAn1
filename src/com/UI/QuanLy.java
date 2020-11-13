@@ -910,11 +910,9 @@ public class QuanLy extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
         model.setRowCount(0);
         try {
-            List<LichSuTK> list = lsDAO.selectAll();
-            for (LichSuTK ls : list) {
-                Object row[] = { // ls.getIdLichSu(),
-                };
-                model.addRow(row);
+            List<Object[]> list = lsDAO.getListLichSu();
+            for (Object[] ls : list) {
+                model.addRow(ls);
             }
         } catch (Exception e) {
             MsgBox.alert(this, "Loi truy van du lieu");

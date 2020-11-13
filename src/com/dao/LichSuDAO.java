@@ -15,14 +15,14 @@ import util.JDBC;
  * @author Rom
  */
 
-public class LichSuDAO extends dadDAO<LichSuTK, Integer>{
+public class LichSuDAO {
     String INSERT_SQL = "insert into LichSu(IDMucTieu,NgayTK,SoTienTK) values(?,?,?)";
     String UPDATE_SQL = "update LichSu set IDMucTieu=?, NgayTK=?, SoTienTK=? where IDLichSu = ?";
     String DELETE_SQL = "delete from LichSu where IDLichSu = ?";
     String SELECT_ALL_SQL = "select IDLichSu,MucTieuTietKiem.TenMT,NgayTK,SoTienTK from LichSu inner join MucTieuTietKiem on LichSu.IDMucTieu=MucTieuTietKiem.IDMucTieu";
     String SELECT_BY_ID_SQL = "select IDLichSu,MucTieuTietKiem.TenMT,NgayTK,SoTienTK from LichSu inner join MucTieuTietKiem on LichSu.IDMucTieu=MucTieuTietKiem.IDMucTieu where IDLichSu=?";
     
-    @Override
+   
     public void insert(LichSuTK entity) {
         try {
             JDBC.update(INSERT_SQL,entity.getIdMucTieu(),entity.getNgayTK(),entity.getNgayTK(),entity.getSoTienTK());
@@ -31,7 +31,7 @@ public class LichSuDAO extends dadDAO<LichSuTK, Integer>{
         }
     }
 
-    @Override
+    
     public void update(LichSuTK entity) {
         try {
             JDBC.update(UPDATE_SQL,entity.getIdMucTieu(),entity.getNgayTK(),entity.getNgayTK(),entity.getSoTienTK(),entity.getIdLichSu());
@@ -40,7 +40,7 @@ public class LichSuDAO extends dadDAO<LichSuTK, Integer>{
         }
     }
 
-    @Override
+    
     public void delete(Integer id) {
         try {
             JDBC.update(DELETE_SQL,id);
@@ -67,24 +67,9 @@ public class LichSuDAO extends dadDAO<LichSuTK, Integer>{
             throw new RuntimeException(e);
         }
     }
-        public List<Object[]> getLuongNguoiHoc() {
-        String sql = "{call }";
-        String[] cols = {"Nam", "SoLuong", "DauTien", "CuoiCung"};
+        public List<Object[]> getListLichSu() {
+        String sql = "{call LichSuMTK}";
+        String[] cols = {"IDLicSu", "TenMT", "NgayTK", "SoTienTK"};
         return this.getListOfArray(sql, cols);
-    }
-
-    @Override
-    public LichSuTK selectByid(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<LichSuTK> selectAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    protected List<LichSuTK> selectBySql(String sql, Object... args) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
