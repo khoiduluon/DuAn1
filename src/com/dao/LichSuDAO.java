@@ -6,6 +6,7 @@
 package com.dao;
 import com.entity.LichSuTK;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import util.JDBC;
@@ -46,40 +47,44 @@ public class LichSuDAO extends dadDAO<LichSuTK, Integer>{
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }    
+    
+        List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
+
+        try {
+            List<Object[]> list = new ArrayList<>();
+            ResultSet rs = JDBC.query(sql, args);
+            while (rs.next()) {
+                Object[] vals = new Object[cols.length];
+                for(int i=0;i<cols.length;i++){
+                    vals[i]=rs.getObject(cols[i]);
+                }
+                list.add(vals);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+        public List<Object[]> getLuongNguoiHoc() {
+        String sql = "{call }";
+        String[] cols = {"Nam", "SoLuong", "DauTien", "CuoiCung"};
+        return this.getListOfArray(sql, cols);
     }
 
     @Override
     public LichSuTK selectByid(Integer id) {
-        List<LichSuTK> list = this.selectBySql(SELECT_BY_ID_SQL, id);
-        if (list.isEmpty()) {
-            return null;
-        }
-        return list.get(0);
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public List<LichSuTK> selectAll() {
-        return this.selectBySql(SELECT_ALL_SQL);
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     protected List<LichSuTK> selectBySql(String sql, Object... args) {
-        List<LichSuTK> list = new ArrayList<LichSuTK>();
-        try {
-            ResultSet rs = JDBC.query(sql, args);
-            while (rs.next()) {
-                LichSuTK entity = new LichSuTK();
-                entity.setIdLichSu(rs.getInt("IDLichSu"));
-                entity.setIdMucTieu(rs.getInt("IDMucTieu"));
-                entity.setNgayTK(rs.getString("NgayTK"));
-                entity.setSoTienTK(rs.getDouble("SoTienTK"));
-                list.add(entity);
-            }
-            rs.getStatement().getConnection().close();
-            return list;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 }
