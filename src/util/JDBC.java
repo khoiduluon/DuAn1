@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class JDBC{
 
     static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    static String dburl = "jdbc:sqlserver://localhost:1433;databaseName=QLTK;";
+    static String dburl = "jdbc:sqlserver://localhost:1433;databaseName=QLTK;integratedSecurity=true";
     static String user = "sa";
     static String pass = "123";
 
