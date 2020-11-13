@@ -889,14 +889,14 @@ public class QuanLy extends javax.swing.JFrame {
         pnlLichSu.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 
-    public void fillTableMucTieu() {
+    public void fillTableMucTietKiem() {
         DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
         model.setRowCount(0);
         try {
             List<MucTieu> list = mtkDAO.selectAll();
-            for(MucTieu mt :list){
-                Object row[] ={
-                    mt.getIdMucTieu(),mt.getTenMucTieu(),mt.getGiaTri(),mt.getThoiHan(),mt.getSoTienDaTK()
+            for (MucTieu mt : list) {
+                Object row[] = {
+                    mt.getIdMucTieu(), mt.getTenMucTieu(), mt.getGiaTri(), mt.getThoiHan(), mt.getSoTienDaTK()
                 };
                 model.addRow(row);
             }
@@ -905,20 +905,19 @@ public class QuanLy extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
-    public void fillTableLichSu(){
+
+    public void fillTableLichSu() {
         DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
         model.setRowCount(0);
-        try{
-             List<LichSuTK> list = lsDAO.selectAll();
-            for(LichSuTK ls :list){
-                Object row[] ={
-                   // ls.getIdLichSu(),
+        try {
+            List<LichSuTK> list = lsDAO.selectAll();
+            for (LichSuTK ls : list) {
+                Object row[] = { // ls.getIdLichSu(),
                 };
                 model.addRow(row);
             }
-        } catch(Exception e){
-             MsgBox.alert(this, "Loi truy van du lieu");
+        } catch (Exception e) {
+            MsgBox.alert(this, "Loi truy van du lieu");
             e.printStackTrace();
         }
     }
@@ -936,10 +935,12 @@ public class QuanLy extends javax.swing.JFrame {
 
     MucTieu getInFo() {
         MucTieu mt = new MucTieu();
+        String arr = (String) cboThoiGianTK.getSelectedItem();
+        String ar[] = arr.split(" ");
         mt.setUsername(Auth.user.getUser());
         mt.setTenMucTieu(txtTenMTK.getText());
         mt.setGiaTri(Double.parseDouble(txtGiaTri.getText()));
-        mt.setThoiHan(cboThoiGianTK.getSelectedIndex());
+        mt.setThoiHan(Integer.valueOf(ar[0]));
         return mt;
     }
 }

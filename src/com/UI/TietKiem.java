@@ -205,8 +205,7 @@ public class TietKiem extends javax.swing.JFrame {
     public void fillInFo(){
           MucTieu muctieu = (MucTieu) cboMTK.getSelectedItem();
           txtGiaTri.setText(String.valueOf(muctieu.getGiaTri()));
-          //Sua lai 3,6 tháng
-          txtThoiGian.setText(String.valueOf(muctieu.getThoiHan()));
+          txtThoiGian.setText(String.valueOf(muctieu.getThoiHan())+" tháng");
     }
     
     public void addTietKiem(){
