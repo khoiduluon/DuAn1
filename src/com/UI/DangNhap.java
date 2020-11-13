@@ -5,6 +5,8 @@
  */
 package com.UI;
 
+import com.dao.NguoiDungDAO;
+import com.entity.NguoiDung;
 import util.setColorSystem;
 import java.awt.Color;
 import java.awt.Component;
@@ -17,6 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
+import util.Auth;
+import util.MsgBox;
 //import sun.lwawt.macosx.CocoaConstants;
 
 public class DangNhap extends javax.swing.JFrame {
@@ -42,8 +46,8 @@ public class DangNhap extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         lblDangNhap = new javax.swing.JLabel();
-        txtDangNhap = new javax.swing.JTextField();
         txtMatKhau = new javax.swing.JTextField();
+        txtTenDN = new javax.swing.JTextField();
         lblQuenMK = new javax.swing.JLabel();
         lblMatKhau = new javax.swing.JLabel();
         lblDangKy = new javax.swing.JLabel();
@@ -61,19 +65,19 @@ public class DangNhap extends javax.swing.JFrame {
         lblDangNhap.setText("Tên đăng nhập:");
         jPanel1.add(lblDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
 
-        txtDangNhap.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtDangNhap.setAlignmentX(1.0F);
-        txtDangNhap.setAlignmentY(1.0F);
-        txtDangNhap.setBorder(null);
-        txtDangNhap.setPreferredSize(new java.awt.Dimension(266, 30));
-        jPanel1.add(txtDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 280, -1));
-
         txtMatKhau.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtMatKhau.setAlignmentX(1.0F);
         txtMatKhau.setAlignmentY(1.0F);
         txtMatKhau.setBorder(null);
         txtMatKhau.setPreferredSize(new java.awt.Dimension(266, 30));
-        jPanel1.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 280, -1));
+        jPanel1.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 280, -1));
+
+        txtTenDN.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtTenDN.setAlignmentX(1.0F);
+        txtTenDN.setAlignmentY(1.0F);
+        txtTenDN.setBorder(null);
+        txtTenDN.setPreferredSize(new java.awt.Dimension(266, 30));
+        jPanel1.add(txtTenDN, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 280, -1));
 
         lblQuenMK.setFont(new java.awt.Font("Arial", 2, 12)); // NOI18N
         lblQuenMK.setForeground(new java.awt.Color(0, 102, 255));
@@ -125,6 +129,11 @@ public class DangNhap extends javax.swing.JFrame {
         btnDangNhap.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         btnDangNhap.setText("Đăng nhập");
         btnDangNhap.setPreferredSize(new java.awt.Dimension(114, 30));
+        btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangNhapActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 280, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 380));
@@ -171,6 +180,10 @@ public class DangNhap extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_lblDangKyMouseClicked
 
+    private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
+        dangNhap();
+    }//GEN-LAST:event_btnDangNhapActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -183,8 +196,8 @@ public class DangNhap extends javax.swing.JFrame {
     private javax.swing.JLabel lblExit;
     private javax.swing.JLabel lblMatKhau;
     private javax.swing.JLabel lblQuenMK;
-    private javax.swing.JTextField txtDangNhap;
     private javax.swing.JTextField txtMatKhau;
+    private javax.swing.JTextField txtTenDN;
     // End of variables declaration//GEN-END:variables
 
     public void mouseHover() {
@@ -193,7 +206,7 @@ public class DangNhap extends javax.swing.JFrame {
         btnDangNhap.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         lblExit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
-    
+    NguoiDungDAO ngdao = new NguoiDungDAO();
     
     public void openDangNhap(){
         new DangNhap().setVisible(true);
@@ -208,4 +221,19 @@ public class DangNhap extends javax.swing.JFrame {
         //mk,taikhoan
     }
 
+    
+       void dangNhap(){
+       String manv = txtTenDN.getText();
+       String matKhau = txtMatKhau.getText();
+      NguoiDung nguoidung = ngdao.selectByid(manv);
+       if(nguoidung==null){
+           MsgBox.alert(this, "Sai ten dang nhap");
+       } else if(!matKhau.equals(nguoidung.getMatKhau())){
+           MsgBox.alert(this, "Sai mat khau");
+       } else {
+           Auth.user = nguoidung;
+           new QuanLy().setVisible(true);
+           this.dispose();
+       }
+   }
 }
