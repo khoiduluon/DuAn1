@@ -23,6 +23,5 @@ import com.entity.NguoiDung;
     public static boolean isLogin(){
         return Auth.user != null;
     }
-    
 }
 

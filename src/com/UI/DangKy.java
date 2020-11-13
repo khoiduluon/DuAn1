@@ -5,7 +5,10 @@
  */
 package com.UI;
 
+import com.dao.NguoiDungDAO;
+import com.entity.NguoiDung;
 import java.awt.Color;
+import util.MsgBox;
 import util.setColorSystem;
 
 /**
@@ -37,10 +40,10 @@ public class DangKy extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         lblTenDN = new javax.swing.JLabel();
         txtTenDN = new javax.swing.JTextField();
-        txtMatKhau = new javax.swing.JTextField();
         lblMatKhau = new javax.swing.JLabel();
-        txtNhapLaiMK = new javax.swing.JTextField();
+        txtMatKhau = new javax.swing.JPasswordField();
         lblNhapLaiMK = new javax.swing.JLabel();
+        txtxNhapLaiMK = new javax.swing.JPasswordField();
         txtHoTen = new javax.swing.JTextField();
         lblHoTen = new javax.swing.JLabel();
         lblGioiTinh = new javax.swing.JLabel();
@@ -63,19 +66,15 @@ public class DangKy extends javax.swing.JFrame {
         txtTenDN.setPreferredSize(new java.awt.Dimension(84, 30));
         jPanel1.add(txtTenDN, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 260, -1));
 
-        txtMatKhau.setPreferredSize(new java.awt.Dimension(84, 30));
-        jPanel1.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 260, -1));
-
         lblMatKhau.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         lblMatKhau.setText("Mật khẩu:");
         jPanel1.add(lblMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
-
-        txtNhapLaiMK.setPreferredSize(new java.awt.Dimension(84, 30));
-        jPanel1.add(txtNhapLaiMK, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 260, -1));
+        jPanel1.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 260, 30));
 
         lblNhapLaiMK.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         lblNhapLaiMK.setText("Nhập lại mật khẩu:");
         jPanel1.add(lblNhapLaiMK, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+        jPanel1.add(txtxNhapLaiMK, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 260, 30));
 
         txtHoTen.setPreferredSize(new java.awt.Dimension(84, 30));
         jPanel1.add(txtHoTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 260, -1));
@@ -97,7 +96,12 @@ public class DangKy extends javax.swing.JFrame {
         jPanel1.add(rdoNu, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, -1, -1));
 
         btnDangKy.setText("Đăng ký");
-        jPanel1.add(btnDangKy, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 400, -1, -1));
+        btnDangKy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangKyActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnDangKy, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 410, -1, -1));
 
         lblExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/delete.png"))); // NOI18N
         lblExit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -146,6 +150,13 @@ public class DangKy extends javax.swing.JFrame {
         setColorSystem cl = new setColorSystem();
         cl.setBorder(lblExit);
     }//GEN-LAST:event_lblExitMouseEntered
+
+    private void btnDangKyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangKyActionPerformed
+        // TODO add your handling code here:
+        if(checkLoi()==true){
+            insert();
+        }
+    }//GEN-LAST:event_btnDangKyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,24 +209,66 @@ public class DangKy extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdoNam;
     private javax.swing.JRadioButton rdoNu;
     private javax.swing.JTextField txtHoTen;
-    private javax.swing.JTextField txtMatKhau;
-    private javax.swing.JTextField txtNhapLaiMK;
+    private javax.swing.JPasswordField txtMatKhau;
     private javax.swing.JTextField txtTenDN;
+    private javax.swing.JPasswordField txtxNhapLaiMK;
     // End of variables declaration//GEN-END:variables
-
-    public void addToDataBase() {
-
+    NguoiDungDAO dao=new NguoiDungDAO();
+    NguoiDung getForm(){
+        NguoiDung nd=new NguoiDung();
+        nd.setUser(txtTenDN.getText());
+        nd.setMatKhau(txtMatKhau.getText());
+        nd.setTenND(txtHoTen.getText());
+        if(rdoNam.isSelected()){
+            nd.setGioiTinh(true);
+        }else{
+            nd.setGioiTinh(false);
+        }
+        return nd;
     }
-
-    public void thongBao() {
-
+    
+    void clearFormm(){
+        txtTenDN.setText("");
+        txtMatKhau.setText("");
+        txtxNhapLaiMK.setText("");
+        txtHoTen.setText("");
+        rdoNam.setSelected(true);
     }
-
-    public void checkLoi() {
-        //trung id
-        //mk ko trung
-        //bo trong
-        //
+    
+    void insert(){
+        NguoiDung nd=getForm();
+        String mk2=txtxNhapLaiMK.getText();
+        if(!mk2.equals(nd.getMatKhau())){
+            MsgBox.alert(this,"Xác nhận mật khẩu không đúng!");
+        }else{
+            try {
+                dao.insert(nd);
+                clearFormm();
+                MsgBox.alert(this,"Thêm mới thành công!");
+            } catch (Exception e) {
+                MsgBox.alert(this,"Thêm mới thất bại!");
+            }
+        }
+    }
+    
+    boolean checkLoi() {
+        if(txtTenDN.getText().equals("")){
+            MsgBox.alert(this,"Không được bỏ trống tên đăng nhập!");
+            return false;
+        }
+        if(txtMatKhau.getText().equals("")){
+            MsgBox.alert(this,"Không được bỏ trống mật khẩu!");
+            return false;
+        }
+        if(txtxNhapLaiMK.getText().equals("")){
+            MsgBox.alert(this,"Vui lòng xác nhận mật khẩu!");
+            return false;
+        }
+        if(txtHoTen.getText().equals("")){
+            MsgBox.alert(this,"Không được bỏ trống họ tên!");
+            return false;
+        }
+       return true;
     }
 
 }
