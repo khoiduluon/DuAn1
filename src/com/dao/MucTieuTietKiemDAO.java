@@ -5,11 +5,13 @@
  */
 package com.dao;
 
+import com.UI.QuanLy;
 import com.entity.MucTieu;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import util.JDBC;
+import util.MsgBox;
 
 /**
  *
@@ -17,9 +19,9 @@ import util.JDBC;
  */
 public class MucTieuTietKiemDAO extends dadDAO<MucTieu, Integer>{
     String INSERT_SQL = "insert into MucTieuTietKiem(Username,tenMT,GiaTri,ThoiHan) values (?,?,?,?)";
-    String UPDATE_SQL = "update MucTieuTietKiem set TenMT=?, GiaTri=?, ThoiHan=? where IDMucTieu = ?";
+    String UPDATE_SQL = "update MucTieuTietKiem set TenMT=?, GiaTri=?, ThoiHan=?, SoTienDaTK =? where IDMucTieu = ?";
     String DELETE_SQL = "delete from MucTieuTietKiem where IDMucTieu = ?";
-    String SELECT_ALL_SQL = "select * from MucTieuTietKiem";
+    String SELECT_ALL_SQL = "select * from MucTieuTietKiem where username =?";
     String SELECT_BY_ID_SQL = "select * from MucTieuTietKiem where IDMucTieu = ?";
     
     @Override
@@ -34,7 +36,7 @@ public class MucTieuTietKiemDAO extends dadDAO<MucTieu, Integer>{
     @Override
     public void update(MucTieu entity) {
         try {
-            JDBC.update(UPDATE_SQL,entity.getTenMucTieu(),entity.getGiaTri(),entity.getThoiHan(),entity.getIdMucTieu());
+            JDBC.update(UPDATE_SQL,entity.getTenMucTieu(),entity.getGiaTri(),entity.getThoiHan(),entity.getSoTienDaTK(),entity.getIdMucTieu());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -58,9 +60,9 @@ public class MucTieuTietKiemDAO extends dadDAO<MucTieu, Integer>{
         return list.get(0);
     }
 
-    @Override
-    public List<MucTieu> selectAll() {
-        return this.selectBySql(SELECT_ALL_SQL);
+   
+    public List<MucTieu> selectMTK(String id) {
+        return this.selectBySql(SELECT_ALL_SQL,id);
     }
 
     @Override
@@ -84,6 +86,11 @@ public class MucTieuTietKiemDAO extends dadDAO<MucTieu, Integer>{
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public List<MucTieu> selectAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

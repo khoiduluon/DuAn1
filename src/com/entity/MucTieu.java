@@ -131,7 +131,7 @@ public class MucTieu {
 
     @Override
     public String toString() {
-        return "MucTieu{" + "tenMucTieu=" + tenMucTieu + '}';
+        return tenMucTieu;
     }
     
 }

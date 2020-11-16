@@ -12,14 +12,33 @@ import com.entity.MucTieu;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Year;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.ProgressBar;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JProgressBar;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 import util.Auth;
 import util.MsgBox;
 import util.setColorSystem;
+import utils.fmDate;
 
 /**
  *
@@ -37,8 +56,10 @@ public class QuanLy extends javax.swing.JFrame {
         this.setBackground(new Color(0, 0, 0, 0));
         pnlBg.setBackground(new Color(0, 0, 0, 0));
         cardLayout = (CardLayout) pnlTabs.getLayout();
+        fillTableMucTietKiem();
+        fillComboBox();
         mouseHover();
-
+        thongKe();
     }
 
     /**
@@ -382,6 +403,11 @@ public class QuanLy extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblDanhSach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDanhSachMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblDanhSach);
 
         pnlbottom.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 280));
@@ -419,9 +445,17 @@ public class QuanLy extends javax.swing.JFrame {
         lblMucTietKiem.setText("Mục tiết kiệm:");
 
         cboMucTietKiem.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
-        cboMucTietKiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboMucTietKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboMucTietKiemActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        pgbTienDo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        pgbTienDo.setPreferredSize(new java.awt.Dimension(146, 200));
+        pgbTienDo.setStringPainted(true);
 
         lblTienDaTK.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         lblTienDaTK.setText("Số tiền đã tiết kiệm được:");
@@ -435,8 +469,8 @@ public class QuanLy extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(92, 92, 92)
-                .addComponent(pgbTienDo, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                .addComponent(pgbTienDo, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblThoiGianCon)
                     .addComponent(lblTienDaTK)
@@ -449,7 +483,7 @@ public class QuanLy extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pgbTienDo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pgbTienDo, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lblTienDaTK)
                         .addGap(18, 18, 18)
@@ -458,7 +492,7 @@ public class QuanLy extends javax.swing.JFrame {
                         .addComponent(lblThoiGianCon)
                         .addGap(18, 18, 18)
                         .addComponent(txtThoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -722,7 +756,9 @@ public class QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThemMouseExited
 
     private void btnThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseClicked
-        addMtkToDaTaBase();
+        if (checkError()) {
+            addMtkToDaTaBase();
+        }
     }//GEN-LAST:event_btnThemMouseClicked
 
     private void btnSuaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaMouseEntered
@@ -736,7 +772,9 @@ public class QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSuaMouseExited
 
     private void btnSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSuaMouseClicked
-        // TODO add your handling code here:
+        if (checkError()) {
+            updateMtkToDaTaBase();
+        }
     }//GEN-LAST:event_btnSuaMouseClicked
 
     private void btnXoaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaMouseEntered
@@ -750,7 +788,7 @@ public class QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXoaMouseExited
 
     private void btnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaMouseClicked
-        // TODO add your handling code here:
+        deleteMtk();
     }//GEN-LAST:event_btnXoaMouseClicked
 
     private void btnTietKiemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTietKiemMouseEntered
@@ -765,7 +803,7 @@ public class QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTietKiemMouseExited
 
     private void btnTietKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTietKiemMouseClicked
-        // TODO add your handling code here:
+        new TietKiem().setVisible(true);
     }//GEN-LAST:event_btnTietKiemMouseClicked
 
     private void pnlGiaoDichMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlGiaoDichMouseEntered
@@ -781,6 +819,14 @@ public class QuanLy extends javax.swing.JFrame {
     private void pnlGiaoDichMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlGiaoDichMouseClicked
         new GiaoDich().setVisible(true);
     }//GEN-LAST:event_pnlGiaoDichMouseClicked
+
+    private void tblDanhSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachMouseClicked
+        selectForm();
+    }//GEN-LAST:event_tblDanhSachMouseClicked
+
+    private void cboMucTietKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboMucTietKiemActionPerformed
+        thongKe();
+    }//GEN-LAST:event_cboMucTietKiemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -887,16 +933,17 @@ public class QuanLy extends javax.swing.JFrame {
         pnlKeHoach.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         pnlThongKe.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         pnlLichSu.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        pnlGiaoDich.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 
     public void fillTableMucTietKiem() {
         DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
         model.setRowCount(0);
         try {
-            List<MucTieu> list = mtkDAO.selectAll();
+            List<MucTieu> list = mtkDAO.selectMTK(Auth.user.getUser());
             for (MucTieu mt : list) {
                 Object row[] = {
-                    mt.getIdMucTieu(), mt.getTenMucTieu(), mt.getGiaTri(), mt.getThoiHan(), mt.getSoTienDaTK()
+                    mt.getIdMucTieu(), mt.getTenMucTieu(), mt.getGiaTri(), mt.getThoiHan() + " tháng", mt.getSoTienDaTK()
                 };
                 model.addRow(row);
             }
@@ -922,7 +969,39 @@ public class QuanLy extends javax.swing.JFrame {
 
     public void addMtkToDaTaBase() {
         MucTieu mt = getInFo();
-        mtkDAO.insert(mt);
+        try {
+            mtkDAO.insert(mt);
+            fillTableMucTietKiem();
+        } catch (Exception e) {
+            MsgBox.alert(this, "Loi roi ku");
+        }
+    }
+
+    public void updateMtkToDaTaBase() {
+        MucTieu mt = upDateInFo();
+        try {
+            mtkDAO.update(mt);
+            fillTableMucTietKiem();
+            clear();
+        } catch (Exception e) {
+            MsgBox.alert(this, "Loi roi ku");
+        }
+    }
+
+    public void deleteMtk() {
+        if (Auth.user.getUser().equals("")) {
+            MsgBox.alert(this, "Dang nhap de co the xoa");
+        } else if (MsgBox.confirm(this, "That su muon xoa ?")) {
+            try {
+                int row = (int) (tblDanhSach.getValueAt(tblDanhSach.getSelectedRow(), 0));
+                mtkDAO.delete(row);
+                MsgBox.alert(this, "Xoa thanh cong");
+                fillTableMucTietKiem();
+            } catch (Exception e) {
+                MsgBox.alert(this, "Loi roi ku");
+                e.printStackTrace();
+            }
+        }
     }
 
     public void clear() {
@@ -940,5 +1019,143 @@ public class QuanLy extends javax.swing.JFrame {
         mt.setGiaTri(Double.parseDouble(txtGiaTri.getText()));
         mt.setThoiHan(Integer.valueOf(ar[0]));
         return mt;
+    }
+
+    MucTieu upDateInFo() {
+        MucTieu mt = new MucTieu();
+        try {
+            String arr = (String) cboThoiGianTK.getSelectedItem();
+            String ar[] = arr.split(" ");
+            mt.setTenMucTieu(txtTenMTK.getText());
+            mt.setGiaTri(Double.parseDouble(txtGiaTri.getText()));
+            mt.setThoiHan(Integer.valueOf(ar[0]));
+            Double value = (double) tblDanhSach.getValueAt(tblDanhSach.getSelectedRow(), 4);
+            mt.setSoTienDaTK(value);
+            int id = (int) tblDanhSach.getValueAt(tblDanhSach.getSelectedRow(), 0);
+            mt.setIdMucTieu(id);
+        } catch (Exception e) {
+            MsgBox.alert(this, "Cap nhat loi, vui long cap nhat lai");
+        }
+        return mt;
+    }
+
+    void selectForm() {
+        int id = (int) tblDanhSach.getValueAt(tblDanhSach.getSelectedRow(), 0);
+        MucTieu mt = mtkDAO.selectByid(id);
+        txtTenMTK.setText(mt.getTenMucTieu());
+        txtGiaTri.setText(String.valueOf(mt.getGiaTri()));
+        if (tblDanhSach.getValueAt(tblDanhSach.getSelectedRow(), 3).equals("1 tháng")) {
+            cboThoiGianTK.setSelectedIndex(0);
+        } else if (tblDanhSach.getValueAt(tblDanhSach.getSelectedRow(), 3).equals("3 tháng")) {
+            cboThoiGianTK.setSelectedIndex(1);
+        } else if (tblDanhSach.getValueAt(tblDanhSach.getSelectedRow(), 3).equals("6 tháng")) {
+            cboThoiGianTK.setSelectedIndex(2);
+        } else {
+            cboThoiGianTK.setSelectedIndex(3);
+        }
+    }
+
+    boolean checkError() {
+        if (txtGiaTri.getText().matches(".*[a-zA-Z].*")) {
+            MsgBox.alert(this, "Khong dc dien ki tu vao o gia tri");
+            return false;
+        } else if (txtTenMTK.getText().equals("") || txtGiaTri.getText().equals("")) {
+            MsgBox.alert(this, "khong duoc de trong");
+            return false;
+        } else if (Double.valueOf(txtGiaTri.getText()) < 0) {
+            MsgBox.alert(this, "khong duoc nhap so am");
+            return false;
+        }
+        return true;
+    }
+
+    boolean noTif() {
+        List<MucTieu> list = mtkDAO.selectMTK(Auth.user.getUser());
+        for (MucTieu mt : list) {
+            if (mt.getGiaTri() >= mt.getSoTienDaTK()) {
+                MsgBox.alert(this, "Ban da tiet kiem du");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void fillComboBox() {
+        DefaultComboBoxModel combobox = (DefaultComboBoxModel) cboMucTietKiem.getModel();
+        combobox.removeAllElements();
+        List<MucTieu> list = mtkDAO.selectMTK(Auth.user.getUser());
+        for (MucTieu mt : list) {
+            combobox.addElement(mt);
+        }
+    }
+
+    public void thongKe() {
+//        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        MucTieu mt = (MucTieu) cboMucTietKiem.getSelectedItem();
+        txtTienDaTK.setText(String.valueOf(mt.getSoTienDaTK()));
+        txtThoiGian.setText(String.valueOf(mt.getThoiHan()));
+//        try{
+//          dataset.setValue((mt.getSoTienDaTK()*100)/mt.getGiaTri(), String.valueOf(mt.getTenMucTieu()), mt.getTenMucTieu());
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }   
+        //        JFreeChart chart = ChartFactory.createBarChart("Oops", "vcl", "dcm", dataset, PlotOrientation.VERTICAL, rootPaneCheckingEnabled, rootPaneCheckingEnabled, rootPaneCheckingEnabled);
+//        ChartFrame chartFrame = new ChartFrame("yoyo", chart);
+//        chartFrame.setVisible(true);
+//        chartFrame.setSize(500,400);
+        new Timer(200, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int value = (int) ((int) (mt.getSoTienDaTK() * 100) / mt.getGiaTri());
+                if (value < pgbTienDo.getMaximum()) {
+                    pgbTienDo.setValue(value + 1);
+                }
+            }
+        }).start();
+    }
+
+    int getSumDays(int numberOfMonths, int month, int year) {
+        int sumDays = 0;
+        for (int i = 0; i < numberOfMonths; i++) {
+            if (month == 2) {
+                if ((year % 400 == 0) || (year % 4 == 0 && year % 100 != 0)) {
+                    sumDays += 29;
+                } else {
+                    sumDays += 28;
+                }
+            } else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8
+                    || month == 10 || month == 12) {
+                sumDays += 31;
+            } else {
+                sumDays += 30;
+            }
+        }
+        return sumDays;
+    }
+
+    int getDays(int month, int year) {
+        int Days = 0;
+        if (month == 2) {
+            if ((year % 400 == 0) || (year % 4 == 0 && year % 100 != 0)) {
+                Days = 29;
+            } else {
+                Days = 28;
+            }
+        } else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8
+                || month == 10 || month == 12) {
+            Days = 31;
+        } else {
+            Days = 30;
+        }
+        return Days;
+    }
+
+    void endOfMTK() {
+        MucTieu mt = (MucTieu) cboMucTietKiem.getSelectedItem();
+        for(int i = 0;i<getSumDays(mt.getThoiHan(), LocalDate.now().getMonthValue(), Year.now().getValue());i++){
+            if(LocalDateTime.now().getDayOfMonth()<getDays(WIDTH, i)){
+                
+            }
+        }
     }
 }

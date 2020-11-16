@@ -6,6 +6,7 @@
 package com.UI;
 
 import de.javasoft.plaf.synthetica.SyntheticaSimple2DLookAndFeel;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -19,7 +20,7 @@ public class Main {
 
     public static void main(String args[]) {
 
-//        try {
+//        try {den
 //            UIManager.setLookAndFeel("de.javasoft.plaf.synthetica.SyntheticaSimple2DLookAndFeel");
 //                                     
 //        } catch (Exception e) {
@@ -34,6 +35,5 @@ public class Main {
                 dn.setVisible(true);
             }
         });
-        System.out.println("Hello Trang");
     }
 }

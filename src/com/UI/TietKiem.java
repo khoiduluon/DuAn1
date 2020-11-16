@@ -8,8 +8,11 @@ package com.UI;
 import com.dao.MucTieuTietKiemDAO;
 import com.entity.MucTieu;
 import java.awt.Color;
+import java.sql.SQLException;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import util.Auth;
+import util.MsgBox;
 import util.setColorSystem;
 
 /**
@@ -26,6 +29,7 @@ public class TietKiem extends javax.swing.JFrame {
         this.setResizable(false);
         setLocationRelativeTo(null);
         this.setBackground(new Color(0, 0, 0, 0));
+        fillComboBox();
     }
 
     /**
@@ -60,7 +64,11 @@ public class TietKiem extends javax.swing.JFrame {
         lblMucTietKiem.setText("Mục tiết kiệm:");
         jPanel1.add(lblMucTietKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
-        cboMTK.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboMTK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboMTKActionPerformed(evt);
+            }
+        });
         jPanel1.add(cboMTK, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 120, -1));
 
         jLabel1.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
@@ -68,7 +76,6 @@ public class TietKiem extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
         txtGiaTri.setEditable(false);
-        txtGiaTri.setEnabled(false);
         txtGiaTri.setPreferredSize(new java.awt.Dimension(14, 30));
         jPanel1.add(txtGiaTri, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 280, -1));
 
@@ -77,7 +84,6 @@ public class TietKiem extends javax.swing.JFrame {
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
 
         txtThoiGian.setEditable(false);
-        txtThoiGian.setEnabled(false);
         txtThoiGian.setPreferredSize(new java.awt.Dimension(14, 30));
         jPanel1.add(txtThoiGian, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 280, -1));
 
@@ -89,6 +95,11 @@ public class TietKiem extends javax.swing.JFrame {
         jPanel1.add(txtSoTienTietKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 280, -1));
 
         btnTietKiem.setText("Tiết kiệm");
+        btnTietKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTietKiemActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnTietKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, -1, -1));
 
         lblExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/delete.png"))); // NOI18N
@@ -129,7 +140,8 @@ public class TietKiem extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseClicked
-        System.exit(0);
+        this.dispose();
+        new QuanLy().fillTableMucTietKiem();
     }//GEN-LAST:event_lblExitMouseClicked
 
     private void lblExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseExited
@@ -141,6 +153,16 @@ public class TietKiem extends javax.swing.JFrame {
         setColorSystem cl = new setColorSystem();
         cl.setBorder(lblExit);
     }//GEN-LAST:event_lblExitMouseEntered
+
+    private void cboMTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboMTKActionPerformed
+        fillInFo();
+    }//GEN-LAST:event_cboMTKActionPerformed
+
+    private void btnTietKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTietKiemActionPerformed
+        if(checkError()){
+            insert();
+        }
+    }//GEN-LAST:event_btnTietKiemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,25 +214,50 @@ public class TietKiem extends javax.swing.JFrame {
     private javax.swing.JTextField txtThoiGian;
     // End of variables declaration//GEN-END:variables
     MucTieuTietKiemDAO mtkdao = new MucTieuTietKiemDAO();
-    
-    public void fillComboBox(){
+
+    public void fillComboBox() {
         DefaultComboBoxModel combobox = (DefaultComboBoxModel) cboMTK.getModel();
         combobox.removeAllElements();
-        List<MucTieu> list = mtkdao.selectAll();
-        for(MucTieu mt : list){
+        List<MucTieu> list = mtkdao.selectMTK(Auth.user.getUser());
+        for (MucTieu mt : list) {
             combobox.addElement(mt);
         }
     }
-    
-    public void fillInFo(){
-          MucTieu muctieu = (MucTieu) cboMTK.getSelectedItem();
-          txtGiaTri.setText(String.valueOf(muctieu.getGiaTri()));
-          txtThoiGian.setText(String.valueOf(muctieu.getThoiHan())+" tháng");
-    }
-    
-    public void addTietKiem(){
+
+    public void fillInFo() {
         MucTieu muctieu = (MucTieu) cboMTK.getSelectedItem();
-        muctieu.setSoTienDaTK(Double.valueOf(txtSoTienTietKiem.getText()));
+        txtGiaTri.setText(String.valueOf(muctieu.getGiaTri()));
+        txtThoiGian.setText(String.valueOf(muctieu.getThoiHan()) + " tháng");
+    }
+
+    MucTieu getInFo() {
+        MucTieu muctieu = (MucTieu) cboMTK.getSelectedItem();
+        double newPrice = muctieu.getSoTienDaTK();
+        newPrice += Double.valueOf(txtSoTienTietKiem.getText());
+        muctieu.setSoTienDaTK(newPrice);
+        return muctieu;
     }
     
+        void insert() {
+        MucTieu mt = getInFo();
+        try {
+            mtkdao.update(mt);
+            MsgBox.alert(this, "Tiet kiem");
+            new QuanLy().setVisible(false);new QuanLy().setVisible(true);
+        } catch (Exception e) {
+            MsgBox.alert(this, "Co loi xay ra");
+            System.out.println(e.getMessage());
+        }
+    }
+
+        boolean checkError(){
+            if(txtSoTienTietKiem.getText().equals("")){
+                MsgBox.alert(this, "So tien can tiet kiem dang bo trong");
+                return false;
+            } else if(Double.valueOf(txtSoTienTietKiem.getText())<0){
+                MsgBox.alert(this, "Khong the nhap so am");
+                return false;
+            }
+            return true;
+        }
 }
