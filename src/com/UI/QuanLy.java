@@ -21,6 +21,7 @@ import java.time.Year;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.ProgressBar;
@@ -483,7 +484,7 @@ public class QuanLy extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pgbTienDo, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
+                    .addComponent(pgbTienDo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lblTienDaTK)
                         .addGap(18, 18, 18)
@@ -492,7 +493,7 @@ public class QuanLy extends javax.swing.JFrame {
                         .addComponent(lblThoiGianCon)
                         .addGap(18, 18, 18)
                         .addComponent(txtThoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -518,8 +519,8 @@ public class QuanLy extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMucTietKiem)
                     .addComponent(cboMucTietKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(14, 14, 14))
         );
 
@@ -1114,48 +1115,6 @@ public class QuanLy extends javax.swing.JFrame {
         }).start();
     }
 
-    int getSumDays(int numberOfMonths, int month, int year) {
-        int sumDays = 0;
-        for (int i = 0; i < numberOfMonths; i++) {
-            if (month == 2) {
-                if ((year % 400 == 0) || (year % 4 == 0 && year % 100 != 0)) {
-                    sumDays += 29;
-                } else {
-                    sumDays += 28;
-                }
-            } else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8
-                    || month == 10 || month == 12) {
-                sumDays += 31;
-            } else {
-                sumDays += 30;
-            }
-        }
-        return sumDays;
-    }
-
-    int getDays(int month, int year) {
-        int Days = 0;
-        if (month == 2) {
-            if ((year % 400 == 0) || (year % 4 == 0 && year % 100 != 0)) {
-                Days = 29;
-            } else {
-                Days = 28;
-            }
-        } else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8
-                || month == 10 || month == 12) {
-            Days = 31;
-        } else {
-            Days = 30;
-        }
-        return Days;
-    }
-
-    void endOfMTK() {
-        MucTieu mt = (MucTieu) cboMucTietKiem.getSelectedItem();
-        for(int i = 0;i<getSumDays(mt.getThoiHan(), LocalDate.now().getMonthValue(), Year.now().getValue());i++){
-            if(LocalDateTime.now().getDayOfMonth()<getDays(WIDTH, i)){
-                
-            }
-        }
-    }
+ 
+    
 }
