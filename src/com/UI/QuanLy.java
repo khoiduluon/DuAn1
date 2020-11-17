@@ -957,14 +957,26 @@ public class QuanLy extends javax.swing.JFrame {
     public void fillTableLichSu() {
         DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
         model.setRowCount(0);
-        try {
-            List<Object[]> list = lsDAO.getListLichSu();
-            for (Object[] ls : list) {
-                model.addRow(ls);
+        if(txtTimKiem.getText().equals("")){
+            try {
+                List<Object[]> list = lsDAO.getLichSu(Auth.user.getUser());
+                for (Object[] ls : list) {
+                    model.addRow(ls);
+                }
+            } catch (Exception e) {
+                MsgBox.alert(this, "Loi truy van du lieu");
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            MsgBox.alert(this, "Loi truy van du lieu");
-            e.printStackTrace();
+        }else{
+            try {
+                List<Object[]> list = lsDAO.getLichSu1(txtTimKiem.getText(),Auth.user.getUser());
+                for (Object[] ls : list) {
+                    model.addRow(ls);
+                }
+            } catch (Exception e) {
+                MsgBox.alert(this, "Loi truy van du lieu");
+                e.printStackTrace();
+            }
         }
     }
 
@@ -1114,7 +1126,5 @@ public class QuanLy extends javax.swing.JFrame {
             }
         }).start();
     }
-
- 
     
 }
