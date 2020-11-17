@@ -46,13 +46,13 @@ public class DangNhap extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         lblDangNhap = new javax.swing.JLabel();
-        txtMatKhau = new javax.swing.JTextField();
         txtTenDN = new javax.swing.JTextField();
         lblQuenMK = new javax.swing.JLabel();
         lblMatKhau = new javax.swing.JLabel();
         lblDangKy = new javax.swing.JLabel();
         lblExit = new javax.swing.JLabel();
         btnDangNhap = new javax.swing.JButton();
+        txtMatKhau = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -64,13 +64,6 @@ public class DangNhap extends javax.swing.JFrame {
         lblDangNhap.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         lblDangNhap.setText("Tên đăng nhập:");
         jPanel1.add(lblDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
-
-        txtMatKhau.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        txtMatKhau.setAlignmentX(1.0F);
-        txtMatKhau.setAlignmentY(1.0F);
-        txtMatKhau.setBorder(null);
-        txtMatKhau.setPreferredSize(new java.awt.Dimension(266, 30));
-        jPanel1.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 280, -1));
 
         txtTenDN.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtTenDN.setAlignmentX(1.0F);
@@ -135,6 +128,7 @@ public class DangNhap extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 280, 30));
+        jPanel1.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 280, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 380));
 
@@ -196,7 +190,7 @@ public class DangNhap extends javax.swing.JFrame {
     private javax.swing.JLabel lblExit;
     private javax.swing.JLabel lblMatKhau;
     private javax.swing.JLabel lblQuenMK;
-    private javax.swing.JTextField txtMatKhau;
+    private javax.swing.JPasswordField txtMatKhau;
     private javax.swing.JTextField txtTenDN;
     // End of variables declaration//GEN-END:variables
 
@@ -225,7 +219,7 @@ public class DangNhap extends javax.swing.JFrame {
        void dangNhap(){
        String manv = txtTenDN.getText();
        String matKhau = txtMatKhau.getText();
-      NguoiDung nguoidung = ngdao.selectByid(manv);
+        NguoiDung nguoidung = ngdao.selectByid(manv);
        if(nguoidung==null){
            MsgBox.alert(this, "Sai ten dang nhap");
        } else if(!matKhau.equals(nguoidung.getMatKhau())){
