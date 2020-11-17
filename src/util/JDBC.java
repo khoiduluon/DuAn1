@@ -22,7 +22,11 @@ public class JDBC{
     static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     static String dburl = "jdbc:sqlserver://localhost:1433;databaseName=QLTK";
     static String user = "sa";
+<<<<<<< HEAD
     static String pass = "96842205q";
+=======
+    static String pass = "123";
+>>>>>>> 6fe4eebd6700ca6c27e72e681988ea9201e2c935
 
     static {
         try {

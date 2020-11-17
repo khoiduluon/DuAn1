@@ -15,18 +15,30 @@ public class QuanLyChi {
     private String loaiGD;
     private String ngayGD;
     private double soTien;
+<<<<<<< HEAD
     private String nhomGD;
+=======
+   
+>>>>>>> 6fe4eebd6700ca6c27e72e681988ea9201e2c935
 
     public QuanLyChi() {
     }
 
+<<<<<<< HEAD
     public QuanLyChi(int idChi, String username, String loaiGD, String ngayGD, double soTien, String nhomGD) {
+=======
+    public QuanLyChi(int idChi, String username, String loaiGD, String ngayGD, double soTien) {
+>>>>>>> 6fe4eebd6700ca6c27e72e681988ea9201e2c935
         this.idChi = idChi;
         this.username = username;
         this.loaiGD = loaiGD;
         this.ngayGD = ngayGD;
         this.soTien = soTien;
+<<<<<<< HEAD
         this.nhomGD = nhomGD;
+=======
+        
+>>>>>>> 6fe4eebd6700ca6c27e72e681988ea9201e2c935
     }
 
     /**
@@ -99,6 +111,7 @@ public class QuanLyChi {
         this.soTien = soTien;
     }
 
+<<<<<<< HEAD
     public void setNhomGD(String nhomGD) {
         this.nhomGD = nhomGD;
     }
@@ -106,5 +119,7 @@ public class QuanLyChi {
     public String getNhomGD() {
         return nhomGD;
     }
+=======
+>>>>>>> 6fe4eebd6700ca6c27e72e681988ea9201e2c935
     
 }

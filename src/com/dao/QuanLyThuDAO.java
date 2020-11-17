@@ -17,8 +17,13 @@ import util.JDBC;
  */
 public class QuanLyThuDAO extends dadDAO<QuanLyThu, Integer>{
     
+<<<<<<< HEAD
     String INSERT_SQL = "insert into QuanLyThu(Username,LoaiGD,SoTien,NgayGD,nhomGD) values(?,?,?,?)";
     String UPDATE_SQL = "update QuanLyThu set LoaiGD=?, SoTien=?, NgayGD=?, nhomGD=? where IDThu = ?";
+=======
+    String INSERT_SQL = "insert into QuanLyThu(Username,LoaiGD,SoTien,NgayGD) values(?,?,?,?)";
+    String UPDATE_SQL = "update QuanLyThu set LoaiGD=?, SoTien=?, NgayGD=? where IDThu = ?";
+>>>>>>> 6fe4eebd6700ca6c27e72e681988ea9201e2c935
     String DELETE_SQL = "delete from QuanLyThu where IDThu=?";
     String SELECT_ALL_SQL = "select * from QuanLyThu";
     String SELECT_BY_ID_SQL = "select * from QuanLyThu where IDThu=?";
@@ -26,7 +31,11 @@ public class QuanLyThuDAO extends dadDAO<QuanLyThu, Integer>{
     @Override
     public void insert(QuanLyThu entity) {
         try {
+<<<<<<< HEAD
             JDBC.update(INSERT_SQL,entity.getUsername(),entity.getLoaiGD(),entity.getSoTien(),entity.getNgayGD(),entity.getNhomGD());
+=======
+            JDBC.update(INSERT_SQL,entity.getUsername(),entity.getLoaiGD(),entity.getSoTien(),entity.getNgayGD());
+>>>>>>> 6fe4eebd6700ca6c27e72e681988ea9201e2c935
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -35,7 +44,11 @@ public class QuanLyThuDAO extends dadDAO<QuanLyThu, Integer>{
     @Override
     public void update(QuanLyThu entity) {
         try {
+<<<<<<< HEAD
             JDBC.update(UPDATE_SQL,entity.getLoaiGD(),entity.getSoTien(),entity.getNgayGD(),entity.getIdThu(),entity.getNhomGD());
+=======
+            JDBC.update(UPDATE_SQL,entity.getLoaiGD(),entity.getSoTien(),entity.getNgayGD(),entity.getIdThu());
+>>>>>>> 6fe4eebd6700ca6c27e72e681988ea9201e2c935
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -76,7 +89,10 @@ public class QuanLyThuDAO extends dadDAO<QuanLyThu, Integer>{
                 entity.setLoaiGD(rs.getString("LoaiGD"));
                 entity.setSoTien(rs.getDouble("SoTien"));
                 entity.setNgayGD(rs.getString("NgayGD"));
+<<<<<<< HEAD
                 entity.setNhomGD(rs.getString("nhomGD"));
+=======
+>>>>>>> 6fe4eebd6700ca6c27e72e681988ea9201e2c935
                 list.add(entity);
             }
             rs.getStatement().getConnection().close();

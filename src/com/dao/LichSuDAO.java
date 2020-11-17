@@ -16,6 +16,7 @@ import util.JDBC;
  */
 
 public class LichSuDAO {
+<<<<<<< HEAD
     String INSERT_SQL = "insert into LichSu(IDMucTieu,NgayTK,SoTienTK) values(?,?,?)";
     String UPDATE_SQL = "update LichSu set IDMucTieu=?, NgayTK=?, SoTienTK=? where IDLichSu = ?";
     String DELETE_SQL = "delete from LichSu where IDLichSu = ?";
@@ -57,12 +58,22 @@ public class LichSuDAO {
             while (rs.next()) {
                 Object[] vals = new Object[cols.length];
                 for(int i=0;i<cols.length;i++){
+=======
+    private List<Object[]> getListOfArray(String sql,String[] cols,Object...args){
+        try {
+            List<Object[]> list= new ArrayList<>();
+            ResultSet rs=JDBC.query(sql, args);
+            while(rs.next()){
+                Object[] vals=new Object[cols.length];
+                for (int i = 0; i < cols.length; i++) {
+>>>>>>> 6fe4eebd6700ca6c27e72e681988ea9201e2c935
                     vals[i]=rs.getObject(cols[i]);
                 }
                 list.add(vals);
             }
             rs.getStatement().getConnection().close();
             return list;
+<<<<<<< HEAD
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -71,5 +82,20 @@ public class LichSuDAO {
         String sql = "{call LichSuMTK}";
         String[] cols = {"IDLicSu", "TenMT", "NgayTK", "SoTienTK"};
         return this.getListOfArray(sql, cols);
+=======
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public List<Object[]> getLichSu(String User){
+        String sql="{CALL LichSuMTK(?)}";
+        String[] cols={"IDLichSu","TenMucTieu","NgayTietKiem"};
+        return this.getListOfArray(sql, cols, User);
+    }
+    public List<Object[]> getLichSu1(String TenMTK,String User){
+        String sql="{CALL LichSuMTK2(?,?)}";
+        String[] cols={"IDLichSu","TenMucTieu","NgayTietKiem"};
+        return this.getListOfArray(sql, cols, TenMTK,User);
+>>>>>>> 6fe4eebd6700ca6c27e72e681988ea9201e2c935
     }
 }
