@@ -1176,6 +1176,5 @@ public class QuanLy extends javax.swing.JFrame {
         pnlPieChart.removeAll();
         pnlPieChart.add(chartPanel,BorderLayout.CENTER);
         pnlPieChart.validate();
-        System.out.println("");
     }
 }
