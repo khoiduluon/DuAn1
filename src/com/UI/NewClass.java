@@ -5,31 +5,30 @@
  */
 package com.UI;
 
+import java.text.DateFormat;
+import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
+import utils.fmDate;
+
 /**
  *
  * @author trantrung
  */
 public class NewClass {
+
     public static void main(String[] args) {
-  
-       
+//        String currentDate = fmDate.toString(new Date(), "dd-MM-yyyy");
+//        String deadlineDate = fmDate.toString(fmDate.addDays(new Date(), 6*30), "dd-MM-yyyy");
+//        System.out.println(deadlineDate);
+//        Date d1 = fmDate.toDate(currentDate, "dd-MM-yyyy");
+//        System.out.println("d1"+d1);
+//        Date d2 = fmDate.toDate(deadlineDate, "dd-MM-yyyy");
+//        System.out.println("d2"+d2);
+//        long diff = (d2.getTime() - d1.getTime()) / (24*60*60*1000);
+//        System.out.println(diff);
+        System.out.println();
+        System.out.println();
     }
-    
-        int getSumDays(int numberOfMonths, int month, int year) {
-        int sumDays = 0;
-        for (int i = 0; i < numberOfMonths; i++) {
-            if (month == 2) {
-                if ((year % 400 == 0) || (year % 4 == 0 && year % 100 != 0)) 
-                    sumDays += 29;
-                 else 
-                    sumDays += 28;
-                
-            } else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8
-                    || month == 10 || month == 12) 
-                    sumDays += 31;
-            else 
-                sumDays += 30;
-        }
-        return sumDays;
-    }
+
 }
