@@ -10,36 +10,91 @@ package com.entity;
  * @author trantrung
  */
 public class NguoiDung {
-    String name;
-    boolean genDer;
+    private String user;
+    private String tenND;
+    private String matKhau;
+    private boolean gioiTinh;
+    private double soDu;
 
     public NguoiDung() {
     }
 
-    public NguoiDung(String name, boolean genDer) {
-        this.name = name;
-        this.genDer = genDer;
+    public NguoiDung(String user, String tenND, String matKhau, boolean gioiTinh, double soDu) {
+        this.user = user;
+        this.tenND = tenND;
+        this.matKhau = matKhau;
+        this.gioiTinh = gioiTinh;
+        this.soDu = soDu;
     }
 
-    public String getName() {
-        return name;
+    /**
+     * @return the user
+     */
+    public String getUser() {
+        return user;
     }
 
-    public boolean isGenDer() {
-        return genDer;
+    /**
+     * @param user the user to set
+     */
+    public void setUser(String user) {
+        this.user = user;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    /**
+     * @return the tenND
+     */
+    public String getTenND() {
+        return tenND;
     }
 
-    public void setGenDer(boolean genDer) {
-        this.genDer = genDer;
+    /**
+     * @param tenND the tenND to set
+     */
+    public void setTenND(String tenND) {
+        this.tenND = tenND;
     }
 
-    @Override
-    public String toString() {
-        return "NguoiDung{" + "name=" + name + ", genDer=" + genDer + '}';
+    /**
+     * @return the matKhau
+     */
+    public String getMatKhau() {
+        return matKhau;
+    }
+
+    /**
+     * @param matKhau the matKhau to set
+     */
+    public void setMatKhau(String matKhau) {
+        this.matKhau = matKhau;
+    }
+
+    /**
+     * @return the gioiTinh
+     */
+    public boolean isGioiTinh() {
+        return gioiTinh;
+    }
+
+    /**
+     * @param gioiTinh the gioiTinh to set
+     */
+    public void setGioiTinh(boolean gioiTinh) {
+        this.gioiTinh = gioiTinh;
+    }
+
+    /**
+     * @return the soDu
+     */
+    public double getSoDu() {
+        return soDu;
+    }
+
+    /**
+     * @param soDu the soDu to set
+     */
+    public void setSoDu(double soDu) {
+        this.soDu = soDu;
     }
     
 }
