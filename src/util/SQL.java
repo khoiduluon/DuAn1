@@ -42,9 +42,10 @@ create table ThongKeTienDo(
 create table LichSu(
 	IDLichSu int identity(1,1) primary key,
 	IDMucTieu int not null,
-	NgayTK date not null,
+	NgayTK date Default(Getdate()),
 	SoTienTK float not null
 )
+ALTER TABLE LichSu ADD CONSTRAINT df_LichSu DEFAULT(Getdate()) FOR NgayTK;
 
 create table QuanLyThu(
 	IDThu int identity(1,1) primary key,
@@ -98,18 +99,22 @@ alter table ThongKeChiTieu
 add constraint FK_TKCT_ND
 foreign key (Username)
 references NguoiDung(Username)
-    
-create proc LichSuMTK
+
+alter proc LichSuMTK @User nvarchar(50)
 as
 begin
 	select IDLichSu,MucTieuTietKiem.TenMT,NgayTK,SoTienTK from LichSu inner join MucTieuTietKiem on LichSu.IDMucTieu=MucTieuTietKiem.IDMucTieu
+	where Username=@User
 end;
 
-create proc LichSuMTK2 @TenMTK nvarchar(50)
+alter proc LichSuMTK2 @User nvarchar(50),@TenMTK nvarchar(50)
 as
 begin
-	select IDLichSu,MucTieuTietKiem.TenMT,NgayTK,SoTienTK from LichSu inner join MucTieuTietKiem on LichSu.IDMucTieu=MucTieuTietKiem.IDMucTieu
-	where MucTieuTietKiem.TenMT=@TenMTK
+	select IDLichSu,MucTieuTietKiem.TenMT,NgayTK,SoTienTK from LichSu 
+	inner join MucTieuTietKiem on LichSu.IDMucTieu=MucTieuTietKiem.IDMucTieu
+	where Username=@User and TenMT=@TenMTK
 end;
+
+exec LichSuMTK2 'Ngandhl',N'Mua heo'
     */
 }

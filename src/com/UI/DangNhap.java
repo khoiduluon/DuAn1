@@ -225,7 +225,7 @@ public class DangNhap extends javax.swing.JFrame {
        void dangNhap(){
        String manv = txtTenDN.getText();
        String matKhau = txtMatKhau.getText();
-      NguoiDung nguoidung = ngdao.selectByid(manv);
+       NguoiDung nguoidung = ngdao.selectByid(manv);
        if(nguoidung==null){
            MsgBox.alert(this, "Sai ten dang nhap");
        } else if(!matKhau.equals(nguoidung.getMatKhau())){
