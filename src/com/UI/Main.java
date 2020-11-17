@@ -24,7 +24,7 @@ public class Main {
 //            UIManager.setLookAndFeel("de.javasoft.plaf.synthetica.SyntheticaSimple2DLookAndFeel");
 //                                     
 //        } catch (Exception e) {
-//            e.printStackTrace();
+//            e.printStackTrace^
 //        }
 
         java.awt.EventQueue.invokeLater(new Runnable() {

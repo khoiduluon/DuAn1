@@ -9,6 +9,7 @@ import com.dao.LichSuDAO;
 import com.dao.MucTieuTietKiemDAO;
 import com.entity.LichSuTK;
 import com.entity.MucTieu;
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -31,6 +32,7 @@ import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
@@ -52,15 +54,16 @@ public class QuanLy extends javax.swing.JFrame {
      */
     public QuanLy() {
         initComponents();
-        this.setResizable(false);
-        this.setLocationRelativeTo(null);
-        this.setBackground(new Color(0, 0, 0, 0));
-        pnlBg.setBackground(new Color(0, 0, 0, 0));
+        this.setResizable(true);
+          this.setLocationRelativeTo(null);
+//        this.setBackground(new Color(0, 0, 0, 0));
+//        pnlBg.setBackground(new Color(0, 0, 0, 0));
         cardLayout = (CardLayout) pnlTabs.getLayout();
         fillTableMucTietKiem();
         fillComboBox();
         mouseHover();
         thongKe();
+
     }
 
     /**
@@ -118,6 +121,9 @@ public class QuanLy extends javax.swing.JFrame {
         txtTienDaTK = new javax.swing.JTextField();
         lblThoiGianCon = new javax.swing.JLabel();
         txtThoiGian = new javax.swing.JTextField();
+        lblNgayConLai = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        pnlPieChart = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         pnlTab3 = new javax.swing.JPanel();
         txtTimKiem = new javax.swing.JTextField();
@@ -253,6 +259,11 @@ public class QuanLy extends javax.swing.JFrame {
         pnlleft.add(pnlGiaoDich, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 150, 40));
 
         btnExit.setText("Thoát");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
         pnlleft.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, -1, -1));
 
         pnlBg.add(pnlleft, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 470));
@@ -455,6 +466,7 @@ public class QuanLy extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         pgbTienDo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        pgbTienDo.setEnabled(false);
         pgbTienDo.setPreferredSize(new java.awt.Dimension(146, 200));
         pgbTienDo.setStringPainted(true);
 
@@ -462,26 +474,57 @@ public class QuanLy extends javax.swing.JFrame {
         lblTienDaTK.setText("Số tiền đã tiết kiệm được:");
 
         lblThoiGianCon.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
-        lblThoiGianCon.setText("Thời gian còn lại:");
+        lblThoiGianCon.setText("Tiết kiệm đến ngày:");
+
+        lblNgayConLai.setText("jLabel4");
+
+        jLabel4.setText("Tiến độ:");
+
+        pnlPieChart.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlPieChart.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addComponent(pgbTienDo, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblThoiGianCon)
+                    .addComponent(lblNgayConLai)
                     .addComponent(lblTienDaTK)
+                    .addComponent(txtTienDaTK, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblThoiGianCon)
                     .addComponent(txtThoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTienDaTK, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(95, 95, 95))
+                    .addComponent(pgbTienDo, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addComponent(pnlPieChart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+<<<<<<< HEAD
+                .addGap(16, 16, 16)
+                .addComponent(jLabel4)
+                .addGap(12, 12, 12)
+                .addComponent(pgbTienDo, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblTienDaTK)
+                .addGap(17, 17, 17)
+                .addComponent(txtTienDaTK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblThoiGianCon)
+                .addGap(14, 14, 14)
+                .addComponent(txtThoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblNgayConLai)
+                .addContainerGap(122, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlPieChart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+=======
                 .addGap(50, 50, 50)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pgbTienDo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -494,6 +537,7 @@ public class QuanLy extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(txtThoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(84, Short.MAX_VALUE))
+>>>>>>> d15b0bac0036514e87b8a8cef4fc2e9db9a0b863
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -501,27 +545,32 @@ public class QuanLy extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(lblMucTietKiem)
-                        .addGap(37, 37, 37)
-                        .addComponent(cboMucTietKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(17, 17, 17)
+                .addComponent(lblMucTietKiem)
+                .addGap(35, 35, 35)
+                .addComponent(cboMucTietKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(261, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(19, 19, 19)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMucTietKiem)
                     .addComponent(cboMucTietKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+<<<<<<< HEAD
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+=======
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(14, 14, 14))
+>>>>>>> d15b0bac0036514e87b8a8cef4fc2e9db9a0b863
         );
 
         jTabbedPane1.addTab("Thống kê mục tiết kiệm", jPanel3);
@@ -534,7 +583,7 @@ public class QuanLy extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 430, Short.MAX_VALUE)
+            .addGap(0, 439, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Thống kê Thu/Chi", jPanel4);
@@ -552,8 +601,7 @@ public class QuanLy extends javax.swing.JFrame {
             pnlTab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTab2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE))
         );
 
         pnlTabs.add(pnlTab2, "card2");
@@ -730,6 +778,7 @@ public class QuanLy extends javax.swing.JFrame {
 
     private void pnlThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongKeMouseClicked
         cardLayout.show(pnlTabs, "card2");
+                thongKeMTK();
     }//GEN-LAST:event_pnlThongKeMouseClicked
 
     private void pnlLichSuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLichSuMouseEntered
@@ -829,6 +878,10 @@ public class QuanLy extends javax.swing.JFrame {
         thongKe();
     }//GEN-LAST:event_cboMucTietKiemActionPerformed
 
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExitActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -876,6 +929,7 @@ public class QuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -894,6 +948,7 @@ public class QuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel lblLogoQL;
     private javax.swing.JLabel lblLogoQL1;
     private javax.swing.JLabel lblMucTietKiem;
+    private javax.swing.JLabel lblNgayConLai;
     private javax.swing.JLabel lblQuanLy;
     private javax.swing.JLabel lblTenMT;
     private javax.swing.JLabel lblTenMT1;
@@ -908,6 +963,7 @@ public class QuanLy extends javax.swing.JFrame {
     private javax.swing.JPanel pnlGiaoDich;
     private javax.swing.JPanel pnlKeHoach;
     private javax.swing.JPanel pnlLichSu;
+    private javax.swing.JPanel pnlPieChart;
     private javax.swing.JPanel pnlTab1;
     private javax.swing.JPanel pnlTab2;
     private javax.swing.JPanel pnlTab3;
@@ -1088,8 +1144,8 @@ public class QuanLy extends javax.swing.JFrame {
             if (mt.getGiaTri() >= mt.getSoTienDaTK()) {
                 MsgBox.alert(this, "Ban da tiet kiem du");
                 return true;
-            }
         }
+            }
         return false;
     }
 
@@ -1103,28 +1159,54 @@ public class QuanLy extends javax.swing.JFrame {
     }
 
     public void thongKe() {
-//        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        
         MucTieu mt = (MucTieu) cboMucTietKiem.getSelectedItem();
         txtTienDaTK.setText(String.valueOf(mt.getSoTienDaTK()));
-        txtThoiGian.setText(String.valueOf(mt.getThoiHan()));
-//        try{
-//          dataset.setValue((mt.getSoTienDaTK()*100)/mt.getGiaTri(), String.valueOf(mt.getTenMucTieu()), mt.getTenMucTieu());
-//        }catch(Exception e){
-//            e.printStackTrace();
-//        }   
-        //        JFreeChart chart = ChartFactory.createBarChart("Oops", "vcl", "dcm", dataset, PlotOrientation.VERTICAL, rootPaneCheckingEnabled, rootPaneCheckingEnabled, rootPaneCheckingEnabled);
-//        ChartFrame chartFrame = new ChartFrame("yoyo", chart);
-//        chartFrame.setVisible(true);
-//        chartFrame.setSize(500,400);
-        new Timer(200, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int value = (int) ((int) (mt.getSoTienDaTK() * 100) / mt.getGiaTri());
-                if (value < pgbTienDo.getMaximum()) {
-                    pgbTienDo.setValue(value + 1);
-                }
+        txtThoiGian.setText(fmDate.toString(fmDate.addDays(fmDate.toDate(mt.getNgayTao(), "dd-MM-yyyy"), mt.getThoiHan() * 30), "dd-MM-yyyy"));
+        pgbTienDo.setValue((int) ((int) (mt.getSoTienDaTK() * 100) / mt.getGiaTri()));
+        //Tinh ngay còn lại
+        String currentDate = fmDate.toString(fmDate.toDate(mt.getNgayTao(), "dd-MM-yyyy"), "dd-MM-yyyy");
+        String deadlineDate = fmDate.toString(fmDate.addDays(fmDate.toDate(mt.getNgayTao(), "dd-MM-yyyy"),
+                mt.getThoiHan() * getNumberOfDays(Calendar.getInstance().get(Calendar.MONTH),
+                        Calendar.getInstance().get(Calendar.YEAR))), "dd-MM-yyyy");
+        Date d1 = fmDate.toDate(currentDate, "dd-MM-yyyy");
+        Date d2 = fmDate.toDate(deadlineDate, "dd-MM-yyyy");
+        long diff = (d2.getTime() - d1.getTime()) / (24 * 60 * 60 * 1000);
+        lblNgayConLai.setText("Số ngày còn lại: "+String.valueOf(diff));
+    }
+    int getNumberOfDays(int month, int year) {
+        if (month == 2) {
+            if ((year % 400 == 0) || (year % 4 == 0 && year % 100 != 0)) {
+                return 29;
+            } else {
+                return 28;
             }
-        }).start();
+        } else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8
+                || month == 10 || month == 12) {
+            return 31;
+        } else {
+            return 30;
+        }
     }
     
+    void thongKeMTK(){
+        DefaultPieDataset dataset = new DefaultPieDataset();
+ 
+        try{
+            List<MucTieu> list = mtkDAO.selectMTK(Auth.user.getUser());
+            for (MucTieu mt : list) {
+                dataset.setValue(mt.getTenMucTieu(), mt.getGiaTri());
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }   
+         JFreeChart chart = ChartFactory.createPieChart("",dataset,true,true,false);
+//        ChartFrame chartFrame = new ChartFrame("yoyo", chart);
+//        chartFrame.setVisible(true);
+//        chartFrame.setSize(200,300);
+        ChartPanel chartPanel = new ChartPanel(chart);
+        pnlPieChart.removeAll();
+        pnlPieChart.add(chartPanel,BorderLayout.CENTER);
+        pnlPieChart.validate();
+    }
 }
