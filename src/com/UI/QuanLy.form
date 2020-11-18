@@ -677,7 +677,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTabbedPane1" pref="464" max="32767" attributes="0"/>
+                          <Component id="jTabbedPane1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -775,11 +775,11 @@
                                           <Component id="txtTienDaTK" min="-2" pref="163" max="-2" attributes="0"/>
                                           <Component id="lblThoiGianCon" min="-2" max="-2" attributes="0"/>
                                           <Component id="txtThoiGian" min="-2" pref="163" max="-2" attributes="0"/>
-                                          <Component id="pgbTienDo" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
                                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="pgbTienDo" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="pnlPieChart" max="32767" attributes="0"/>
+                                      <Component id="pnlPieChart" pref="299" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                               </Group>

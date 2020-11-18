@@ -78,7 +78,7 @@ public class MucTieuTietKiemDAO extends dadDAO<MucTieu, Integer>{
                 entity.setGiaTri(rs.getDouble("GiaTri"));
                 entity.setThoiHan(rs.getInt("ThoiHan"));
                 entity.setSoTienDaTK(rs.getDouble("SoTienDaTK"));
-                entity.setNgayTao(rs.getString("NgayTao"));
+                entity.setNgayTao(rs.getDate("NgayTao"));
                 list.add(entity);
             }
             rs.getStatement().getConnection().close();

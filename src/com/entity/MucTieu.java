@@ -5,6 +5,8 @@
  */
 package com.entity;
 
+import java.util.Date;
+
 /**
  *
  * @author trantrung
@@ -14,14 +16,14 @@ public class MucTieu {
     private double giaTri;
     private double soTienDaTK;
     private int thoiHan;
-    private String ngayTao;
+    private Date ngayTao;
     private int idMucTieu;
     private String username;
 
     public MucTieu() {
     }
 
-    public MucTieu(String tenMucTieu, double giaTri, double soTienDaTK, int thoiHan, String ngayTao, int idMucTieu, String username) {
+    public MucTieu(String tenMucTieu, double giaTri, double soTienDaTK, int thoiHan, Date ngayTao, int idMucTieu, String username) {
         this.tenMucTieu = tenMucTieu;
         this.giaTri = giaTri;
         this.soTienDaTK = soTienDaTK;
@@ -90,14 +92,14 @@ public class MucTieu {
     /**
      * @return the ngayTao
      */
-    public String getNgayTao() {
+    public Date getNgayTao() {
         return ngayTao;
     }
 
     /**
      * @param ngayTao the ngayTao to set
      */
-    public void setNgayTao(String ngayTao) {
+    public void setNgayTao(Date ngayTao) {
         this.ngayTao = ngayTao;
     }
 

@@ -16,6 +16,8 @@ import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Year;
@@ -55,15 +57,13 @@ public class QuanLy extends javax.swing.JFrame {
     public QuanLy() {
         initComponents();
         this.setResizable(true);
-          this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
 //        this.setBackground(new Color(0, 0, 0, 0));
 //        pnlBg.setBackground(new Color(0, 0, 0, 0));
         cardLayout = (CardLayout) pnlTabs.getLayout();
         fillTableMucTietKiem();
         fillComboBox();
         mouseHover();
-        thongKe();
-
     }
 
     /**
@@ -495,10 +495,10 @@ public class QuanLy extends javax.swing.JFrame {
                     .addComponent(txtTienDaTK, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblThoiGianCon)
                     .addComponent(txtThoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pgbTienDo, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(pgbTienDo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(pnlPieChart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlPieChart, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -580,7 +580,7 @@ public class QuanLy extends javax.swing.JFrame {
             pnlTab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTab2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1))
         );
 
         pnlTabs.add(pnlTab2, "card2");
@@ -757,7 +757,7 @@ public class QuanLy extends javax.swing.JFrame {
 
     private void pnlThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongKeMouseClicked
         cardLayout.show(pnlTabs, "card2");
-                thongKeMTK();
+        thongKeMTK();
     }//GEN-LAST:event_pnlThongKeMouseClicked
 
     private void pnlLichSuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLichSuMouseEntered
@@ -854,6 +854,7 @@ public class QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_tblDanhSachMouseClicked
 
     private void cboMucTietKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboMucTietKiemActionPerformed
+        clear();
         thongKe();
     }//GEN-LAST:event_cboMucTietKiemActionPerformed
 
@@ -1042,6 +1043,8 @@ public class QuanLy extends javax.swing.JFrame {
 
     public void clear() {
         txtTenMTK.setText("");
+        txtThoiGian.setText("");
+        txtTienDaTK.setText("");
         txtGiaTri.setText("");
         cboThoiGianTK.setSelectedIndex(0);
     }
@@ -1126,20 +1129,52 @@ public class QuanLy extends javax.swing.JFrame {
     }
 
     public void thongKe() {
-        
+        //Variable
         MucTieu mt = (MucTieu) cboMucTietKiem.getSelectedItem();
+        int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        String currentDate = fmDate.toString(mt.getNgayTao(), "dd-MM-yyyy");
+        String deadlineDate = fmDate.toString(fmDate.addDays(mt.getNgayTao(), getSumDays(currentMonth, currentYear, mt.getThoiHan())), "dd-MM-yyyy");
+                           // System.out.println(deadlineDate);
+        //SetTextde
         txtTienDaTK.setText(String.valueOf(mt.getSoTienDaTK()));
-        txtThoiGian.setText(fmDate.toString(fmDate.addDays(fmDate.toDate(mt.getNgayTao(), "dd-MM-yyyy"), mt.getThoiHan() * 30), "dd-MM-yyyy"));
+        txtThoiGian.setText(fmDate.toString(fmDate.addDays(mt.getNgayTao(), mt.getThoiHan()*getNumberOfDays(currentMonth, currentYear)), "dd-MM-yyyy"));
         pgbTienDo.setValue((int) ((int) (mt.getSoTienDaTK() * 100) / mt.getGiaTri()));
+        
         //Tinh ngay còn lại
-        String currentDate = fmDate.toString(fmDate.toDate(mt.getNgayTao(), "dd-MM-yyyy"), "dd-MM-yyyy");
-        String deadlineDate = fmDate.toString(fmDate.addDays(fmDate.toDate(mt.getNgayTao(), "dd-MM-yyyy"),
-                mt.getThoiHan() * getNumberOfDays(Calendar.getInstance().get(Calendar.MONTH),
-                        Calendar.getInstance().get(Calendar.YEAR))), "dd-MM-yyyy");
-        Date d1 = fmDate.toDate(currentDate, "dd-MM-yyyy");
-        Date d2 = fmDate.toDate(deadlineDate, "dd-MM-yyyy");
-        long diff = (d2.getTime() - d1.getTime()) / (24 * 60 * 60 * 1000);
-        lblNgayConLai.setText("Số ngày còn lại: "+String.valueOf(diff));
+        Calendar.getInstance().get(Calendar.DATE);
+        final String today = fmDate.toString(new Date(System.currentTimeMillis()), "dd-MM-yyyy");
+        System.out.println(today);
+                //fmDate.toString(new Date(System.currentTimeMillis()), "dd-MM-yyyy");
+        Date d1 = mt.getNgayTao();
+                //fmDate.toDate(currentDate, "dd-MM-yyyy");
+        Date d2 = fmDate.addDays(mt.getNgayTao(), getSumDays(currentMonth, currentYear, mt.getThoiHan()));
+                //fmDate.toDate(deadlineDate, "dd-MM-yyyy");
+        Date d3 = fmDate.toDate(today, "yyyy-MM-dd");
+        System.out.println("d1: "+d1+"\nd2: "+d2+"\nd3: "+d3);
+        lblNgayConLai.setText("Số ngày còn lại: " + String.valueOf(dayleft(d1, d2, d3)));
+
+    }
+
+    long dayleft(Date dayStart, Date dayEnd, Date toDay) {
+        long diff = (dayEnd.getTime() - dayStart.getTime()) / (24 * 60 * 60 * 1000);
+        long diff2 = (toDay.getTime() - dayStart.getTime()) / (24 * 60 * 60 * 1000);
+        System.out.println(diff + " " + diff2);
+        return diff - diff2;
+    }
+
+    int getSumDays(int currentMonth, int currentYear, int month) {
+        int sumDays = 0;
+        for (int i = 0; i < month; i++) {
+            sumDays += getNumberOfDays(currentMonth, currentYear);
+            if (currentMonth >= 12) {
+                currentYear++;
+                currentMonth = 1;
+            }
+            currentMonth++;
+        }
+        return sumDays;
+       
     }
 
     int getNumberOfDays(int month, int year) {
@@ -1156,25 +1191,25 @@ public class QuanLy extends javax.swing.JFrame {
             return 30;
         }
     }
-    
-    void thongKeMTK(){
+
+    void thongKeMTK() {
         DefaultPieDataset dataset = new DefaultPieDataset();
- 
-        try{
+
+        try {
             List<MucTieu> list = mtkDAO.selectMTK(Auth.user.getUser());
             for (MucTieu mt : list) {
                 dataset.setValue(mt.getTenMucTieu(), mt.getGiaTri());
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }   
-         JFreeChart chart = ChartFactory.createPieChart("",dataset,true,true,false);
+        }
+        JFreeChart chart = ChartFactory.createPieChart("", dataset, true, true, false);
 //        ChartFrame chartFrame = new ChartFrame("yoyo", chart);
 //        chartFrame.setVisible(true);
 //        chartFrame.setSize(200,300);
         ChartPanel chartPanel = new ChartPanel(chart);
         pnlPieChart.removeAll();
-        pnlPieChart.add(chartPanel,BorderLayout.CENTER);
+        pnlPieChart.add(chartPanel, BorderLayout.CENTER);
         pnlPieChart.validate();
     }
 }

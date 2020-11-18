@@ -18,17 +18,11 @@ import utils.fmDate;
 public class NewClass {
 
     public static void main(String[] args) {
-//        String currentDate = fmDate.toString(new Date(), "dd-MM-yyyy");
-//        String deadlineDate = fmDate.toString(fmDate.addDays(new Date(), 6*30), "dd-MM-yyyy");
-//        System.out.println(deadlineDate);
-//        Date d1 = fmDate.toDate(currentDate, "dd-MM-yyyy");
-//        System.out.println("d1"+d1);
-//        Date d2 = fmDate.toDate(deadlineDate, "dd-MM-yyyy");
-//        System.out.println("d2"+d2);
-//        long diff = (d2.getTime() - d1.getTime()) / (24*60*60*1000);
-//        System.out.println(diff);
-        System.out.println();
-        System.out.println();
+        long d1 = new Date().getTime();
+        long d2 = 180*24 * 60 * 60 * 1000;
+        long d3 = d1+d2;
+        System.out.println(fmDate.addDays(new Date(), 180));
+        
     }
 
 }
