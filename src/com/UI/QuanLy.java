@@ -64,6 +64,8 @@ public class QuanLy extends javax.swing.JFrame {
         fillTableMucTietKiem();
         fillComboBox();
         mouseHover();
+        init();
+
     }
 
     /**
@@ -587,6 +589,11 @@ public class QuanLy extends javax.swing.JFrame {
 
         btnTimKiem.setFont(new java.awt.Font("Quicksand", 0, 13)); // NOI18N
         btnTimKiem.setText("Tìm Kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
 
         tblLichSu.setFont(new java.awt.Font("Quicksand", 0, 12)); // NOI18N
         tblLichSu.setModel(new javax.swing.table.DefaultTableModel(
@@ -860,7 +867,13 @@ public class QuanLy extends javax.swing.JFrame {
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_btnExitActionPerformed
+
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        // TODO add your handling code here:
+        fillTableLichSu();
+    }//GEN-LAST:event_btnTimKiemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -965,7 +978,20 @@ public class QuanLy extends javax.swing.JFrame {
     CardLayout cardLayout;
     MucTieuTietKiemDAO mtkDAO = new MucTieuTietKiemDAO();
     LichSuDAO lsDAO = new LichSuDAO();
-
+    
+    void init(){
+        this.setResizable(true);
+        this.setLocationRelativeTo(null);
+//        this.setBackground(new Color(0, 0, 0, 0));
+//        pnlBg.setBackground(new Color(0, 0, 0, 0));
+        cardLayout = (CardLayout) pnlTabs.getLayout();
+        fillTableMucTietKiem();
+        fillComboBox();
+        mouseHover();
+        thongKe();
+        fillTableLichSu();
+    }
+    
     public void mouseHover() {
         pnlKeHoach.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         pnlThongKe.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -991,17 +1017,30 @@ public class QuanLy extends javax.swing.JFrame {
     }
 
     public void fillTableLichSu() {
-        DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblLichSu.getModel();
         model.setRowCount(0);
-        try {
-            List<Object[]> list = lsDAO.getListLichSu();
-            for (Object[] ls : list) {
-                model.addRow(ls);
+        if(txtTimKiem.getText().equals("")){
+            try {
+                List<Object[]> list = lsDAO.getLichSu(Auth.user.getUser());
+                for (Object[] ls : list) {
+                    model.addRow(ls);
+                }
+                tblLichSu.setModel(model);
+            } catch (Exception e) {
+                MsgBox.alert(this, "Loi truy van du lieu");
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            MsgBox.alert(this, "Loi truy van du lieu");
-            e.printStackTrace();
-        }
+        }else{
+            try {
+                List<Object[]> list = lsDAO.getLichSu1(txtTimKiem.getText().trim(),Auth.user.getUser());
+                for (Object[] ls : list) {
+                    model.addRow(ls);
+                }
+            } catch (Exception e) {
+                MsgBox.alert(this, "Loi truy van du lieu");
+                e.printStackTrace();
+            }
+        }   
     }
 
     public void addMtkToDaTaBase() {

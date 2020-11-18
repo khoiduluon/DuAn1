@@ -27,7 +27,7 @@ public class TietKiem extends javax.swing.JFrame {
     public TietKiem() {
         initComponents();
         this.setResizable(false);
-        setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         this.setBackground(new Color(0, 0, 0, 0));
         fillComboBox();
     }
