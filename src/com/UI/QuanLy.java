@@ -15,6 +15,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -27,7 +28,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.ProgressBar;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 import javax.swing.JProgressBar;
+import javax.swing.KeyStroke;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartFactory;
@@ -1021,7 +1024,7 @@ public class QuanLy extends javax.swing.JFrame {
             }
         }else{
             try {
-                List<Object[]> list = lsDAO.getLichSu1(txtTimKiem.getText().trim(),Auth.user.getUser());
+                List<Object[]> list = lsDAO.getLichSu1(Auth.user.getUser(),txtTimKiem.getText().trim());
                 for (Object[] ls : list) {
                     model.addRow(ls);
                 }
@@ -1106,7 +1109,8 @@ public class QuanLy extends javax.swing.JFrame {
 
     void selectForm() {
         int id = (int) tblDanhSach.getValueAt(tblDanhSach.getSelectedRow(), 0);
-        MucTieu mt = mtkDAO.selectByid(id);
+        String User=Auth.user.getUser();
+        MucTieu mt = mtkDAO.selectByid_MTTK(id,User);
         txtTenMTK.setText(mt.getTenMucTieu());
         txtGiaTri.setText(String.valueOf(mt.getGiaTri()));
         if (tblDanhSach.getValueAt(tblDanhSach.getSelectedRow(), 3).equals("1 tháng")) {
