@@ -13,6 +13,7 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Insets;
+import java.awt.event.KeyEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -70,6 +71,11 @@ public class DangNhap extends javax.swing.JFrame {
         txtMatKhau.setAlignmentY(1.0F);
         txtMatKhau.setBorder(null);
         txtMatKhau.setPreferredSize(new java.awt.Dimension(266, 30));
+        txtMatKhau.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMatKhauKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 280, -1));
 
         txtTenDN.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -184,6 +190,12 @@ public class DangNhap extends javax.swing.JFrame {
         dangNhap();
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
+    private void txtMatKhauKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMatKhauKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            dangNhap(); 
+        }
+    }//GEN-LAST:event_txtMatKhauKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -211,29 +223,18 @@ public class DangNhap extends javax.swing.JFrame {
     public void openDangNhap(){
         new DangNhap().setVisible(true);
     }
-    
-    public void thongBao(){
-        //loi
+    void dangNhap(){
+    String manv = txtTenDN.getText();
+    String matKhau = txtMatKhau.getText();
+    NguoiDung nguoidung = ngdao.selectByid(manv);
+    if(nguoidung==null){
+        MsgBox.alert(this, "Sai ten dang nhap");
+    } else if(!matKhau.equals(nguoidung.getMatKhau())){
+        MsgBox.alert(this, "Sai mat khau");
+    } else {
+        Auth.user = nguoidung;
+        new QuanLy().setVisible(true);
+        this.dispose();
     }
-    
-    public void checkLoi(){
-        //detrong
-        //mk,taikhoan
-    }
-
-    
-       void dangNhap(){
-       String manv = txtTenDN.getText();
-       String matKhau = txtMatKhau.getText();
-       NguoiDung nguoidung = ngdao.selectByid(manv);
-       if(nguoidung==null){
-           MsgBox.alert(this, "Sai ten dang nhap");
-       } else if(!matKhau.equals(nguoidung.getMatKhau())){
-           MsgBox.alert(this, "Sai mat khau");
-       } else {
-           Auth.user = nguoidung;
-           new QuanLy().setVisible(true);
-           this.dispose();
-       }
    }
 }

@@ -22,7 +22,7 @@ public class MucTieuTietKiemDAO extends dadDAO<MucTieu, Integer>{
     String UPDATE_SQL = "update MucTieuTietKiem set TenMT=?, GiaTri=?, ThoiHan=?, SoTienDaTK =? where IDMucTieu = ?";
     String DELETE_SQL = "delete from MucTieuTietKiem where IDMucTieu = ?";
     String SELECT_ALL_SQL = "select * from MucTieuTietKiem where username =?";
-    String SELECT_BY_ID_SQL = "select * from MucTieuTietKiem where IDMucTieu = ?";
+    String SELECT_BY_ID_SQL = "select * from MucTieuTietKiem where IDMucTieu = ? and username=?";
     
     @Override
     public void insert(MucTieu entity) {
@@ -51,9 +51,8 @@ public class MucTieuTietKiemDAO extends dadDAO<MucTieu, Integer>{
         }
     }
 
-    @Override
-    public MucTieu selectByid(Integer id) {
-        List<MucTieu> list = this.selectBySql(SELECT_BY_ID_SQL, id);
+    public MucTieu selectByid_MTTK(Integer id,String User) {
+        List<MucTieu> list = this.selectBySql(SELECT_BY_ID_SQL,id,User);
         if (list.isEmpty()) {
             return null;
         }
@@ -92,5 +91,8 @@ public class MucTieuTietKiemDAO extends dadDAO<MucTieu, Integer>{
     public List<MucTieu> selectAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+    @Override
+    public MucTieu selectByid(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
