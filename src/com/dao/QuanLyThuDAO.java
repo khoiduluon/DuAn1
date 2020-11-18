@@ -17,8 +17,8 @@ import util.JDBC;
  */
 public class QuanLyThuDAO extends dadDAO<QuanLyThu, Integer>{
     
-    String INSERT_SQL = "insert into QuanLyThu(Username,LoaiGD,SoTien,NgayGD) values(?,?,?,?)";
-    String UPDATE_SQL = "update QuanLyThu set LoaiGD=?, SoTien=?, NgayGD=? where IDThu = ?";
+    String INSERT_SQL = "insert into QuanLyThu(Username,LoaiGD,SoTien,NgayGD,nhomGD) values(?,?,?,?)";
+    String UPDATE_SQL = "update QuanLyThu set LoaiGD=?, SoTien=?, NgayGD=?, nhomGD=? where IDThu = ?";
     String DELETE_SQL = "delete from QuanLyThu where IDThu=?";
     String SELECT_ALL_SQL = "select * from QuanLyThu";
     String SELECT_BY_ID_SQL = "select * from QuanLyThu where IDThu=?";
@@ -26,7 +26,7 @@ public class QuanLyThuDAO extends dadDAO<QuanLyThu, Integer>{
     @Override
     public void insert(QuanLyThu entity) {
         try {
-            JDBC.update(INSERT_SQL,entity.getUsername(),entity.getLoaiGD(),entity.getSoTien(),entity.getNgayGD());
+            JDBC.update(INSERT_SQL,entity.getUsername(),entity.getLoaiGD(),entity.getSoTien(),entity.getNgayGD(),entity.getNhomGD());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -35,7 +35,7 @@ public class QuanLyThuDAO extends dadDAO<QuanLyThu, Integer>{
     @Override
     public void update(QuanLyThu entity) {
         try {
-            JDBC.update(UPDATE_SQL,entity.getLoaiGD(),entity.getSoTien(),entity.getNgayGD(),entity.getIdThu());
+            JDBC.update(UPDATE_SQL,entity.getLoaiGD(),entity.getSoTien(),entity.getNgayGD(),entity.getIdThu(),entity.getNhomGD());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -76,6 +76,7 @@ public class QuanLyThuDAO extends dadDAO<QuanLyThu, Integer>{
                 entity.setLoaiGD(rs.getString("LoaiGD"));
                 entity.setSoTien(rs.getDouble("SoTien"));
                 entity.setNgayGD(rs.getString("NgayGD"));
+                entity.setNhomGD(rs.getString("nhomGD"));
                 list.add(entity);
             }
             rs.getStatement().getConnection().close();

@@ -677,7 +677,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTabbedPane1" pref="464" max="32767" attributes="0"/>
+                          <Component id="jTabbedPane1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -726,15 +726,9 @@
                                       <Component id="lblMucTietKiem" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="cboMucTietKiem" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-<<<<<<< HEAD
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jPanel2" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-=======
-                                  <EmptySpace pref="20" max="32767" attributes="0"/>
-                                  <Component id="jPanel2" max="32767" attributes="0"/>
-                                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
->>>>>>> d15b0bac0036514e87b8a8cef4fc2e9db9a0b863
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -781,11 +775,11 @@
                                           <Component id="txtTienDaTK" min="-2" pref="163" max="-2" attributes="0"/>
                                           <Component id="lblThoiGianCon" min="-2" max="-2" attributes="0"/>
                                           <Component id="txtThoiGian" min="-2" pref="163" max="-2" attributes="0"/>
-                                          <Component id="pgbTienDo" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
                                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="pgbTienDo" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="pnlPieChart" max="32767" attributes="0"/>
+                                      <Component id="pnlPieChart" pref="299" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -793,7 +787,6 @@
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-<<<<<<< HEAD
                                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
@@ -814,22 +807,6 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="pnlPieChart" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-=======
-                                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="pgbTienDo" max="32767" attributes="0"/>
-                                          <Group type="102" attributes="0">
-                                              <Component id="lblTienDaTK" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="txtTienDaTK" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="lblThoiGianCon" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="txtThoiGian" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace pref="84" max="32767" attributes="0"/>
->>>>>>> d15b0bac0036514e87b8a8cef4fc2e9db9a0b863
                                   </Group>
                               </Group>
                             </DimensionLayout>

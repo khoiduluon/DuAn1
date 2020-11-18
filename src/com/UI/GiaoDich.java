@@ -5,14 +5,11 @@
  */
 package com.UI;
 
-import com.dao.QuanLyChiDAO;
-import com.dao.QuanLyThuDAO;
 import com.entity.QuanLyChi;
 import com.entity.QuanLyThu;
 import java.awt.CardLayout;
 import javax.swing.JRadioButton;
 import util.Auth;
-import util.MsgBox;
 import utils.fmDate;
 
 /**
@@ -27,7 +24,7 @@ public class GiaoDich extends javax.swing.JFrame {
     public GiaoDich() {
         initComponents();
         rdoThu.setSelected(true);
-        this.setLocationRelativeTo(null);
+
     }
 
     /**
@@ -57,6 +54,7 @@ public class GiaoDich extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(302, 300));
+        jPanel1.setSize(new java.awt.Dimension(302, 300));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
@@ -107,11 +105,6 @@ public class GiaoDich extends javax.swing.JFrame {
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
 
         btnThem.setText("Thêm giao dịch");
-        btnThem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemActionPerformed(evt);
-            }
-        });
         jPanel1.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, -1, -1));
 
         cboThu.setFont(new java.awt.Font("Quicksand", 0, 13)); // NOI18N
@@ -170,13 +163,6 @@ public class GiaoDich extends javax.swing.JFrame {
 
     }//GEN-LAST:event_rdoChiMouseClicked
 
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        // TODO add your handling code here:
-        if(checkError()==true){
-            insert();
-        }
-    }//GEN-LAST:event_btnThemActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -228,14 +214,14 @@ public class GiaoDich extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdoThu;
     private javax.swing.JTextField txtSoTien;
     // End of variables declaration//GEN-END:variables
-    QuanLyThuDAO qltdao=new QuanLyThuDAO();
-    QuanLyChiDAO qlcdao= new QuanLyChiDAO();
+
     QuanLyChi getInfoGiaoDichChi() {
         QuanLyChi qlc = new QuanLyChi();
         qlc.setUsername(Auth.user.getUser());
         qlc.setSoTien(Double.valueOf(txtSoTien.getText()));
-        qlc.setLoaiGD((String) cboChi.getSelectedItem());
-        qlc.setNgayGD(fmDate.toString(dcsNgay.getDate(), "yyyy-MM-dd"));
+        qlc.setLoaiGD(rdoChi.getText());
+        qlc.setNgayGD(fmDate.toString(dcsNgay.getDate(), "dd-MM-yyyy"));
+        qlc.setNhomGD((String) cboChi.getSelectedItem());
         return qlc;
     }
 
@@ -243,54 +229,18 @@ public class GiaoDich extends javax.swing.JFrame {
         QuanLyThu qlt = new QuanLyThu();
         qlt.setUsername(Auth.user.getUser());
         qlt.setSoTien(Double.valueOf(txtSoTien.getText()));
-        qlt.setLoaiGD((String) cboChi.getSelectedItem());
-        qlt.setNgayGD(fmDate.toString(dcsNgay.getDate(), "yyyy-MM-dd"));
+        qlt.setLoaiGD(rdoChi.getText());
+        qlt.setNgayGD(fmDate.toString(dcsNgay.getDate(), "dd-MM-yyyy"));
+        qlt.setNhomGD((String) cboChi.getSelectedItem());
         return qlt;
     }
 
     public void clear() {
         rdoThu.setSelected(true);
-        txtSoTien.setText("");
-        cboThu.setSelectedIndex(1);
+
     }
 
-    boolean checkError() {
-        if(txtSoTien.getText().equals("")){
-            MsgBox.alert(this,"Vui lòng nhập số tiền!");
-            return false;
-        }
-        if (txtSoTien.getText().matches(".*[a-zA-Z].*")) {
-            MsgBox.alert(this, "Không được nhập chữ!\nVui lòng nhập số!");
-            return false;
-        }
-        if (Double.valueOf(txtSoTien.getText()) < 0) {
-            MsgBox.alert(this, "Tiền không được âm!");
-            return false;
-        }
-        return true;
+    public void checkError() {
+
     }
-    
-    void insert(){
-        QuanLyChi qlc =getInfoGiaoDichChi();
-        QuanLyThu qlt =getInfoGiaoDichThu();
-        if(rdoThu.isSelected()){
-            try {
-                qltdao.insert(qlt);
-                clear();
-                MsgBox.alert(this,"Thêm mới thành công!");
-            } catch (Exception e) {
-                MsgBox.alert(this,"Thêm mới thất bại!");
-            }
-        }
-        else{
-            try {
-                qlcdao.insert(qlc);
-                clear();
-                MsgBox.alert(this,"Thêm mới thành công!");
-            } catch (Exception e) {
-                MsgBox.alert(this,"Thêm mới thất bại!");
-            }
-        }
-    }
-    
 }
