@@ -41,6 +41,6 @@ public class LichSuDAO {
     public List<Object[]> getLichSu1(String User,String TenMTK){
         String sql="{CALL LichSuMTK2(?,?)}";
         String[] cols={"IDLichSu","TenMT","NgayTK","SoTienTK"};
-        return this.getListOfArray(sql, cols, TenMTK,User);
+        return this.getListOfArray(sql, cols, User,TenMTK);
     }
 }
