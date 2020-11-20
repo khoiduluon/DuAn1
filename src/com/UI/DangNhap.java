@@ -83,6 +83,11 @@ public class DangNhap extends javax.swing.JFrame {
         txtTenDN.setAlignmentY(1.0F);
         txtTenDN.setBorder(null);
         txtTenDN.setPreferredSize(new java.awt.Dimension(266, 30));
+        txtTenDN.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTenDNKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtTenDN, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 280, -1));
 
         lblQuenMK.setFont(new java.awt.Font("Arial", 2, 12)); // NOI18N
@@ -194,7 +199,20 @@ public class DangNhap extends javax.swing.JFrame {
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             dangNhap(); 
         }
+        if(evt.getKeyCode()==KeyEvent.VK_F1){
+            System.exit(0);
+        }
     }//GEN-LAST:event_txtMatKhauKeyPressed
+
+    private void txtTenDNKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTenDNKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_F1){
+            System.exit(0);
+        }
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            dangNhap(); 
+        }
+    }//GEN-LAST:event_txtTenDNKeyPressed
 
     /**
      * @param args the command line arguments
@@ -224,7 +242,7 @@ public class DangNhap extends javax.swing.JFrame {
         new DangNhap().setVisible(true);
     }
     void dangNhap(){
-    String manv = txtTenDN.getText();
+    String manv = txtTenDN.getText().trim();
     String matKhau = txtMatKhau.getText();
     NguoiDung nguoidung = ngdao.selectByid(manv);
     if(nguoidung==null){

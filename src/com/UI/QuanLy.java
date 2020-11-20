@@ -9,10 +9,12 @@ import com.dao.LichSuDAO;
 import com.dao.MucTieuTietKiemDAO;
 import com.dao.QuanLyChiDAO;
 import com.dao.QuanLyThuDAO;
+import com.dao.TongThuChi_DAO;
 import com.entity.LichSuTK;
 import com.entity.MucTieu;
 import com.entity.QuanLyChi;
 import com.entity.QuanLyThu;
+import com.entity.TongThuChi;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -64,14 +66,6 @@ public class QuanLy extends javax.swing.JFrame {
      */
     public QuanLy() {
         initComponents();
-        this.setResizable(true);
-        this.setLocationRelativeTo(null);
-//        this.setBackground(new Color(0, 0, 0, 0));
-//        pnlBg.setBackground(new Color(0, 0, 0, 0));
-        cardLayout = (CardLayout) pnlTabs.getLayout();
-        fillTableMucTietKiem();
-        fillComboBox();
-        mouseHover();
         init();
 
     }
@@ -168,11 +162,11 @@ public class QuanLy extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlKeHoachMouseClicked(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pnlKeHoachMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnlKeHoachMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnlKeHoachMouseExited(evt);
             }
         });
         pnlKeHoach.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -989,6 +983,7 @@ public class QuanLy extends javax.swing.JFrame {
     LichSuDAO lsDAO = new LichSuDAO();
     QuanLyThuDAO thuDAO = new QuanLyThuDAO();
     QuanLyChiDAO chiDAO = new QuanLyChiDAO();
+    TongThuChi_DAO ttcDAO = new TongThuChi_DAO();
 
     void init() {
         this.setResizable(true);
@@ -1166,8 +1161,8 @@ public class QuanLy extends javax.swing.JFrame {
             if (mt.getGiaTri() >= mt.getSoTienDaTK()) {
                 MsgBox.alert(this, "Ban da tiet kiem du");
                 return true;
-            }
         }
+            }
         return false;
     }
 
@@ -1220,7 +1215,6 @@ public class QuanLy extends javax.swing.JFrame {
         return sumDays;
 
     }
-
     int getNumberOfDays(int month, int year) {
         if (month == 2) {
             if ((year % 400 == 0) || (year % 4 == 0 && year % 100 != 0)) {
@@ -1261,9 +1255,9 @@ public class QuanLy extends javax.swing.JFrame {
  
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         try {
-            List<QuanLyThu> list1 = thuDAO.selectAll();
-            for (QuanLyThu qlThu : list1) {
-                dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 1");
+            List<Object[]> list1 = ttcDAO.getThu(Auth.user.getUser());
+            for (Object[] qlThu : list1) {
+                dataset.setValue(qlThu., "cột thu", "tháng 1");
                 dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 2");
                 dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 3");
                 dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 4");

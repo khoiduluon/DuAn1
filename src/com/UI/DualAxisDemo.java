@@ -1,41 +1,4 @@
-/* ===========================================================
- * JFreeChart : a free chart library for the Java(tm) platform
- * ===========================================================
- *
- * (C) Copyright 2000-2004, by Object Refinery Limited and Contributors.
- *
- * Project Info:  http://www.jfree.org/jfreechart/index.html
- *
- * This library is free software; you can redistribute it and/or modify it under the terms
- * of the GNU Lesser General Public License as published by the Free Software Foundation;
- * either version 2.1 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License along with this
- * library; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307, USA.
- *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
- * in the United States and other countries.]
- *
- * -----------------
- * DualAxisDemo.java
- * -----------------
- * (C) Copyright 2002-2004, by Object Refinery Limited and Contributors.
- *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
- *
- * $Id: DualAxisDemo.java,v 1.21 2004/05/10 16:45:24 mungady Exp $
- *
- * Changes
- * -------
- * 19-Nov-2002 : Version 1 (DG);
- *
- */
+package com.UI;
 
 
 
@@ -120,22 +83,6 @@ public class DualAxisDemo extends ApplicationFrame {
 
     }
 
-    // ****************************************************************************
-    // * JFREECHART DEVELOPER GUIDE                                               *
-    // * The JFreeChart Developer Guide, written by David Gilbert, is available   *
-    // * to purchase from Object Refinery Limited:                                *
-    // *                                                                          *
-    // * http://www.object-refinery.com/jfreechart/guide.html                     *
-    // *                                                                          *
-    // * Sales are used to provide funding for the JFreeChart project - please    * 
-    // * support us so that we can continue developing free software.             *
-    // ****************************************************************************
-    
-    /**
-     * Creates a sample dataset.
-     *
-     * @return  The dataset.
-     */
     private CategoryDataset createDataset1() {
 
         // row keys...
@@ -187,47 +134,6 @@ public class DualAxisDemo extends ApplicationFrame {
 
     }
 
-    /**
-     * Creates a sample dataset.
-     *
-     * @return  The dataset.
-     */
-    private CategoryDataset createDataset2() {
-
-        // row keys...
-        final String series1 = "Fourth";
-
-        // column keys...
-        final String category1 = "Category 1";
-        final String category2 = "Category 2";
-        final String category3 = "Category 3";
-        final String category4 = "Category 4";
-        final String category5 = "Category 5";
-        final String category6 = "Category 6";
-        final String category7 = "Category 7";
-        final String category8 = "Category 8";
-
-        // create the dataset...
-        final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-
-        dataset.addValue(15.0, series1, category1);
-        dataset.addValue(24.0, series1, category2);
-        dataset.addValue(31.0, series1, category3);
-        dataset.addValue(25.0, series1, category4);
-        dataset.addValue(56.0, series1, category5);
-        dataset.addValue(37.0, series1, category6);
-        dataset.addValue(77.0, series1, category7);
-        dataset.addValue(18.0, series1, category8);
-
-        return dataset;
-
-    }
-
-    /**
-     * Starting point for the demonstration application.
-     *
-     * @param args  ignored.
-     */
     public static void main(final String[] args) {
 
         final DualAxisDemo demo = new DualAxisDemo("Dual Axis Demo");
