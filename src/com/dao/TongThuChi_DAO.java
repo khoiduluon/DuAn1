@@ -1,4 +1,4 @@
-    /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -14,8 +14,7 @@ import util.JDBC;
  *
  * @author Rom
  */
-
-public class LichSuDAO {
+public class TongThuChi_DAO {
     private List<Object[]> getListOfArray(String sql,String[] cols,Object...args){
         try {
             List<Object[]> list= new ArrayList<>();
@@ -33,14 +32,14 @@ public class LichSuDAO {
             throw new RuntimeException(e);
         }
     }
-    public List<Object[]> getLichSu(String User){
-        String sql="{CALL LichSuMTK(?)}";
-        String[] cols={"IDLichSu","TenMT","NgayTK","SoTienTK"};
+    public List<Object[]> getThu(String User){
+        String sql="{CALL TongThu(?)}";
+        String[] cols={"Thang","TongThu"};
         return this.getListOfArray(sql, cols, User);
     }
-    public List<Object[]> getLichSu1(String User,String TenMTK){
-        String sql="{CALL LichSuMTK2(?,?)}";
-        String[] cols={"IDLichSu","TenMT","NgayTK","SoTienTK"};
-        return this.getListOfArray(sql, cols, User,TenMTK);
+    public List<Object[]> getChi(String User){
+        String sql="{CALL TongChi(?)}";
+        String[] cols={"Thang","TongThu"};
+        return this.getListOfArray(sql, cols, User);
     }
 }
