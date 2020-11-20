@@ -209,6 +209,9 @@ public class DangNhap extends javax.swing.JFrame {
         if(evt.getKeyCode()==KeyEvent.VK_F1){
             System.exit(0);
         }
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            dangNhap(); 
+        }
     }//GEN-LAST:event_txtTenDNKeyPressed
 
     /**
