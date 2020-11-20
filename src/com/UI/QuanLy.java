@@ -7,8 +7,12 @@ package com.UI;
 
 import com.dao.LichSuDAO;
 import com.dao.MucTieuTietKiemDAO;
+import com.dao.QuanLyChiDAO;
+import com.dao.QuanLyThuDAO;
 import com.entity.LichSuTK;
 import com.entity.MucTieu;
+import com.entity.QuanLyChi;
+import com.entity.QuanLyThu;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -41,6 +45,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import util.Auth;
@@ -864,8 +869,9 @@ public class QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_tblDanhSachMouseClicked
 
     private void cboMucTietKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboMucTietKiemActionPerformed
-        clear();
-        thongKe();
+        if (cboMucTietKiem.getSelectedIndex() != -1) {
+            thongKe();
+        }
     }//GEN-LAST:event_cboMucTietKiemActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
@@ -981,8 +987,10 @@ public class QuanLy extends javax.swing.JFrame {
     CardLayout cardLayout;
     MucTieuTietKiemDAO mtkDAO = new MucTieuTietKiemDAO();
     LichSuDAO lsDAO = new LichSuDAO();
-    
-    void init(){
+    QuanLyThuDAO thuDAO = new QuanLyThuDAO();
+    QuanLyChiDAO chiDAO = new QuanLyChiDAO();
+
+    void init() {
         this.setResizable(true);
         this.setLocationRelativeTo(null);
 //        this.setBackground(new Color(0, 0, 0, 0));
@@ -991,10 +999,9 @@ public class QuanLy extends javax.swing.JFrame {
         fillTableMucTietKiem();
         fillComboBox();
         mouseHover();
-        thongKe();
         fillTableLichSu();
     }
-    
+
     public void mouseHover() {
         pnlKeHoach.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         pnlThongKe.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -1022,7 +1029,7 @@ public class QuanLy extends javax.swing.JFrame {
     public void fillTableLichSu() {
         DefaultTableModel model = (DefaultTableModel) tblLichSu.getModel();
         model.setRowCount(0);
-        if(txtTimKiem.getText().equals("")){
+        if (txtTimKiem.getText().equals("")) {
             try {
                 List<Object[]> list = lsDAO.getLichSu(Auth.user.getUser());
                 for (Object[] ls : list) {
@@ -1033,9 +1040,9 @@ public class QuanLy extends javax.swing.JFrame {
                 MsgBox.alert(this, "Loi truy van du lieu");
                 e.printStackTrace();
             }
-        }else{
+        } else {
             try {
-                List<Object[]> list = lsDAO.getLichSu1(Auth.user.getUser(),txtTimKiem.getText().trim());
+                List<Object[]> list = lsDAO.getLichSu1(Auth.user.getUser(), txtTimKiem.getText().trim());
                 for (Object[] ls : list) {
                     model.addRow(ls);
                 }
@@ -1043,7 +1050,7 @@ public class QuanLy extends javax.swing.JFrame {
                 MsgBox.alert(this, "Loi truy van du lieu");
                 e.printStackTrace();
             }
-        }   
+        }
     }
 
     public void addMtkToDaTaBase() {
@@ -1051,6 +1058,7 @@ public class QuanLy extends javax.swing.JFrame {
         try {
             mtkDAO.insert(mt);
             fillTableMucTietKiem();
+            fillComboBox();
         } catch (Exception e) {
             MsgBox.alert(this, "Loi roi ku");
         }
@@ -1076,6 +1084,7 @@ public class QuanLy extends javax.swing.JFrame {
                 mtkDAO.delete(row);
                 MsgBox.alert(this, "Xoa thanh cong");
                 fillTableMucTietKiem();
+                fillComboBox();
             } catch (Exception e) {
                 MsgBox.alert(this, "Loi roi ku");
                 e.printStackTrace();
@@ -1122,8 +1131,8 @@ public class QuanLy extends javax.swing.JFrame {
 
     void selectForm() {
         int id = (int) tblDanhSach.getValueAt(tblDanhSach.getSelectedRow(), 0);
-        String User=Auth.user.getUser();
-        MucTieu mt = mtkDAO.selectByid_MTTK(id,User);
+        String User = Auth.user.getUser();
+        MucTieu mt = mtkDAO.selectByid_MTTK(id, User);
         txtTenMTK.setText(mt.getTenMucTieu());
         txtGiaTri.setText(String.valueOf(mt.getGiaTri()));
         if (tblDanhSach.getValueAt(tblDanhSach.getSelectedRow(), 3).equals("1 tháng")) {
@@ -1172,31 +1181,23 @@ public class QuanLy extends javax.swing.JFrame {
     }
 
     public void thongKe() {
-        //Variable
+
         MucTieu mt = (MucTieu) cboMucTietKiem.getSelectedItem();
         int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-        String currentDate = fmDate.toString(mt.getNgayTao(), "dd-MM-yyyy");
-        String deadlineDate = fmDate.toString(fmDate.addDays(mt.getNgayTao(), getSumDays(currentMonth, currentYear, mt.getThoiHan())), "dd-MM-yyyy");
-                           // System.out.println(deadlineDate);
-        //SetTextde
-        txtTienDaTK.setText(String.valueOf(mt.getSoTienDaTK()));
-        txtThoiGian.setText(fmDate.toString(fmDate.addDays(mt.getNgayTao(), mt.getThoiHan()*getNumberOfDays(currentMonth, currentYear)), "dd-MM-yyyy"));
+        //Ngày còn lại
+        long sumDays = getSumDays(currentMonth, currentYear, mt.getThoiHan());
+        long currentDate = (new Date().getTime() - mt.getNgayTao().getTime()) / (24 * 60 * 60 * 1000);
+        long reSutl = sumDays - currentDate;
+        lblNgayConLai.setText(String.valueOf(reSutl));
+        //Deadline
+        long day = mt.getNgayTao().getTime() + (sumDays * 24 * 60 * 60 * 1000);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(day);
+        txtThoiGian.setText(fmDate.toString(calendar.getTime(), "dd-MM-yyyy"));
+        //textfied còn lại...
         pgbTienDo.setValue((int) ((int) (mt.getSoTienDaTK() * 100) / mt.getGiaTri()));
-        
-        //Tinh ngay còn lại
-        Calendar.getInstance().get(Calendar.DATE);
-        final String today = fmDate.toString(new Date(System.currentTimeMillis()), "dd-MM-yyyy");
-        System.out.println(today);
-                //fmDate.toString(new Date(System.currentTimeMillis()), "dd-MM-yyyy");
-        Date d1 = mt.getNgayTao();
-                //fmDate.toDate(currentDate, "dd-MM-yyyy");
-        Date d2 = fmDate.addDays(mt.getNgayTao(), getSumDays(currentMonth, currentYear, mt.getThoiHan()));
-                //fmDate.toDate(deadlineDate, "dd-MM-yyyy");
-        Date d3 = fmDate.toDate(today, "yyyy-MM-dd");
-        System.out.println("d1: "+d1+"\nd2: "+d2+"\nd3: "+d3);
-        lblNgayConLai.setText("Số ngày còn lại: " + String.valueOf(dayleft(d1, d2, d3)));
-
+        txtTienDaTK.setText(String.valueOf(mt.getSoTienDaTK()));
     }
 
     long dayleft(Date dayStart, Date dayEnd, Date toDay) {
@@ -1217,7 +1218,7 @@ public class QuanLy extends javax.swing.JFrame {
             currentMonth++;
         }
         return sumDays;
-       
+
     }
 
     int getNumberOfDays(int month, int year) {
@@ -1255,4 +1256,57 @@ public class QuanLy extends javax.swing.JFrame {
         pnlPieChart.add(chartPanel, BorderLayout.CENTER);
         pnlPieChart.validate();
     }
+
+     CategoryDataset thongKeThu() {
+ 
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        try {
+            List<QuanLyThu> list1 = thuDAO.selectAll();
+            for (QuanLyThu qlThu : list1) {
+                dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 1");
+                dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 2");
+                dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 3");
+                dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 4");
+                dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 5");
+                dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 6");
+                dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 7");
+                dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 8");
+                dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 9");
+                dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 10");
+                dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 11");
+                dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 12");
+                dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 13");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+         return dataset;
+    }
+    
+    
+    CategoryDataset thongKeChi(){
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+          try {
+            List<QuanLyChi> list2 = chiDAO.selectAll();
+            for (QuanLyChi qlChi : list2) {
+                dataset.setValue(qlChi.getSoTien(), "cột thu", "tháng 1");
+                dataset.setValue(qlChi.getSoTien(), "cột thu", "tháng 2");
+                dataset.setValue(qlChi.getSoTien(), "cột thu", "tháng 3");
+                dataset.setValue(qlChi.getSoTien(), "cột thu", "tháng 4");
+                dataset.setValue(qlChi.getSoTien(), "cột thu", "tháng 5");
+                dataset.setValue(qlChi.getSoTien(), "cột thu", "tháng 6");
+                dataset.setValue(qlChi.getSoTien(), "cột thu", "tháng 7");
+                dataset.setValue(qlChi.getSoTien(), "cột thu", "tháng 8");
+                dataset.setValue(qlChi.getSoTien(), "cột thu", "tháng 9");
+                dataset.setValue(qlChi.getSoTien(), "cột thu", "tháng 10");
+                dataset.setValue(qlChi.getSoTien(), "cột thu", "tháng 11");
+                dataset.setValue(qlChi.getSoTien(), "cột thu", "tháng 12");
+                dataset.setValue(qlChi.getSoTien(), "cột thu", "tháng 13");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+          return dataset;
+    }
+
 }
