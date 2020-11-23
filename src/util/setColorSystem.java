@@ -27,10 +27,16 @@ public class setColorSystem {
           l.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, new java.awt.Color(Red, Blue, Green), new java.awt.Color(Red, Blue, Green)));
 
     }
-    public void setColor(JLabel l){
-        l.setForeground(new java.awt.Color(255,0,0));
-    }
     
+    public void setColor(JLabel l) {
+        l.setForeground(new java.awt.Color(255, 0, 0));
+    }
+
+    public void setColor(JLabel l, int Red, int Blue, int Green) {
+        l.setForeground(new java.awt.Color(Red, Blue, Green));
+    }
+        
+        
     public void resetColor(JLabel l){
         l.setForeground(new Color(0,102,255));
     }
