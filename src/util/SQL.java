@@ -40,21 +40,15 @@ create table LichSu(
 	SoTienTK float not null
 )
 
-create table QuanLyThu(
-	IDThu int identity(1,1) primary key,
+create table QuanLyThuChi(
+	ID int identity(1,1) primary key,
 	Username nvarchar(50) not null,
-	LoaiGD nvarchar(100) not null,
+	TenGD nvarchar(100) not null,
 	SoTien float not null,
-	NgayGD date not null
+	NgayGD date not null,
+	LoaiGD nvarchar(15) not null
 )
 
-create table QuanLyChi(
-	IDChi int identity(1,1) primary key,
-	Username nvarchar(50) not null,
-	LoaiGD nvarchar(100) not null,
-	SoTien float not null,
-	NgayGD date not null
-)
 
 alter table MucTieuTietKiem
 add constraint FK_MTTK_ND
@@ -66,13 +60,8 @@ add constraint FK_LS_MTTK
 foreign key (IDMucTieu)
 references MucTieuTietKiem(IDMucTieu)
 
-alter table QuanLyThu
+alter table QuanLyThuChi
 add constraint FK_QLT_ND
-foreign key (Username)
-references NguoiDung(Username)
-
-alter table QuanLyChi
-add constraint FK_QLC_ND
 foreign key (Username)
 references NguoiDung(Username)
 
@@ -93,25 +82,41 @@ begin
 end;
 exec LichSuMTK2 'Ngandhl',N'heo'
 
-alter proc TongChi @User nvarchar(50)
+create proc TongThu @User nvarchar(50)
 as
 begin
-	select MONTH(QuanLyChi.NgayGD) as 'Thang', sum(quanlychi.SoTien) as 'TongChi' from NguoiDung
-	inner join QuanLyChi on NguoiDung.Username=QuanLyChi.Username
-	where NguoiDung.Username=@User
-	group by month(QuanLyChi.NgayGD)
+	select MONTH(NgayGD) as 'Thang',SUM(SoTien) as 'TongThu'
+	from QuanLyThuChi where LoaiGD='Thu'
+	group by MONTH(NgayGD)
 end
-alter proc TongThu @User nvarchar(50)
+
+create proc TongChi @User nvarchar(50)
 as
 begin
-	select MONTH(QuanLyThu.NgayGD) as 'Thang', sum(QuanLyThu.SoTien) as 'TongChi' from NguoiDung
-	inner join QuanLyThu on NguoiDung.Username=QuanLyThu.Username
-	where NguoiDung.Username=@User
-	group by month(QuanLyThu.NgayGD)
+	select MONTH(NgayGD) as 'Thang',SUM(SoTien) as 'TongThu'
+	from QuanLyThuChi where LoaiGD='Chi'
+	group by MONTH(NgayGD)
 end
 
-exec TongChi 'Ngandhl'
-exec TongThu 'Ngandhl'
+alter proc LichSu_ThuChi @User nvarchar(50)
+as
+begin
+	select TenGD,NgayGD,SoTien,LoaiGD from NguoiDung nd
+	inner join QuanLyThuChi qltc on nd.Username=qltc.Username
+	where nd.Username=@User
+end
 
+alter proc Tinh_SoDu @User nvarchar(50)
+as
+begin
+	declare @tongthu float
+	declare @tongchi float
+	declare @sodu float
+	set @tongthu=(Select SUM(SoTien) from QuanLyThuChi where LoaiGD='Thu')
+	set @tongchi=(Select SUM(SoTien) from QuanLyThuChi where LoaiGD='Chi')
+	set @sodu=(select @tongthu-@tongchi)
+	update NguoiDung set SoDu=@sodu where Username=@User
+	select SoDu from NguoiDung where Username=@User
+end
     */
 }

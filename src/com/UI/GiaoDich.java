@@ -5,10 +5,9 @@
  */
 package com.UI;
 
-import com.dao.QuanLyChiDAO;
-import com.dao.QuanLyThuDAO;
-import com.entity.QuanLyChi;
-import com.entity.QuanLyThu;
+
+import com.dao.ThuChiDAO;
+import com.entity.ThuChi;
 import java.awt.CardLayout;
 import java.awt.event.KeyEvent;
 import javax.swing.JRadioButton;
@@ -380,53 +379,38 @@ public class GiaoDich extends javax.swing.JFrame {
     private javax.swing.JTextField txtSoTien;
     // End of variables declaration//GEN-END:variables
     
-    QuanLyThuDAO qltdao=new QuanLyThuDAO();
-    QuanLyChiDAO qlcdao=new QuanLyChiDAO();
+    ThuChiDAO dao=new ThuChiDAO();
     
-    QuanLyChi getInfoGiaoDichChi() {
-        QuanLyChi qlc = new QuanLyChi();
-        qlc.setUsername(Auth.user.getUser());
-        qlc.setSoTien(Double.valueOf(txtSoTien.getText()));
-        qlc.setLoaiGD(cboChi.getSelectedItem().toString());
-        qlc.setNgayGD(fmDate.toString(dcsNgay.getDate(), "yyyy-MM-dd"));
-        return qlc;
+    ThuChi getInfoGiaoDich() {
+        ThuChi qltc = new ThuChi();
+        qltc.setUsername(Auth.user.getUser());
+        qltc.setSoTien(Double.valueOf(txtSoTien.getText()));
+        if(rdoThu.isSelected()){
+            qltc.setLoaiGD(rdoThu.getText().trim());
+            qltc.setTenGD(cboThu.getSelectedItem().toString());
+        }else{
+            qltc.setLoaiGD(rdoChi.getText().trim());
+            qltc.setTenGD(cboChi.getSelectedItem().toString());
+        }
+        qltc.setNgayGD(fmDate.toString(dcsNgay.getDate(), "yyyy-MM-dd"));
+        return qltc;
     }
-
-    QuanLyThu getInfoGiaoDichThu() {
-        QuanLyThu qlt = new QuanLyThu();
-        qlt.setUsername(Auth.user.getUser());
-        qlt.setSoTien(Double.valueOf(txtSoTien.getText()));
-        qlt.setLoaiGD(cboThu.getSelectedItem().toString());
-        qlt.setNgayGD(fmDate.toString(dcsNgay.getDate(), "yyyy-MM-dd"));
-        return qlt;
-    }
-
     public void clear() {
         txtSoTien.setText("");
         rdoThu.setSelected(true);
+        cboThu.setVisible(true);
 
     }
 
     public void insert(){
-        QuanLyChi qlc=getInfoGiaoDichChi();
-        QuanLyThu qlt=getInfoGiaoDichThu();
-        if(rdoThu.isSelected()){
+        ThuChi qltc=getInfoGiaoDich();
             try {
-                qltdao.insert(qlt);
+                dao.insert(qltc);
                 MsgBox.alert(this,"Thêm thành công!");
                 clear();
             } catch (Exception e) {
                 MsgBox.alert(this,e.toString());
             }
-        }else{
-            try {
-                qlcdao.insert(qlc);
-                MsgBox.alert(this,"Thêm thành công!");
-                clear();
-            } catch (Exception e) {
-                MsgBox.alert(this,e.toString());
-            }
-        }
     }
     
     boolean checkError() {

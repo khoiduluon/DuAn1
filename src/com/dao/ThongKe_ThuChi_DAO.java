@@ -14,7 +14,7 @@ import util.JDBC;
  *
  * @author Rom
  */
-public class TongThuChi_DAO {
+public class ThongKe_ThuChi_DAO {
     private List<Object[]> getListOfArray(String sql,String[] cols,Object...args){
         try {
             List<Object[]> list= new ArrayList<>();
@@ -39,7 +39,17 @@ public class TongThuChi_DAO {
     }
     public List<Object[]> getChi(String User){
         String sql="{CALL TongChi(?)}";
-        String[] cols={"Thang","TongThu"};
+        String[] cols={"Thang","TongChi"};
+        return this.getListOfArray(sql, cols, User);
+    }
+    public List<Object[]> LichSu_ThuChi(String User){
+        String sql="{CALL LichSu_ThuChi(?)}";
+        String[] cols={"TenGD","NgayGD","SoTien","LoaiGD"};
+        return this.getListOfArray(sql, cols, User);
+    }
+    public List<Object[]> Tinh_SoDu(String User){
+        String sql="{CALL Tinh_SoDu(?)}";
+        String[] cols={"SoDu"};
         return this.getListOfArray(sql, cols, User);
     }
 }

@@ -43,4 +43,5 @@ public class LichSuDAO {
         String[] cols={"IDLichSu","TenMT","NgayTK","SoTienTK"};
         return this.getListOfArray(sql, cols, User,TenMTK);
     }
+    
 }

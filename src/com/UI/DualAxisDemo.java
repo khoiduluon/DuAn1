@@ -57,24 +57,24 @@ public class DualAxisDemo extends ApplicationFrame {
 //        chart.getLegend().setAnchor(Legend.SOUTH);
 
         // get a reference to the plot for further customisation...
-        final CategoryPlot plot = chart.getCategoryPlot();
-        plot.setBackgroundPaint(new Color(0xEE, 0xEE, 0xFF));
-        plot.setDomainAxisLocation(AxisLocation.BOTTOM_OR_RIGHT);
-
-//        final CategoryDataset dataset2 = createDataset2();
-//        plot.setDataset(1, dataset2);
-//        plot.mapDatasetToRangeAxis(1, 1);
-
-        final CategoryAxis domainAxis = plot.getDomainAxis();
-        domainAxis.setCategoryLabelPositions(CategoryLabelPositions.DOWN_45);
-        final ValueAxis axis2 = new NumberAxis("Secondary");
-        plot.setRangeAxis(1, axis2);
-
-        final LineAndShapeRenderer renderer2 = new LineAndShapeRenderer();
-        renderer2.setToolTipGenerator(new StandardCategoryToolTipGenerator());
-        plot.setRenderer(1, renderer2);
-        plot.setDatasetRenderingOrder(DatasetRenderingOrder.REVERSE);
-        // OPTIONAL CUSTOMISATION COMPLETED.
+//        final CategoryPlot plot = chart.getCategoryPlot();
+//        plot.setBackgroundPaint(new Color(0xEE, 0xEE, 0xFF));
+//        plot.setDomainAxisLocation(AxisLocation.BOTTOM_OR_RIGHT);
+//
+////        final CategoryDataset dataset2 = createDataset2();
+////        plot.setDataset(1, dataset2);
+////        plot.mapDatasetToRangeAxis(1, 1);
+//
+//        final CategoryAxis domainAxis = plot.getDomainAxis();
+//        domainAxis.setCategoryLabelPositions(CategoryLabelPositions.DOWN_45);
+//        final ValueAxis axis2 = new NumberAxis("Secondary");
+//        plot.setRangeAxis(1, axis2);
+//
+//        final LineAndShapeRenderer renderer2 = new LineAndShapeRenderer();
+//        renderer2.setToolTipGenerator(new StandardCategoryToolTipGenerator());
+//        plot.setRenderer(1, renderer2);
+//        plot.setDatasetRenderingOrder(DatasetRenderingOrder.REVERSE);
+//        // OPTIONAL CUSTOMISATION COMPLETED.
 
         // add the chart to a panel...
         final ChartPanel chartPanel = new ChartPanel(chart);
@@ -88,8 +88,6 @@ public class DualAxisDemo extends ApplicationFrame {
         // row keys...
         final String series1 = "First";
         final String series2 = "Second";
-        final String series3 = "Third";
-
         // column keys...
         final String category1 = "Category 1";
         final String category2 = "Category 2";
@@ -121,14 +119,6 @@ public class DualAxisDemo extends ApplicationFrame {
         dataset.addValue(2.0, series2, category7);
         dataset.addValue(1.0, series2, category8);
 
-        dataset.addValue(4.0, series3, category1);
-        dataset.addValue(3.0, series3, category2);
-        dataset.addValue(2.0, series3, category3);
-        dataset.addValue(3.0, series3, category4);
-        dataset.addValue(6.0, series3, category5);
-        dataset.addValue(3.0, series3, category6);
-        dataset.addValue(4.0, series3, category7);
-        dataset.addValue(3.0, series3, category8);
 
         return dataset;
 
