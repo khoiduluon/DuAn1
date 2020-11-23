@@ -39,7 +39,7 @@ public class TongThuChi_DAO {
     }
     public List<Object[]> getChi(String User){
         String sql="{CALL TongChi(?)}";
-        String[] cols={"Thang","TongThu"};
+        String[] cols={"Thang","TongChi"};
         return this.getListOfArray(sql, cols, User);
     }
 }

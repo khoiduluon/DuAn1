@@ -12,6 +12,7 @@ import com.dao.QuanLyThuDAO;
 import com.dao.TongThuChi_DAO;
 import com.entity.LichSuTK;
 import com.entity.MucTieu;
+import com.entity.NguoiDung;
 import com.entity.QuanLyChi;
 import com.entity.QuanLyThu;
 import com.entity.TongThuChi;
@@ -45,10 +46,19 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.AxisLocation;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.CategoryLabelPositions;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.DatasetRenderingOrder;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DatasetGroup;
 import org.jfree.data.general.DefaultPieDataset;
 import util.Auth;
 import util.MsgBox;
@@ -67,6 +77,8 @@ public class QuanLy extends javax.swing.JFrame {
     public QuanLy() {
         initComponents();
         init();
+        tblDanhSach.getTableHeader().setOpaque(false);
+        tblDanhSach.getTableHeader().setBackground(new Color(249,247,207));
 
     }
 
@@ -136,8 +148,8 @@ public class QuanLy extends javax.swing.JFrame {
         tblLichSu = new javax.swing.JTable();
         pnlTab4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblSoDu = new javax.swing.JLabel();
+        lblThemGiaoDich = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
@@ -178,7 +190,7 @@ public class QuanLy extends javax.swing.JFrame {
         lblQuanLy.setBackground(new java.awt.Color(204, 204, 204));
         lblQuanLy.setFont(new java.awt.Font("Quicksand", 1, 16)); // NOI18N
         lblQuanLy.setForeground(new java.awt.Color(255, 255, 255));
-        lblQuanLy.setText("Quản Lý");
+        lblQuanLy.setText("Mục TK");
         pnlKeHoach.add(lblQuanLy, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, -1, 40));
 
         pnlleft.add(pnlKeHoach, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 150, 40));
@@ -243,11 +255,11 @@ public class QuanLy extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pnlGiaoDichMouseClicked(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pnlGiaoDichMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnlGiaoDichMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnlGiaoDichMouseExited(evt);
             }
         });
         pnlGiaoDich.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -558,17 +570,12 @@ public class QuanLy extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Thống kê mục tiết kiệm", jPanel3);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 541, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 439, Short.MAX_VALUE)
-        );
-
+        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel4MouseClicked(evt);
+            }
+        });
+        jPanel4.setLayout(new java.awt.BorderLayout());
         jTabbedPane1.addTab("Thống kê Thu/Chi", jPanel4);
 
         javax.swing.GroupLayout pnlTab2Layout = new javax.swing.GroupLayout(pnlTab2);
@@ -650,9 +657,20 @@ public class QuanLy extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         jLabel1.setText("Số dư:");
 
-        jLabel2.setText("jLabel2");
+        lblSoDu.setText("jLabel2");
 
-        jLabel3.setText("Thêm giao dịch");
+        lblThemGiaoDich.setText("Thêm giao dịch");
+        lblThemGiaoDich.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblThemGiaoDichMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblThemGiaoDichMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblThemGiaoDichMouseExited(evt);
+            }
+        });
 
         jTable1.setFont(new java.awt.Font("Quicksand", 0, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -684,9 +702,9 @@ public class QuanLy extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblSoDu, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
+                .addComponent(lblThemGiaoDich)
                 .addGap(62, 62, 62))
             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
         );
@@ -696,8 +714,8 @@ public class QuanLy extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addGroup(pnlTab4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(lblSoDu)
+                    .addComponent(lblThemGiaoDich))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -767,6 +785,7 @@ public class QuanLy extends javax.swing.JFrame {
     private void pnlThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongKeMouseClicked
         cardLayout.show(pnlTabs, "card2");
         thongKeMTK();
+        thongKeGiaoDich();
     }//GEN-LAST:event_pnlThongKeMouseClicked
 
     private void pnlLichSuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlLichSuMouseEntered
@@ -855,7 +874,8 @@ public class QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_pnlGiaoDichMouseExited
 
     private void pnlGiaoDichMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlGiaoDichMouseClicked
-        new GiaoDich().setVisible(true);
+//        new GiaoDich().setVisible(true);
+        cardLayout.show(pnlTabs, "card4");
     }//GEN-LAST:event_pnlGiaoDichMouseClicked
 
     private void tblDanhSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachMouseClicked
@@ -877,6 +897,23 @@ public class QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
         fillTableLichSu();
     }//GEN-LAST:event_btnTimKiemActionPerformed
+
+    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
+        thongKeGiaoDich();
+    }//GEN-LAST:event_jPanel4MouseClicked
+
+    private void lblThemGiaoDichMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThemGiaoDichMouseClicked
+        new GiaoDich().setVisible(true);
+    }//GEN-LAST:event_lblThemGiaoDichMouseClicked
+
+    private void lblThemGiaoDichMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThemGiaoDichMouseEntered
+        setColorSystem cl = new setColorSystem();
+        cl.setBorder(lblThemGiaoDich, 0, 0, 0);
+    }//GEN-LAST:event_lblThemGiaoDichMouseEntered
+
+    private void lblThemGiaoDichMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThemGiaoDichMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblThemGiaoDichMouseExited
 
     /**
      * @param args the command line arguments
@@ -923,8 +960,6 @@ public class QuanLy extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cboMucTietKiem;
     private javax.swing.JComboBox<String> cboThoiGianTK;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -946,9 +981,11 @@ public class QuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel lblMucTietKiem;
     private javax.swing.JLabel lblNgayConLai;
     private javax.swing.JLabel lblQuanLy;
+    private javax.swing.JLabel lblSoDu;
     private javax.swing.JLabel lblTenMT;
     private javax.swing.JLabel lblTenMT1;
     private javax.swing.JLabel lblTenMT2;
+    private javax.swing.JLabel lblThemGiaoDich;
     private javax.swing.JLabel lblThoiGianCon;
     private javax.swing.JLabel lblThongKe;
     private javax.swing.JLabel lblThuChi;
@@ -995,6 +1032,7 @@ public class QuanLy extends javax.swing.JFrame {
         fillComboBox();
         mouseHover();
         fillTableLichSu();
+        inFoGiaoDich();
     }
 
     public void mouseHover() {
@@ -1002,6 +1040,7 @@ public class QuanLy extends javax.swing.JFrame {
         pnlThongKe.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         pnlLichSu.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         pnlGiaoDich.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        
     }
 
     public void fillTableMucTietKiem() {
@@ -1161,8 +1200,8 @@ public class QuanLy extends javax.swing.JFrame {
             if (mt.getGiaTri() >= mt.getSoTienDaTK()) {
                 MsgBox.alert(this, "Ban da tiet kiem du");
                 return true;
-        }
             }
+        }
         return false;
     }
 
@@ -1195,13 +1234,6 @@ public class QuanLy extends javax.swing.JFrame {
         txtTienDaTK.setText(String.valueOf(mt.getSoTienDaTK()));
     }
 
-    long dayleft(Date dayStart, Date dayEnd, Date toDay) {
-        long diff = (dayEnd.getTime() - dayStart.getTime()) / (24 * 60 * 60 * 1000);
-        long diff2 = (toDay.getTime() - dayStart.getTime()) / (24 * 60 * 60 * 1000);
-        System.out.println(diff + " " + diff2);
-        return diff - diff2;
-    }
-
     int getSumDays(int currentMonth, int currentYear, int month) {
         int sumDays = 0;
         for (int i = 0; i < month; i++) {
@@ -1215,6 +1247,7 @@ public class QuanLy extends javax.swing.JFrame {
         return sumDays;
 
     }
+
     int getNumberOfDays(int month, int year) {
         if (month == 2) {
             if ((year % 400 == 0) || (year % 4 == 0 && year % 100 != 0)) {
@@ -1251,56 +1284,59 @@ public class QuanLy extends javax.swing.JFrame {
         pnlPieChart.validate();
     }
 
-     CategoryDataset thongKeThu() {
- 
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+    void thongKeGiaoDich() {
+        JFreeChart chart = ChartFactory.createBarChart("Thống kê thu chi 2020", "Tháng", "Tiền VNĐ", nhomThuChi(), PlotOrientation.VERTICAL, true, true, false);
+//        ChartFrame chartFrame = new ChartFrame("yoyo", chart);
+//        chartFrame.setVisible(true);
+//        chartFrame.setSize(200, 300);
+        
+        final CategoryPlot plot = chart.getCategoryPlot();
+        plot.setBackgroundPaint(new Color(0xEE, 0xEE, 0xFF));
+        plot.setDomainAxisLocation(AxisLocation.BOTTOM_OR_RIGHT);
+        
+        final CategoryAxis domainAxis = plot.getDomainAxis();
+        domainAxis.setCategoryLabelPositions(CategoryLabelPositions.DOWN_45);
+
+        final LineAndShapeRenderer renderer2 = new LineAndShapeRenderer();
+        renderer2.setToolTipGenerator(new StandardCategoryToolTipGenerator());
+        plot.setRenderer(1, renderer2);
+        plot.setDatasetRenderingOrder(DatasetRenderingOrder.REVERSE);
+        
+        ChartPanel chartPanel = new ChartPanel(chart);
+        jPanel4.removeAll();
+        jPanel4.add(chartPanel, BorderLayout.CENTER);
+        jPanel4.validate();
+    }
+
+    CategoryDataset nhomThuChi() {
+        final String series1 = "Tổng Thu";
+        final String series2 = "Tổng Chi";
+        // create the dataset...
+        final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
         try {
             List<Object[]> list1 = ttcDAO.getThu(Auth.user.getUser());
             for (Object[] qlThu : list1) {
-                dataset.setValue(qlThu., "cột thu", "tháng 1");
-                dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 2");
-                dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 3");
-                dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 4");
-                dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 5");
-                dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 6");
-                dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 7");
-                dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 8");
-                dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 9");
-                dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 10");
-                dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 11");
-                dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 12");
-                dataset.setValue(qlThu.getSoTien(), "cột thu", "tháng 13");
+                dataset.setValue((Number) qlThu[1], series1,"Tháng " + (Comparable) qlThu[0]);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-         return dataset;
-    }
-    
-    
-    CategoryDataset thongKeChi(){
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-          try {
-            List<QuanLyChi> list2 = chiDAO.selectAll();
-            for (QuanLyChi qlChi : list2) {
-                dataset.setValue(qlChi.getSoTien(), "cột thu", "tháng 1");
-                dataset.setValue(qlChi.getSoTien(), "cột thu", "tháng 2");
-                dataset.setValue(qlChi.getSoTien(), "cột thu", "tháng 3");
-                dataset.setValue(qlChi.getSoTien(), "cột thu", "tháng 4");
-                dataset.setValue(qlChi.getSoTien(), "cột thu", "tháng 5");
-                dataset.setValue(qlChi.getSoTien(), "cột thu", "tháng 6");
-                dataset.setValue(qlChi.getSoTien(), "cột thu", "tháng 7");
-                dataset.setValue(qlChi.getSoTien(), "cột thu", "tháng 8");
-                dataset.setValue(qlChi.getSoTien(), "cột thu", "tháng 9");
-                dataset.setValue(qlChi.getSoTien(), "cột thu", "tháng 10");
-                dataset.setValue(qlChi.getSoTien(), "cột thu", "tháng 11");
-                dataset.setValue(qlChi.getSoTien(), "cột thu", "tháng 12");
-                dataset.setValue(qlChi.getSoTien(), "cột thu", "tháng 13");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-          return dataset;
-    }
 
+        try {
+            List<Object[]> list2 = ttcDAO.getChi(Auth.user.getUser());
+            for (Object[] qlChi : list2) {
+                dataset.setValue((Number) qlChi[1], series2,"Tháng " + (Comparable) qlChi[0]);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dataset;
+    }
+    
+    void inFoGiaoDich(){
+        NguoiDung nd = new NguoiDung();
+        double values = nd.getSoDu();
+        lblSoDu.setText(String.valueOf(values));
+    }
 }
