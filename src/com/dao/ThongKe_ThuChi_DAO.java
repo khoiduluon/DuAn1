@@ -47,9 +47,12 @@ public class ThongKe_ThuChi_DAO {
         String[] cols={"TenGD","NgayGD","SoTien","LoaiGD"};
         return this.getListOfArray(sql, cols, User);
     }
+<<<<<<< HEAD:src/com/dao/ThongKe_ThuChi_DAO.java
     public List<Object[]> Tinh_SoDu(String User){
         String sql="{CALL Tinh_SoDu(?)}";
         String[] cols={"SoDu"};
         return this.getListOfArray(sql, cols, User);
     }
+=======
+>>>>>>> dabe126d91849ad633e59d8ed6243386303f8651:src/com/dao/TongThuChi_DAO.java
 }
