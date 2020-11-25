@@ -240,10 +240,12 @@ public class TietKiem extends javax.swing.JFrame {
     
         void insert() {
         MucTieu mt = getInFo();
+         QuanLy ql = new QuanLy();
         try {
-            mtkdao.update(mt);
+            mtkdao.insert(mt);
             MsgBox.alert(this, "Tiet kiem");
-            new QuanLy().setVisible(false);new QuanLy().setVisible(true);
+           
+            ql.fillTableChiThu();
         } catch (Exception e) {
             MsgBox.alert(this, "Co loi xay ra");
             System.out.println(e.getMessage());

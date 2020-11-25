@@ -4,25 +4,28 @@
  * and open the template in the editor.
  */
 package com.dao;
+
 import com.entity.LichSuTK;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import util.JDBC;
+
 /**
  *
  * @author Rom
  */
 public class ThongKe_ThuChi_DAO {
-    private List<Object[]> getListOfArray(String sql,String[] cols,Object...args){
+
+    private List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
         try {
-            List<Object[]> list= new ArrayList<>();
-            ResultSet rs=JDBC.query(sql, args);
-            while(rs.next()){
-                Object[] vals=new Object[cols.length];
+            List<Object[]> list = new ArrayList<>();
+            ResultSet rs = JDBC.query(sql, args);
+            while (rs.next()) {
+                Object[] vals = new Object[cols.length];
                 for (int i = 0; i < cols.length; i++) {
-                    vals[i]=rs.getObject(cols[i]);
+                    vals[i] = rs.getObject(cols[i]);
                 }
                 list.add(vals);
             }
@@ -32,27 +35,22 @@ public class ThongKe_ThuChi_DAO {
             throw new RuntimeException(e);
         }
     }
-    public List<Object[]> getThu(String User){
-        String sql="{CALL TongThu(?)}";
-        String[] cols={"Thang","TongThu"};
+
+    public List<Object[]> getThu(String User) {
+        String sql = "{CALL TongThu(?)}";
+        String[] cols = {"Thang", "TongThu"};
         return this.getListOfArray(sql, cols, User);
     }
-    public List<Object[]> getChi(String User){
-        String sql="{CALL TongChi(?)}";
-        String[] cols={"Thang","TongChi"};
+
+    public List<Object[]> getChi(String User) {
+        String sql = "{CALL TongChi(?)}";
+        String[] cols = {"Thang", "TongChi"};
         return this.getListOfArray(sql, cols, User);
     }
-    public List<Object[]> LichSu_ThuChi(String User){
-        String sql="{CALL LichSu_ThuChi(?)}";
-        String[] cols={"TenGD","NgayGD","SoTien","LoaiGD"};
+
+    public List<Object[]> LichSu_ThuChi(String User) {
+        String sql = "{CALL LichSu_ThuChi(?)}";
+        String[] cols = {"TenGD", "NgayGD", "SoTien", "LoaiGD"};
         return this.getListOfArray(sql, cols, User);
     }
-<<<<<<< HEAD:src/com/dao/ThongKe_ThuChi_DAO.java
-    public List<Object[]> Tinh_SoDu(String User){
-        String sql="{CALL Tinh_SoDu(?)}";
-        String[] cols={"SoDu"};
-        return this.getListOfArray(sql, cols, User);
-    }
-=======
->>>>>>> dabe126d91849ad633e59d8ed6243386303f8651:src/com/dao/TongThuChi_DAO.java
 }
