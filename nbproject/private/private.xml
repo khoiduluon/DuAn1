@@ -3,20 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/D:/DuAn_1/DuAn1/src/com/dao/NguoiDungDAO.java</file>
-            <file>file:/D:/DuAn_1/DuAn1/src/com/UI/GiaoDich.java</file>
-            <file>file:/D:/DuAn_1/DuAn1/src/com/dao/ThongKe_ThuChi_DAO.java</file>
-            <file>file:/D:/DuAn_1/DuAn1/src/util/SQL.java</file>
-            <file>file:/D:/DuAn_1/DuAn1/src/com/UI/QuanLy.java</file>
-=======
-            <file>file:/Users/trantrung/Google%20Drive/lab/java4/DuAn1/src/com/UI/DangNhap.java</file>
-            <file>file:/Users/trantrung/Google%20Drive/lab/java4/DuAn1/src/com/UI/Main.java</file>
-            <file>file:/Users/trantrung/Google%20Drive/lab/java4/DuAn1/src/com/dao/ThuChiDAO.java</file>
-            <file>file:/Users/trantrung/Google%20Drive/lab/java4/DuAn1/src/com/UI/QuanLy.java</file>
+            <file>file:/Users/trantrung/Google%20Drive/lab/java4/DuAn1/src/com/dao/MucTieuTietKiemDAO.java</file>
+            <file>file:/Users/trantrung/Google%20Drive/lab/java4/DuAn1/src/com/dao/ThongKe_ThuChi_DAO.java</file>
+            <file>file:/Users/trantrung/Google%20Drive/lab/java4/DuAn1/src/util/JDBC.java</file>
             <file>file:/Users/trantrung/Google%20Drive/lab/java4/DuAn1/src/com/UI/GiaoDich.java</file>
+            <file>file:/Users/trantrung/Google%20Drive/lab/java4/DuAn1/src/com/UI/QuanLy.java</file>
+            <file>file:/Users/trantrung/Google%20Drive/lab/java4/DuAn1/src/com/UI/ThongBaoMTK.java</file>
+            <file>file:/Users/trantrung/Google%20Drive/lab/java4/DuAn1/src/com/dao/NguoiDungDAO.java</file>
             <file>file:/Users/trantrung/Google%20Drive/lab/java4/DuAn1/src/com/UI/TietKiem.java</file>
->>>>>>> dabe126d91849ad633e59d8ed6243386303f8651
         </group>
     </open-files>
 </project-private>

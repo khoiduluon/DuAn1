@@ -17,10 +17,10 @@ import util.JDBC;
  */
 public class ThuChiDAO extends dadDAO<ThuChi, Integer>{
     String INSERT_SQL = "insert into QuanLyThuChi(Username,TenGD,SoTien,NgayGD,LoaiGD) values(?,?,?,?,?)";
-    String UPDATE_SQL = "update QuanLyThuChi set TenGD=?, SoTien=?, NgayGD=?, LoaiGD=? where IDChi = ?";
-    String DELETE_SQL = "delete from QuanLyThuChi where IDChi=?";
+    String UPDATE_SQL = "update QuanLyThuChi set TenGD=?, SoTien=?, NgayGD=?, LoaiGD=? where ID = ?";
+    String DELETE_SQL = "delete from QuanLyThuChi where ID=?";
     String SELECT_ALL_SQL = "select * from QuanLyThuChi";
-    String SELECT_BY_ID_SQL = "select * from QuanLyThre QuanLyThuChi where IDChi=?";
+    String SELECT_BY_ID_SQL = "select * from QuanLyThuChi where ID=?";
 
     @Override
     public void insert(ThuChi entity) {

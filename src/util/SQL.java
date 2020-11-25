@@ -106,17 +106,5 @@ begin
 	where nd.Username=@User
 end
 
-alter proc Tinh_SoDu @User nvarchar(50)
-as
-begin
-	declare @tongthu float
-	declare @tongchi float
-	declare @sodu float
-	set @tongthu=(Select SUM(SoTien) from QuanLyThuChi where LoaiGD='Thu')
-	set @tongchi=(Select SUM(SoTien) from QuanLyThuChi where LoaiGD='Chi')
-	set @sodu=(select @tongthu-@tongchi)
-	update NguoiDung set SoDu=@sodu where Username=@User
-	select SoDu from NguoiDung where Username=@User
-end
     */
 }

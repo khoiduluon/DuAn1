@@ -5,11 +5,12 @@
  */
 package com.UI;
 
-
+import com.dao.ThongKe_ThuChi_DAO;
 import com.dao.ThuChiDAO;
 import com.entity.ThuChi;
 import java.awt.CardLayout;
 import java.awt.event.KeyEvent;
+import java.util.List;
 import javax.swing.JRadioButton;
 import util.Auth;
 import util.JDBC;
@@ -239,19 +240,19 @@ public class GiaoDich extends javax.swing.JFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        if(checkError()==true){
+        if (checkError() == true) {
             insert();
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void backgroundKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_backgroundKeyPressed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_backgroundKeyPressed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_formKeyPressed
 
     private void cboChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboChiActionPerformed
@@ -260,8 +261,8 @@ public class GiaoDich extends javax.swing.JFrame {
 
     private void cboThuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cboThuKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            if(checkError()==true){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (checkError() == true) {
                 insert();
             }
         }
@@ -269,8 +270,8 @@ public class GiaoDich extends javax.swing.JFrame {
 
     private void cboChiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cboChiKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            if(checkError()==true){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (checkError() == true) {
                 insert();
             }
         }
@@ -278,8 +279,8 @@ public class GiaoDich extends javax.swing.JFrame {
 
     private void dcsNgayKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dcsNgayKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            if(checkError()==true){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (checkError() == true) {
                 insert();
             }
         }
@@ -287,8 +288,8 @@ public class GiaoDich extends javax.swing.JFrame {
 
     private void txtSoTienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSoTienKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            if(checkError()==true){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (checkError() == true) {
                 insert();
             }
         }
@@ -296,8 +297,8 @@ public class GiaoDich extends javax.swing.JFrame {
 
     private void rdoThuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rdoThuKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            if(checkError()==true){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (checkError() == true) {
                 insert();
             }
         }
@@ -305,8 +306,8 @@ public class GiaoDich extends javax.swing.JFrame {
 
     private void rdoChiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rdoChiKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            if(checkError()==true){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (checkError() == true) {
                 insert();
             }
         }
@@ -378,41 +379,42 @@ public class GiaoDich extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdoThu;
     private javax.swing.JTextField txtSoTien;
     // End of variables declaration//GEN-END:variables
-    
-    ThuChiDAO dao=new ThuChiDAO();
-    
+
+    ThuChiDAO dao = new ThuChiDAO();
+    ThongKe_ThuChi_DAO tkctDAO = new ThongKe_ThuChi_DAO();
+
     ThuChi getInfoGiaoDich() {
         ThuChi qltc = new ThuChi();
         qltc.setUsername(Auth.user.getUser());
         qltc.setSoTien(Double.valueOf(txtSoTien.getText()));
-        if(rdoThu.isSelected()){
+        if (rdoThu.isSelected()) {
             qltc.setLoaiGD(rdoThu.getText().trim());
             qltc.setTenGD(cboThu.getSelectedItem().toString());
-        }else{
+        } else {
             qltc.setLoaiGD(rdoChi.getText().trim());
             qltc.setTenGD(cboChi.getSelectedItem().toString());
         }
         qltc.setNgayGD(fmDate.toString(dcsNgay.getDate(), "yyyy-MM-dd"));
         return qltc;
     }
+
     public void clear() {
         txtSoTien.setText("");
         rdoThu.setSelected(true);
-        cboThu.setVisible(true);
 
     }
 
-    public void insert(){
-        ThuChi qltc=getInfoGiaoDich();
-            try {
-                dao.insert(qltc);
-                MsgBox.alert(this,"Thêm thành công!");
-                clear();
-            } catch (Exception e) {
-                MsgBox.alert(this,e.toString());
-            }
+    public void insert() {
+        ThuChi qltc = getInfoGiaoDich();
+        try {
+            dao.insert(qltc);
+            MsgBox.alert(this, "Thêm thành công!");
+            clear();
+        } catch (Exception e) {
+            MsgBox.alert(this, e.toString());
+        }
     }
-    
+
     boolean checkError() {
         if (txtSoTien.getText().matches(".*[a-zA-Z].*")) {
             MsgBox.alert(this, "Vui lòng điền số!");
@@ -426,4 +428,6 @@ public class GiaoDich extends javax.swing.JFrame {
         }
         return true;
     }
+
+
 }
