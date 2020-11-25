@@ -401,15 +401,17 @@ public class GiaoDich extends javax.swing.JFrame {
     public void clear() {
         txtSoTien.setText("");
         rdoThu.setSelected(true);
-
+        cboThu.setVisible(true);
     }
 
     public void insert() {
         ThuChi qltc = getInfoGiaoDich();
+        QuanLy ql=new QuanLy();
         try {
             dao.insert(qltc);
             MsgBox.alert(this, "Thêm thành công!");
             clear();
+            ql.fillTableChiThu();
         } catch (Exception e) {
             MsgBox.alert(this, e.toString());
         }
