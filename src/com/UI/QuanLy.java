@@ -89,6 +89,8 @@ public class QuanLy extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        deleteRow = new javax.swing.JMenuItem();
         pnlBg = new javax.swing.JPanel();
         pnlleft = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
@@ -111,11 +113,13 @@ public class QuanLy extends javax.swing.JFrame {
         cboThoiGianTK = new javax.swing.JComboBox<>();
         pnlButton = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        lblExit = new javax.swing.JLabel();
         btnThem = new javax.swing.JLabel();
         btnSua = new javax.swing.JLabel();
         btnXoa = new javax.swing.JLabel();
         btnTietKiem = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         pnlbottom = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDanhSach = new javax.swing.JTable();
@@ -131,6 +135,7 @@ public class QuanLy extends javax.swing.JFrame {
         lblNgayConLai = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         pnlPieChart = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         pnlTab3 = new javax.swing.JPanel();
         txtTimKiem = new javax.swing.JTextField();
         btnTimKiem = new javax.swing.JButton();
@@ -145,7 +150,10 @@ public class QuanLy extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblThuChi = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
+        lblExit = new javax.swing.JLabel();
+
+        deleteRow.setText("jMenuItem1");
+        jPopupMenu1.add(deleteRow);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -158,8 +166,8 @@ public class QuanLy extends javax.swing.JFrame {
         pnlleft.setPreferredSize(new java.awt.Dimension(150, 100));
         pnlleft.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblLogo.setText("Logo");
-        pnlleft.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/bank.png"))); // NOI18N
+        pnlleft.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
         pnlKeHoach.setBackground(new java.awt.Color(154, 211, 188));
         pnlKeHoach.setPreferredSize(new java.awt.Dimension(150, 40));
@@ -258,33 +266,15 @@ public class QuanLy extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(219, 246, 233));
 
-        lblExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/delete.png"))); // NOI18N
-        lblExit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblExitMouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblExitMouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblExitMouseEntered(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(112, Short.MAX_VALUE)
-                .addComponent(lblExit)
-                .addContainerGap())
+            .addGap(0, 150, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblExit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(0, 30, Short.MAX_VALUE)
         );
 
         pnlButton.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 7, -1, -1));
@@ -346,6 +336,15 @@ public class QuanLy extends javax.swing.JFrame {
         pnlButton.add(btnTietKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
 
         pnltop.add(pnlButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, 160, 190));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/tag.png"))); // NOI18N
+        pnltop.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/market-investment.png"))); // NOI18N
+        pnltop.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 70, -1, -1));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/calendar.png"))); // NOI18N
+        pnltop.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, -1, -1));
 
         pnlbottom.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -429,12 +428,16 @@ public class QuanLy extends javax.swing.JFrame {
         lblThoiGianCon.setFont(new java.awt.Font("Quicksand", 0, 16)); // NOI18N
         lblThoiGianCon.setText("Tiết kiệm đến ngày:");
 
+        lblNgayConLai.setFont(new java.awt.Font("Quicksand", 1, 18)); // NOI18N
         lblNgayConLai.setText("jLabel4");
 
         jLabel4.setText("Tiến độ:");
 
         pnlPieChart.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlPieChart.setLayout(new java.awt.BorderLayout());
+
+        jLabel2.setFont(new java.awt.Font("Quicksand", 0, 14)); // NOI18N
+        jLabel2.setText("Ngày còn lại:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -443,13 +446,17 @@ public class QuanLy extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNgayConLai)
                     .addComponent(lblTienDaTK)
                     .addComponent(txtTienDaTK, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblThoiGianCon)
-                    .addComponent(txtThoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(pgbTienDo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pgbTienDo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(lblNgayConLai))
+                        .addComponent(txtThoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(pnlPieChart, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
                 .addContainerGap())
@@ -470,8 +477,10 @@ public class QuanLy extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(txtThoiGian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(lblNgayConLai)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(lblNgayConLai))
+                .addContainerGap(122, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlPieChart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -605,6 +614,11 @@ public class QuanLy extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblThuChi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblThuChiMouseReleased(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblThuChi);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -667,20 +681,19 @@ public class QuanLy extends javax.swing.JFrame {
 
         getContentPane().add(pnlBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 30, -1, -1));
 
-        jPanel5.setBackground(new java.awt.Color(255, 102, 102));
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 0, 100, 30));
+        lblExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/delete.png"))); // NOI18N
+        lblExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblExitMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblExitMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblExitMouseEntered(evt);
+            }
+        });
+        getContentPane().add(lblExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, -1, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -697,9 +710,9 @@ public class QuanLy extends javax.swing.JFrame {
 
     private void pnlKeHoachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKeHoachMouseClicked
         cardLayout.show(pnlTabs, "card1");
-        thongKeMTK();
+        pieChartMTK();
         if (tblDanhSach.getRowCount() <= 0) {
-            new ThongBaoMTK(this, true).setVisible(true);
+            new HuongDanMTK(this, true).setVisible(true);
         }
     }//GEN-LAST:event_pnlKeHoachMouseClicked
 
@@ -729,7 +742,10 @@ public class QuanLy extends javax.swing.JFrame {
 
     private void pnlThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongKeMouseClicked
         cardLayout.show(pnlTabs, "card2");
-        thongKeGiaoDich();
+        barChartThuChi();
+        if (tblThuChi.getRowCount() <= 0) {
+            new HuongDanGiaoDich(this, true).setVisible(true);
+        }
     }//GEN-LAST:event_pnlThongKeMouseClicked
 
     private void btnThemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseEntered
@@ -799,7 +815,7 @@ public class QuanLy extends javax.swing.JFrame {
 
     private void cboMucTietKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboMucTietKiemActionPerformed
         if (cboMucTietKiem.getSelectedIndex() != -1) {
-            thongKe();
+            caCuLateDates();
         }
     }//GEN-LAST:event_cboMucTietKiemActionPerformed
 
@@ -814,7 +830,7 @@ public class QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
-        thongKeGiaoDich();
+        barChartThuChi();
     }//GEN-LAST:event_jPanel4MouseClicked
 
     private void lblThemGiaoDichMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThemGiaoDichMouseClicked
@@ -830,40 +846,44 @@ public class QuanLy extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_lblThemGiaoDichMouseExited
 
+    private void tblThuChiMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblThuChiMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblThuChiMouseReleased
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(QuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(QuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(QuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(QuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new QuanLy().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(QuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(QuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(QuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(QuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new QuanLy().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;
@@ -874,14 +894,19 @@ public class QuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel btnXoa;
     private javax.swing.JComboBox<String> cboMucTietKiem;
     private javax.swing.JComboBox<String> cboThoiGianTK;
+    private javax.swing.JMenuItem deleteRow;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -925,6 +950,7 @@ public class QuanLy extends javax.swing.JFrame {
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 
+    //Variables
     CardLayout cardLayout;
     MucTieuTietKiemDAO mtkDAO = new MucTieuTietKiemDAO();
     LichSuDAO lsDAO = new LichSuDAO();
@@ -939,11 +965,11 @@ public class QuanLy extends javax.swing.JFrame {
 //        pnlBg.setBackground(new Color(0, 0, 0, 0));
         cardLayout = (CardLayout) pnlTabs.getLayout();
         fillTableMucTietKiem();
-        fillComboBox();
+        fillComboBoxMTK();
         mouseHover();
         fillTableLichSu();
         fillTableChiThu();
- 
+
     }
 
     public void mouseHover() {
@@ -952,6 +978,30 @@ public class QuanLy extends javax.swing.JFrame {
 
     }
 
+    public void clear() {
+        txtTenMTK.setText("");
+        txtThoiGian.setText("");
+        txtTienDaTK.setText("");
+        txtGiaTri.setText("");
+        cboThoiGianTK.setSelectedIndex(0);
+    }
+
+    //Kiểm lỗi
+    boolean checkError() {
+        if (txtGiaTri.getText().matches(".*[a-zA-Z].*")) {
+            MsgBox.alert(this, "Khong dc dien ki tu vao o gia tri");
+            return false;
+        } else if (txtTenMTK.getText().equals("") || txtGiaTri.getText().equals("")) {
+            MsgBox.alert(this, "khong duoc de trong");
+            return false;
+        } else if (Double.valueOf(txtGiaTri.getText()) < 0) {
+            MsgBox.alert(this, "khong duoc nhap so am");
+            return false;
+        }
+        return true;
+    }
+
+    //filltable
     public void fillTableMucTietKiem() {
         DefaultTableModel model = (DefaultTableModel) tblDanhSach.getModel();
         model.setRowCount(0);
@@ -959,7 +1009,7 @@ public class QuanLy extends javax.swing.JFrame {
             List<MucTieu> list = mtkDAO.selectMTK(Auth.user.getUser());
             for (MucTieu mt : list) {
                 Object row[] = {
-                    mt.getIdMucTieu(), mt.getTenMucTieu(), mt.getGiaTri(), mt.getThoiHan() + " tháng", mt.getSoTienDaTK()
+                    mt.getIdMucTieu(), mt.getTenMucTieu(), String.format("%.0f", mt.getGiaTri())+" VND", mt.getThoiHan() + " tháng", String.format("%.0f", mt.getSoTienDaTK())+" VND"
                 };
                 model.addRow(row);
             }
@@ -996,12 +1046,39 @@ public class QuanLy extends javax.swing.JFrame {
         }
     }
 
+    void fillTableChiThu() {
+        DefaultTableModel model = (DefaultTableModel) tblThuChi.getModel();
+        model.setRowCount(0);
+        try {
+            List<Object[]> list = tkctDAO.LichSu_ThuChi(Auth.user.getUser());
+            for (Object[] ls : list) {
+                model.addRow(ls);
+            }
+            SoDu();
+            capNhat_SoDu();
+            tblThuChi.setModel(model);
+        } catch (Exception e) {
+            MsgBox.alert(this, "Loi truy van du lieu");
+            e.printStackTrace();
+        }
+    }
+
+    public void fillComboBoxMTK() {
+        DefaultComboBoxModel combobox = (DefaultComboBoxModel) cboMucTietKiem.getModel();
+        combobox.removeAllElements();
+        List<MucTieu> list = mtkDAO.selectMTK(Auth.user.getUser());
+        for (MucTieu mt : list) {
+            combobox.addElement(mt);
+        }
+    }
+
+    //Tuỳ chình Mục tiết kiệm
     public void addMtkToDaTaBase() {
         MucTieu mt = getInFo();
         try {
             mtkDAO.insert(mt);
             fillTableMucTietKiem();
-            fillComboBox();
+            fillComboBoxMTK();
         } catch (Exception e) {
             MsgBox.alert(this, "Loi roi ku");
         }
@@ -1027,20 +1104,12 @@ public class QuanLy extends javax.swing.JFrame {
                 mtkDAO.delete(row);
                 MsgBox.alert(this, "Xoa thanh cong");
                 fillTableMucTietKiem();
-                fillComboBox();
+                fillComboBoxMTK();
             } catch (Exception e) {
                 MsgBox.alert(this, "Loi roi ku");
                 e.printStackTrace();
             }
         }
-    }
-
-    public void clear() {
-        txtTenMTK.setText("");
-        txtThoiGian.setText("");
-        txtTienDaTK.setText("");
-        txtGiaTri.setText("");
-        cboThoiGianTK.setSelectedIndex(0);
     }
 
     MucTieu getInFo() {
@@ -1088,42 +1157,9 @@ public class QuanLy extends javax.swing.JFrame {
             cboThoiGianTK.setSelectedIndex(3);
         }
     }
-
-    boolean checkError() {
-        if (txtGiaTri.getText().matches(".*[a-zA-Z].*")) {
-            MsgBox.alert(this, "Khong dc dien ki tu vao o gia tri");
-            return false;
-        } else if (txtTenMTK.getText().equals("") || txtGiaTri.getText().equals("")) {
-            MsgBox.alert(this, "khong duoc de trong");
-            return false;
-        } else if (Double.valueOf(txtGiaTri.getText()) < 0) {
-            MsgBox.alert(this, "khong duoc nhap so am");
-            return false;
-        }
-        return true;
-    }
-
-    boolean noTif() {
-        List<MucTieu> list = mtkDAO.selectMTK(Auth.user.getUser());
-        for (MucTieu mt : list) {
-            if (mt.getGiaTri() >= mt.getSoTienDaTK()) {
-                MsgBox.alert(this, "Ban da tiet kiem du");
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void fillComboBox() {
-        DefaultComboBoxModel combobox = (DefaultComboBoxModel) cboMucTietKiem.getModel();
-        combobox.removeAllElements();
-        List<MucTieu> list = mtkDAO.selectMTK(Auth.user.getUser());
-        for (MucTieu mt : list) {
-            combobox.addElement(mt);
-        }
-    }
-
-    public void thongKe() {
+    
+    //Tính ngày
+    public void caCuLateDates() {
 
         MucTieu mt = (MucTieu) cboMucTietKiem.getSelectedItem();
         int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
@@ -1140,7 +1176,7 @@ public class QuanLy extends javax.swing.JFrame {
         txtThoiGian.setText(fmDate.toString(calendar.getTime(), "dd-MM-yyyy"));
         //textfied còn lại...
         pgbTienDo.setValue((int) ((int) (mt.getSoTienDaTK() * 100) / mt.getGiaTri()));
-        txtTienDaTK.setText(String.valueOf(mt.getSoTienDaTK()));
+        txtTienDaTK.setText(String.format("%.0f", mt.getSoTienDaTK())+" VND");
     }
 
     int getSumDays(int currentMonth, int currentYear, int month) {
@@ -1171,8 +1207,9 @@ public class QuanLy extends javax.swing.JFrame {
             return 30;
         }
     }
-
-    void thongKeMTK() {
+    
+    //Biểu đồ
+    void pieChartMTK() {
         DefaultPieDataset dataset = new DefaultPieDataset();
 
         try {
@@ -1193,8 +1230,8 @@ public class QuanLy extends javax.swing.JFrame {
         pnlPieChart.validate();
     }
 
-    void thongKeGiaoDich() {
-        JFreeChart chart = ChartFactory.createBarChart("Thống kê thu chi 2020", "Tháng", "Tiền VNĐ", nhomThuChi(), PlotOrientation.VERTICAL, true, true, false);
+    void barChartThuChi() {
+        JFreeChart chart = ChartFactory.createBarChart("Thống kê thu chi 2020", "Tháng", "Tiền VNĐ", getDataThuChi(), PlotOrientation.VERTICAL, true, true, false);
 //        ChartFrame chartFrame = new ChartFrame("yoyo", chart);
 //        chartFrame.setVisible(true);
 //        chartFrame.setSize(200, 300);
@@ -1217,12 +1254,11 @@ public class QuanLy extends javax.swing.JFrame {
         jPanel4.validate();
     }
 
-    CategoryDataset nhomThuChi() {
+    CategoryDataset getDataThuChi() {
         final String series1 = "Tổng Thu";
         final String series2 = "Tổng Chi";
         // create the dataset...
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-
         try {
             List<Object[]> list1 = tkctDAO.getThu(Auth.user.getUser());
             for (Object[] qlThu : list1) {
@@ -1231,7 +1267,6 @@ public class QuanLy extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         try {
             List<Object[]> list2 = tkctDAO.getChi(Auth.user.getUser());
             for (Object[] qlChi : list2) {
@@ -1243,19 +1278,49 @@ public class QuanLy extends javax.swing.JFrame {
         return dataset;
     }
 
-    void fillTableChiThu() {
-        DefaultTableModel model = (DefaultTableModel) tblThuChi.getModel();
-        model.setRowCount(0);
+   //Tính số dư
+    void capNhat_SoDu() {
+        NguoiDung nd = new NguoiDung();
+        nd.setSoDu(SoDu());
+        nd.setUser(Auth.user.getUser());
         try {
-            List<Object[]> list = tkctDAO.LichSu_ThuChi(Auth.user.getUser());
-            for (Object[] ls : list) {
-                model.addRow(ls);
-            }
-            tblThuChi.setModel(model);
+            ndDAO.update(nd);
         } catch (Exception e) {
-            MsgBox.alert(this, "Loi truy van du lieu");
             e.printStackTrace();
         }
     }
+
+    double SoDu() {
+        double chi = 0, thu = 0, Du = 0;
+        try {
+            List<Object[]> list1 = tkctDAO.getThu(Auth.user.getUser());
+            for (Object[] qlThu : list1) {
+                thu += Double.parseDouble(String.valueOf(qlThu[1]));
+            }
+            List<Object[]> list2 = tkctDAO.getChi(Auth.user.getUser());
+            for (Object[] qlChi : list2) {
+                chi += Double.parseDouble(String.valueOf(qlChi[1]));
+            }
+            Du = thu - chi;
+            lblSoDu.setText(String.valueOf(Du));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Du;
+    }
+
+    //Check tiết kiệm đủ hay chưa
+    //Check có đủ tiền để thêm vào mục tiết kiệm
+    //Delete Giao Dịch
     
+//        boolean noTif() {
+//        List<MucTieu> list = mtkDAO.selectMTK(Auth.user.getUser());
+//        for (MucTieu mt : list) {
+//            if (mt.getGiaTri() >= mt.getSoTienDaTK()) {
+//                MsgBox.alert(this, "Ban da tiet kiem du");
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 }
