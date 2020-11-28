@@ -699,7 +699,7 @@ public class QuanLy extends javax.swing.JFrame {
         cardLayout.show(pnlTabs, "card1");
         thongKeMTK();
         if (tblDanhSach.getRowCount() <= 0) {
-            new ThongBaoMTK(this, true).setVisible(true);
+            new HuongDanMTK(this, true).setVisible(true);
         }
     }//GEN-LAST:event_pnlKeHoachMouseClicked
 
@@ -730,6 +730,9 @@ public class QuanLy extends javax.swing.JFrame {
     private void pnlThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongKeMouseClicked
         cardLayout.show(pnlTabs, "card2");
         thongKeGiaoDich();
+        if (tblThuChi.getRowCount() <= 0) {
+            new HuongDanGiaoDich(this, true).setVisible(true);
+        }
     }//GEN-LAST:event_pnlThongKeMouseClicked
 
     private void btnThemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemMouseEntered
@@ -833,37 +836,37 @@ public class QuanLy extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(QuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(QuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(QuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(QuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new QuanLy().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(QuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(QuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(QuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(QuanLy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new QuanLy().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;
@@ -943,7 +946,7 @@ public class QuanLy extends javax.swing.JFrame {
         mouseHover();
         fillTableLichSu();
         fillTableChiThu();
- 
+
     }
 
     public void mouseHover() {
@@ -1222,7 +1225,6 @@ public class QuanLy extends javax.swing.JFrame {
         final String series2 = "Tổng Chi";
         // create the dataset...
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-
         try {
             List<Object[]> list1 = tkctDAO.getThu(Auth.user.getUser());
             for (Object[] qlThu : list1) {
@@ -1231,7 +1233,6 @@ public class QuanLy extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         try {
             List<Object[]> list2 = tkctDAO.getChi(Auth.user.getUser());
             for (Object[] qlChi : list2) {
@@ -1251,11 +1252,43 @@ public class QuanLy extends javax.swing.JFrame {
             for (Object[] ls : list) {
                 model.addRow(ls);
             }
+            SoDu();
+            capNhat_SoDu();
             tblThuChi.setModel(model);
         } catch (Exception e) {
             MsgBox.alert(this, "Loi truy van du lieu");
             e.printStackTrace();
         }
     }
-    
+
+    void capNhat_SoDu() {
+        NguoiDung nd = new NguoiDung();
+        nd.setSoDu(SoDu());
+        nd.setUser(Auth.user.getUser());
+        try {
+            ndDAO.update(nd);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    double SoDu() {
+        double chi = 0, thu = 0, Du = 0;
+        try {
+            List<Object[]> list1 = tkctDAO.getThu(Auth.user.getUser());
+            for (Object[] qlThu : list1) {
+                thu += Double.parseDouble(String.valueOf(qlThu[1]));
+            }
+            List<Object[]> list2 = tkctDAO.getChi(Auth.user.getUser());
+            for (Object[] qlChi : list2) {
+                chi += Double.parseDouble(String.valueOf(qlChi[1]));
+            }
+            Du = thu - chi;
+            lblSoDu.setText(String.valueOf(Du));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Du;
+    }
+
 }
