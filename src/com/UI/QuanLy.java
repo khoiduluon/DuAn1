@@ -22,6 +22,8 @@ import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,7 +39,11 @@ import java.util.logging.Logger;
 import javafx.scene.control.ProgressBar;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.JProgressBar;
+import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
@@ -78,6 +84,7 @@ public class QuanLy extends javax.swing.JFrame {
         init();
         tblDanhSach.getTableHeader().setOpaque(false);
         tblDanhSach.getTableHeader().setBackground(new Color(249, 247, 207));
+
     }
 
     /**
@@ -618,6 +625,9 @@ public class QuanLy extends javax.swing.JFrame {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 tblThuChiMouseReleased(evt);
             }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblThuChiMouseClicked(evt);
+            }
         });
         jScrollPane3.setViewportView(tblThuChi);
 
@@ -847,8 +857,23 @@ public class QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_lblThemGiaoDichMouseExited
 
     private void tblThuChiMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblThuChiMouseReleased
-        // TODO add your handling code here:
+        final JPopupMenu popupMenu = new JPopupMenu();
+        JMenuItem deleteItem = new JMenuItem("Delete");
+        deleteItem.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("vcl");
+            }
+        });
+        popupMenu.add(deleteItem);
+        tblThuChi.setComponentPopupMenu(popupMenu);
+
     }//GEN-LAST:event_tblThuChiMouseReleased
+
+    private void tblThuChiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblThuChiMouseClicked
+
+    }//GEN-LAST:event_tblThuChiMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1009,7 +1034,7 @@ public class QuanLy extends javax.swing.JFrame {
             List<MucTieu> list = mtkDAO.selectMTK(Auth.user.getUser());
             for (MucTieu mt : list) {
                 Object row[] = {
-                    mt.getIdMucTieu(), mt.getTenMucTieu(), String.format("%.0f", mt.getGiaTri())+" VND", mt.getThoiHan() + " tháng", String.format("%.0f", mt.getSoTienDaTK())+" VND"
+                    mt.getIdMucTieu(), mt.getTenMucTieu(), String.format("%.0f", mt.getGiaTri()) + " VND", mt.getThoiHan() + " tháng", String.format("%.0f", mt.getSoTienDaTK()) + " VND"
                 };
                 model.addRow(row);
             }
@@ -1157,7 +1182,7 @@ public class QuanLy extends javax.swing.JFrame {
             cboThoiGianTK.setSelectedIndex(3);
         }
     }
-    
+
     //Tính ngày
     public void caCuLateDates() {
 
@@ -1176,7 +1201,7 @@ public class QuanLy extends javax.swing.JFrame {
         txtThoiGian.setText(fmDate.toString(calendar.getTime(), "dd-MM-yyyy"));
         //textfied còn lại...
         pgbTienDo.setValue((int) ((int) (mt.getSoTienDaTK() * 100) / mt.getGiaTri()));
-        txtTienDaTK.setText(String.format("%.0f", mt.getSoTienDaTK())+" VND");
+        txtTienDaTK.setText(String.format("%.0f", mt.getSoTienDaTK()) + " VND");
     }
 
     int getSumDays(int currentMonth, int currentYear, int month) {
@@ -1207,7 +1232,7 @@ public class QuanLy extends javax.swing.JFrame {
             return 30;
         }
     }
-    
+
     //Biểu đồ
     void pieChartMTK() {
         DefaultPieDataset dataset = new DefaultPieDataset();
@@ -1278,7 +1303,7 @@ public class QuanLy extends javax.swing.JFrame {
         return dataset;
     }
 
-   //Tính số dư
+    //Tính số dư
     void capNhat_SoDu() {
         NguoiDung nd = new NguoiDung();
         nd.setSoDu(SoDu());
@@ -1309,18 +1334,7 @@ public class QuanLy extends javax.swing.JFrame {
         return Du;
     }
 
-    //Check tiết kiệm đủ hay chưa
+    //Check tiết kiệm đủ hay chưa--XONG
     //Check có đủ tiền để thêm vào mục tiết kiệm
     //Delete Giao Dịch
-    
-//        boolean noTif() {
-//        List<MucTieu> list = mtkDAO.selectMTK(Auth.user.getUser());
-//        for (MucTieu mt : list) {
-//            if (mt.getGiaTri() >= mt.getSoTienDaTK()) {
-//                MsgBox.alert(this, "Ban da tiet kiem du");
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
 }

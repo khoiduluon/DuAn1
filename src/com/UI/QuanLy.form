@@ -978,6 +978,7 @@
                               </Properties>
                               <Events>
                                 <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblThuChiMouseReleased"/>
+                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblThuChiMouseClicked"/>
                               </Events>
                             </Component>
                           </SubComponents>
