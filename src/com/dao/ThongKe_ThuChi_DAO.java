@@ -50,7 +50,7 @@ public class ThongKe_ThuChi_DAO {
 
     public List<Object[]> LichSu_ThuChi(String User) {
         String sql = "{CALL LichSu_ThuChi(?)}";
-        String[] cols = {"TenGD", "NgayGD", "SoTien", "LoaiGD"};
+        String[] cols = {"ID","TenGD", "NgayGD", "SoTien", "LoaiGD"};
         return this.getListOfArray(sql, cols, User);
     }
     public List<Object[]> Tinh_SoDu(String User) {

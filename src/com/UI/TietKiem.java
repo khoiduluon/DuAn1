@@ -6,7 +6,9 @@
 package com.UI;
 
 import com.dao.MucTieuTietKiemDAO;
+import com.dao.NguoiDungDAO;
 import com.entity.MucTieu;
+import com.entity.NguoiDung;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.List;
@@ -107,11 +109,11 @@ public class TietKiem extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblExitMouseClicked(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblExitMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblExitMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblExitMouseExited(evt);
             }
         });
         jPanel1.add(lblExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, 30));
@@ -159,8 +161,9 @@ public class TietKiem extends javax.swing.JFrame {
     }//GEN-LAST:event_cboMTKActionPerformed
 
     private void btnTietKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTietKiemActionPerformed
-        if(checkError()){
+        if (checkError()) {
             insert();
+            noTif();
         }
     }//GEN-LAST:event_btnTietKiemActionPerformed
 
@@ -214,6 +217,7 @@ public class TietKiem extends javax.swing.JFrame {
     private javax.swing.JTextField txtThoiGian;
     // End of variables declaration//GEN-END:variables
     MucTieuTietKiemDAO mtkdao = new MucTieuTietKiemDAO();
+    NguoiDungDAO ndDAO = new NguoiDungDAO();
 
     public void fillComboBox() {
         DefaultComboBoxModel combobox = (DefaultComboBoxModel) cboMTK.getModel();
@@ -237,29 +241,47 @@ public class TietKiem extends javax.swing.JFrame {
         muctieu.setSoTienDaTK(newPrice);
         return muctieu;
     }
-    
-        void insert() {
+
+    void insert() {
         MucTieu mt = getInFo();
-         QuanLy ql = new QuanLy();
+        QuanLy ql = new QuanLy();
         try {
             mtkdao.update(mt);
-            MsgBox.alert(this, "Tiet kiem");       
+            MsgBox.alert(this, "Tiet kiem");
             ql.fillTableChiThu();
-            new QuanLy().setVisible(false); new QuanLy().setVisible(true);
+            new QuanLy().setVisible(false);
+            new QuanLy().setVisible(true);
         } catch (Exception e) {
             MsgBox.alert(this, "Co loi xay ra");
             System.out.println(e.getMessage());
         }
     }
 
-        boolean checkError(){
-            if(txtSoTienTietKiem.getText().equals("")){
-                MsgBox.alert(this, "So tien can tiet kiem dang bo trong");
-                return false;
-            } else if(Double.valueOf(txtSoTienTietKiem.getText())<0){
-                MsgBox.alert(this, "Khong the nhap so am");
-                return false;
-            }
-            return true;
+    boolean checkError() {
+        NguoiDung list=ndDAO.selectByid(Auth.user.getUser());
+        double soDu=list.getSoDu();
+        double soTienTK=Double.parseDouble(txtSoTienTietKiem.getText());
+        if (txtSoTienTietKiem.getText().equals("")) {
+            MsgBox.alert(this, "So tien can tiet kiem dang bo trong");
+            return false;
+        } else if (Double.valueOf(txtSoTienTietKiem.getText()) < 0) {
+            MsgBox.alert(this, "Khong the nhap so am");
+            return false;
+        }else if(soDu<soTienTK){
+            MsgBox.alert(this, "Không đủ tiền để tiết kiệm!");
+            return false;
         }
+        return true;
+    }
+
+    boolean noTif() {
+        List<MucTieu> list = mtkdao.selectMTK(Auth.user.getUser());
+        for (MucTieu mt : list) {
+            if (mt.getGiaTri() >= mt.getSoTienDaTK()) {
+                MsgBox.alert(this, "Ban da tiet kiem du");
+                return true;
+            }
+        }
+        return false;
+    }
 }
