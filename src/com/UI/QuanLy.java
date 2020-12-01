@@ -1335,6 +1335,8 @@ public class QuanLy extends javax.swing.JFrame {
     }
 
     //Check tiết kiệm đủ hay chưa--XONG
-    //Check có đủ tiền để thêm vào mục tiết kiệm
+    
+    //Check có đủ tiền để tiết kiệm hay k
+    
     //Delete Giao Dịch
 }
