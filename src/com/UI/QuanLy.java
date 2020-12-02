@@ -1334,9 +1334,19 @@ public class QuanLy extends javax.swing.JFrame {
         return Du;
     }
 
-    //Check tiết kiệm đủ hay chưa--XONG
+    void XoaGiaoDich(){
+        String ID=Integer.toString((int) tblThuChi.getValueAt(tblThuChi.getSelectedRow(),0));
+        int id=Integer.parseInt(ID);
+        try {
+            tcDAO.delete(id);
+            MsgBox.alert(this, "Xoá thành công!");
+            fillTableChiThu();
+            capNhat_SoDu();
+        } catch (Exception e) {
+            e.printStackTrace();
+            MsgBox.alert(this, "Xoá thát bại!");
+        }
+    }
     
-    //Check có đủ tiền để tiết kiệm hay k
     
-    //Delete Giao Dịch
 }

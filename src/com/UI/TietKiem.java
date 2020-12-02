@@ -6,7 +6,9 @@
 package com.UI;
 
 import com.dao.MucTieuTietKiemDAO;
+import com.dao.NguoiDungDAO;
 import com.entity.MucTieu;
+import com.entity.NguoiDung;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.List;
@@ -215,6 +217,7 @@ public class TietKiem extends javax.swing.JFrame {
     private javax.swing.JTextField txtThoiGian;
     // End of variables declaration//GEN-END:variables
     MucTieuTietKiemDAO mtkdao = new MucTieuTietKiemDAO();
+    NguoiDungDAO ndDAO=new NguoiDungDAO();
 
     public void fillComboBox() {
         DefaultComboBoxModel combobox = (DefaultComboBoxModel) cboMTK.getModel();
@@ -274,5 +277,12 @@ public class TietKiem extends javax.swing.JFrame {
             }
         }
         return false;
+    }
+    void SoDu(){
+        double soDu=0;
+        NguoiDung list= ndDAO.selectByid(Auth.user.getUser());
+        double tien=(double) list.getSoDu();
+        double sotientk=Double.parseDouble(txtSoTienTietKiem.getText());
+        soDu=tien-sotientk;
     }
 }
