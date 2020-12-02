@@ -84,6 +84,8 @@ public class QuanLy extends javax.swing.JFrame {
         init();
         tblDanhSach.getTableHeader().setOpaque(false);
         tblDanhSach.getTableHeader().setBackground(new Color(249, 247, 207));
+        NguoiDung nd = ndDAO.selectByid(Auth.user.getUser());
+        lblSoDu.setText(String.valueOf(nd.getSoDu()));
 
     }
 
@@ -1049,7 +1051,7 @@ public class QuanLy extends javax.swing.JFrame {
         model.setRowCount(0);
         if (txtTimKiem.getText().equals("")) {
             try {
-                List<Object[]> list = lsDAO.getLichSu(Auth.user.getUser());
+                List<Object[]> list = tkctDAO.getLichSu(Auth.user.getUser());
                 for (Object[] ls : list) {
                     model.addRow(ls);
                 }
@@ -1060,7 +1062,7 @@ public class QuanLy extends javax.swing.JFrame {
             }
         } else {
             try {
-                List<Object[]> list = lsDAO.getLichSu1(Auth.user.getUser(), txtTimKiem.getText().trim());
+                List<Object[]> list = tkctDAO.getLichSu1(Auth.user.getUser(), txtTimKiem.getText().trim());
                 for (Object[] ls : list) {
                     model.addRow(ls);
                 }
@@ -1079,8 +1081,8 @@ public class QuanLy extends javax.swing.JFrame {
             for (Object[] ls : list) {
                 model.addRow(ls);
             }
-            SoDu();
-            capNhat_SoDu();
+//            SoDu();
+//            capNhat_SoDu();
             tblThuChi.setModel(model);
         } catch (Exception e) {
             MsgBox.alert(this, "Loi truy van du lieu");
@@ -1304,49 +1306,39 @@ public class QuanLy extends javax.swing.JFrame {
     }
 
     //Tính số dư
-    void capNhat_SoDu() {
-        NguoiDung nd = new NguoiDung();
-        nd.setSoDu(SoDu());
-        nd.setUser(Auth.user.getUser());
-        try {
-            ndDAO.update(nd);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    void capNhat_SoDu() {
+//        NguoiDung nd = new NguoiDung();
+//        nd.setSoDu(SoDu());
+//        nd.setUser(Auth.user.getUser());
+//        try {
+//            ndDAO.update(nd);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//    
+//    double SoDu() {
+//        double chi = 0, thu = 0, Du = 0;
+//        try {
+//            List<Object[]> list1 = tkctDAO.getThu(Auth.user.getUser());
+//            for (Object[] qlThu : list1) {
+//                thu += Double.parseDouble(String.valueOf(qlThu[1]));
+//            }
+//            List<Object[]> list2 = tkctDAO.getChi(Auth.user.getUser());
+//            for (Object[] qlChi : list2) {
+//                chi += Double.parseDouble(String.valueOf(qlChi[1]));
+//            }
+//            Du = thu - chi;
+//            lblSoDu.setText(String.valueOf(Du));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return Du;
+//    }
 
-    double SoDu() {
-        double chi = 0, thu = 0, Du = 0;
-        try {
-            List<Object[]> list1 = tkctDAO.getThu(Auth.user.getUser());
-            for (Object[] qlThu : list1) {
-                thu += Double.parseDouble(String.valueOf(qlThu[1]));
-            }
-            List<Object[]> list2 = tkctDAO.getChi(Auth.user.getUser());
-            for (Object[] qlChi : list2) {
-                chi += Double.parseDouble(String.valueOf(qlChi[1]));
-            }
-            Du = thu - chi;
-            lblSoDu.setText(String.valueOf(Du));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return Du;
-    }
-
-    void XoaGiaoDich(){
-        String ID=Integer.toString((int) tblThuChi.getValueAt(tblThuChi.getSelectedRow(),0));
-        int id=Integer.parseInt(ID);
-        try {
-            tcDAO.delete(id);
-            MsgBox.alert(this, "Xoá thành công!");
-            fillTableChiThu();
-            capNhat_SoDu();
-        } catch (Exception e) {
-            e.printStackTrace();
-            MsgBox.alert(this, "Xoá thát bại!");
-        }
-    }
+    //Check tiết kiệm đủ hay chưa--XONG
     
+    //Check có đủ tiền để tiết kiệm hay k
     
+    //Delete Giao Dịch
 }

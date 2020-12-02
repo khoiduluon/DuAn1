@@ -163,6 +163,7 @@ public class TietKiem extends javax.swing.JFrame {
     private void btnTietKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTietKiemActionPerformed
         if (checkError()) {
             insert();
+            updateND();
             noTif();
         }
     }//GEN-LAST:event_btnTietKiemActionPerformed
@@ -217,7 +218,7 @@ public class TietKiem extends javax.swing.JFrame {
     private javax.swing.JTextField txtThoiGian;
     // End of variables declaration//GEN-END:variables
     MucTieuTietKiemDAO mtkdao = new MucTieuTietKiemDAO();
-    NguoiDungDAO ndDAO=new NguoiDungDAO();
+    NguoiDungDAO nddao = new NguoiDungDAO();
 
     public void fillComboBox() {
         DefaultComboBoxModel combobox = (DefaultComboBoxModel) cboMTK.getModel();
@@ -240,6 +241,23 @@ public class TietKiem extends javax.swing.JFrame {
         newPrice += Double.valueOf(txtSoTienTietKiem.getText());
         muctieu.setSoTienDaTK(newPrice);
         return muctieu;
+    }
+
+    NguoiDung updateSoDu() {
+        NguoiDung nd = nddao.selectByid(Auth.user.getUser());
+        double soDu = nd.getSoDu();
+        soDu -= Double.valueOf(txtSoTienTietKiem.getText());
+        nd.setSoDu(soDu);
+        return nd;
+    }
+
+    void updateND() {
+        NguoiDung nd = updateSoDu();
+        try {
+            nddao.update(nd);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     void insert() {
@@ -277,12 +295,5 @@ public class TietKiem extends javax.swing.JFrame {
             }
         }
         return false;
-    }
-    void SoDu(){
-        double soDu=0;
-        NguoiDung list= ndDAO.selectByid(Auth.user.getUser());
-        double tien=(double) list.getSoDu();
-        double sotientk=Double.parseDouble(txtSoTienTietKiem.getText());
-        soDu=tien-sotientk;
     }
 }

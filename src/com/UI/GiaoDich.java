@@ -5,8 +5,10 @@
  */
 package com.UI;
 
+import com.dao.NguoiDungDAO;
 import com.dao.ThongKe_ThuChi_DAO;
 import com.dao.ThuChiDAO;
+import com.entity.NguoiDung;
 import com.entity.ThuChi;
 import java.awt.CardLayout;
 import java.awt.event.KeyEvent;
@@ -382,6 +384,7 @@ public class GiaoDich extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     ThuChiDAO dao = new ThuChiDAO();
+    NguoiDungDAO nddao = new NguoiDungDAO();
     ThongKe_ThuChi_DAO tkctDAO = new ThongKe_ThuChi_DAO();
 
     ThuChi getInfoGiaoDich() {
@@ -409,6 +412,7 @@ public class GiaoDich extends javax.swing.JFrame {
         QuanLy ql = new QuanLy();
         try {
             dao.insert(qltc);
+            capNhat_SoDu();
             MsgBox.alert(this, "Thêm thành công!");
             ql.fillTableChiThu();
             new QuanLy().setVisible(false);
@@ -417,6 +421,27 @@ public class GiaoDich extends javax.swing.JFrame {
         } catch (Exception e) {
             MsgBox.alert(this, e.toString());
         }
+    }
+    
+        void capNhat_SoDu() {
+        NguoiDung nd = getSoDu();
+        try {
+            nddao.update(nd);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    NguoiDung getSoDu(){
+        NguoiDung nd = nddao.selectByid(Auth.user.getUser());
+        double soDu = nd.getSoDu();
+        if(rdoThu.isSelected()){
+            soDu += Double.valueOf(txtSoTien.getText());
+        } else {
+            soDu -= Double.valueOf(txtSoTien.getText());
+        }
+        nd.setSoDu(soDu);
+        return nd;
     }
 
     boolean checkError() {
