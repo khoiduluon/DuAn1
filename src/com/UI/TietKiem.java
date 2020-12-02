@@ -6,7 +6,9 @@
 package com.UI;
 
 import com.dao.MucTieuTietKiemDAO;
+import com.dao.NguoiDungDAO;
 import com.entity.MucTieu;
+import com.entity.NguoiDung;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.List;
@@ -159,8 +161,10 @@ public class TietKiem extends javax.swing.JFrame {
     }//GEN-LAST:event_cboMTKActionPerformed
 
     private void btnTietKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTietKiemActionPerformed
-        if(checkError()){
+        if (checkError()) {
             insert();
+            updateND();
+            noTif();
         }
     }//GEN-LAST:event_btnTietKiemActionPerformed
 
@@ -214,6 +218,7 @@ public class TietKiem extends javax.swing.JFrame {
     private javax.swing.JTextField txtThoiGian;
     // End of variables declaration//GEN-END:variables
     MucTieuTietKiemDAO mtkdao = new MucTieuTietKiemDAO();
+    NguoiDungDAO nddao = new NguoiDungDAO();
 
     public void fillComboBox() {
         DefaultComboBoxModel combobox = (DefaultComboBoxModel) cboMTK.getModel();
@@ -237,29 +242,58 @@ public class TietKiem extends javax.swing.JFrame {
         muctieu.setSoTienDaTK(newPrice);
         return muctieu;
     }
-    
-        void insert() {
+
+    NguoiDung updateSoDu() {
+        NguoiDung nd = nddao.selectByid(Auth.user.getUser());
+        double soDu = nd.getSoDu();
+        soDu -= Double.valueOf(txtSoTienTietKiem.getText());
+        nd.setSoDu(soDu);
+        return nd;
+    }
+
+    void updateND() {
+        NguoiDung nd = updateSoDu();
+        try {
+            nddao.update(nd);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    void insert() {
         MucTieu mt = getInFo();
-         QuanLy ql = new QuanLy();
+        QuanLy ql = new QuanLy();
         try {
             mtkdao.update(mt);
-            MsgBox.alert(this, "Tiet kiem");       
+            MsgBox.alert(this, "Tiet kiem");
             ql.fillTableChiThu();
-            new QuanLy().setVisible(false); new QuanLy().setVisible(true);
+            new QuanLy().setVisible(false);
+            new QuanLy().setVisible(true);
         } catch (Exception e) {
             MsgBox.alert(this, "Co loi xay ra");
             System.out.println(e.getMessage());
         }
     }
 
-        boolean checkError(){
-            if(txtSoTienTietKiem.getText().equals("")){
-                MsgBox.alert(this, "So tien can tiet kiem dang bo trong");
-                return false;
-            } else if(Double.valueOf(txtSoTienTietKiem.getText())<0){
-                MsgBox.alert(this, "Khong the nhap so am");
-                return false;
-            }
-            return true;
+    boolean checkError() {
+        if (txtSoTienTietKiem.getText().equals("")) {
+            MsgBox.alert(this, "So tien can tiet kiem dang bo trong");
+            return false;
+        } else if (Double.valueOf(txtSoTienTietKiem.getText()) < 0) {
+            MsgBox.alert(this, "Khong the nhap so am");
+            return false;
         }
+        return true;
+    }
+
+    boolean noTif() {
+        List<MucTieu> list = mtkdao.selectMTK(Auth.user.getUser());
+        for (MucTieu mt : list) {
+            if (mt.getGiaTri() >= mt.getSoTienDaTK()) {
+                MsgBox.alert(this, "Ban da tiet kiem du");
+                return true;
+            }
+        }
+        return false;
+    }
 }
