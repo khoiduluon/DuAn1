@@ -10,7 +10,6 @@ import com.dao.NguoiDungDAO;
 import com.entity.MucTieu;
 import com.entity.NguoiDung;
 import java.awt.Color;
-import java.sql.SQLException;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import util.Auth;
@@ -163,8 +162,8 @@ public class TietKiem extends javax.swing.JFrame {
     private void btnTietKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTietKiemActionPerformed
         if (checkError()) {
             insert();
-            updateND();
-            noTif();
+            //updateND();
+            //  updateTienDu();
         }
     }//GEN-LAST:event_btnTietKiemActionPerformed
 
@@ -237,35 +236,67 @@ public class TietKiem extends javax.swing.JFrame {
 
     MucTieu getInFo() {
         MucTieu muctieu = (MucTieu) cboMTK.getSelectedItem();
+        NguoiDung nd = nddao.selectByid(Auth.user.getUser());
+        double soDu = nd.getSoDu();
         double newPrice = muctieu.getSoTienDaTK();
-        newPrice += Double.valueOf(txtSoTienTietKiem.getText());
-        muctieu.setSoTienDaTK(newPrice);
+        double temp = 0;
+        if (soDu < 0) {
+            MsgBox.alert(this, "Bạn đang âm tiền");
+        } else if (soDu < Double.valueOf(txtSoTienTietKiem.getText())) {
+            MsgBox.alert(this, "Số dư không đủ để tiết kiệm");
+        } else if (soDu != 0) {
+            // trừ tiền tiết kiệm vào số dư
+            soDu -= Math.round(Double.valueOf(txtSoTienTietKiem.getText()));
+            nd.setSoDu(soDu);
+            nddao.update(nd);
+            // cộng dồn số tiền đã tiết kiệm được
+            newPrice += Math.round(Double.valueOf(txtSoTienTietKiem.getText()));
+            muctieu.setSoTienDaTK(newPrice);
+            MsgBox.alert(this, "Tiết kiệm thành công");
+            //cộng số tiền dư khi tiết kiệm đủ vào số dư người dùng
+            if (muctieu.getSoTienDaTK() >= muctieu.getGiaTri()) {
+                temp = muctieu.getSoTienDaTK() - muctieu.getGiaTri();
+                double tienThua = muctieu.getSoTienDaTK() - temp;
+                soDu += temp;
+                nd.setSoDu(soDu);
+                nddao.update(nd);
+                muctieu.setSoTienDaTK(tienThua);
+                mtkdao.update(muctieu);
+                MsgBox.alert(this, "Bạn đã tiết kiệm đủ, số tiền dư sẽ được chuyển vào số dư tài khoản của bạn,");
+            }
+        }
         return muctieu;
     }
 
-    NguoiDung updateSoDu() {
-        NguoiDung nd = nddao.selectByid(Auth.user.getUser());
-        double soDu = nd.getSoDu();
-        soDu -= Double.valueOf(txtSoTienTietKiem.getText());
-        nd.setSoDu(soDu);
-        return nd;
-    }
-
-    void updateND() {
-        NguoiDung nd = updateSoDu();
-        try {
-            nddao.update(nd);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
+//    void updateTienDu() {
+//        NguoiDung nd = nddao.selectByid(Auth.user.getUser());
+//        MucTieu mt = (MucTieu) cboMTK.getSelectedItem();
+//        List<MucTieu> list = mtkdao.selectMTK(mt.getIdMucTieu());
+//        for (MucTieu mt : list) {
+//            if (mt.getSoTienDaTK() >= mt.getGiaTri()) {
+//                System.out.println(mt.getSoTienDaTK() + " " + mt.getGiaTri());
+//                double temp = mt.getSoTienDaTK() - mt.getGiaTri();
+//                double tienDU = nd.getSoDu();
+//                tienDU += temp;
+//                nd.setSoDu(tienDU);
+//                nddao.update(nd);
+//                MsgBox.alert(this, "Bạn đã tiết kiệm đủ");
+//            }
+//        }
+//    }
+//    void updateND() {
+//        NguoiDung nd = updateSoDu();
+//        try {
+//            nddao.update(nd);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
     void insert() {
         MucTieu mt = getInFo();
         QuanLy ql = new QuanLy();
         try {
             mtkdao.update(mt);
-            MsgBox.alert(this, "Tiet kiem");
             ql.fillTableChiThu();
             new QuanLy().setVisible(false);
             new QuanLy().setVisible(true);
@@ -276,24 +307,30 @@ public class TietKiem extends javax.swing.JFrame {
     }
 
     boolean checkError() {
-        if (txtSoTienTietKiem.getText().equals("")) {
-            MsgBox.alert(this, "So tien can tiet kiem dang bo trong");
+        if (txtSoTienTietKiem.getText().matches(".*[a-zA-Z].*")) {
+            MsgBox.alert(this, "Vui lòng điền số!");
+            return false;
+        } else if (txtSoTienTietKiem.getText().equals("")) {
+            MsgBox.alert(this, "Số tiền không được để trống!");
             return false;
         } else if (Double.valueOf(txtSoTienTietKiem.getText()) < 0) {
-            MsgBox.alert(this, "Khong the nhap so am");
+            MsgBox.alert(this, "Không nhập số âm!");
             return false;
         }
         return true;
     }
 
-    boolean noTif() {
+    //dư tiền tk
+    void noTif() {
         List<MucTieu> list = mtkdao.selectMTK(Auth.user.getUser());
         for (MucTieu mt : list) {
-            if (mt.getGiaTri() >= mt.getSoTienDaTK()) {
-                MsgBox.alert(this, "Ban da tiet kiem du");
-                return true;
+            //các trường hợp
+            //số dư âm,( tiết kiệm đủ, tiết kiệm dư )
+            if (mt.getSoTienDaTK() >= mt.getGiaTri()) {
+                //add tiền dư vào số dư người dùng
+                double temp = mt.getSoTienDaTK() - mt.getGiaTri();
+                MsgBox.alert(this, "Bạn đã tiết kiệm đủ");
             }
         }
-        return false;
     }
 }

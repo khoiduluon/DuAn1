@@ -606,17 +606,17 @@ public class QuanLy extends javax.swing.JFrame {
         tblThuChi.setFont(new java.awt.Font("Quicksand", 0, 12)); // NOI18N
         tblThuChi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Tên giao dịch", "Ngày", "Số tiền", "Loại giao dịch"
+                "STT", "Tên giao dịch", "Ngày", "Số tiền", "Loại giao dịch"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1104,6 +1104,7 @@ public class QuanLy extends javax.swing.JFrame {
         MucTieu mt = getInFo();
         try {
             mtkDAO.insert(mt);
+            clear();
             fillTableMucTietKiem();
             fillComboBoxMTK();
         } catch (Exception e) {
@@ -1156,7 +1157,7 @@ public class QuanLy extends javax.swing.JFrame {
             String arr = (String) cboThoiGianTK.getSelectedItem();
             String ar[] = arr.split(" ");
             mt.setTenMucTieu(txtTenMTK.getText());
-            mt.setGiaTri(Double.parseDouble(txtGiaTri.getText()));
+            mt.setGiaTri(Double.valueOf(txtGiaTri.getText()));
             mt.setThoiHan(Integer.valueOf(ar[0]));
             Double value = (double) tblDanhSach.getValueAt(tblDanhSach.getSelectedRow(), 4);
             mt.setSoTienDaTK(value);
@@ -1164,6 +1165,7 @@ public class QuanLy extends javax.swing.JFrame {
             mt.setIdMucTieu(id);
         } catch (Exception e) {
             MsgBox.alert(this, "Cap nhat loi, vui long cap nhat lai");
+            e.printStackTrace();
         }
         return mt;
     }
