@@ -18,7 +18,10 @@ public class HuongDanGiaoDich extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+<<<<<<< HEAD
         
+=======
+>>>>>>> 08294b6c57b1997650b9dbe98aac31a19b24a8d3
     }
 
     /**

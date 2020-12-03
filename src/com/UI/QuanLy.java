@@ -1051,7 +1051,7 @@ public class QuanLy extends javax.swing.JFrame {
         model.setRowCount(0);
         if (txtTimKiem.getText().equals("")) {
             try {
-                List<Object[]> list = lsDAO.getLichSu(Auth.user.getUser());
+                List<Object[]> list = tkctDAO.getLichSu(Auth.user.getUser());
                 for (Object[] ls : list) {
                     model.addRow(ls);
                 }
@@ -1062,7 +1062,7 @@ public class QuanLy extends javax.swing.JFrame {
             }
         } else {
             try {
-                List<Object[]> list = lsDAO.getLichSu1(Auth.user.getUser(), txtTimKiem.getText().trim());
+                List<Object[]> list = tkctDAO.getLichSu1(Auth.user.getUser(), txtTimKiem.getText().trim());
                 for (Object[] ls : list) {
                     model.addRow(ls);
                 }

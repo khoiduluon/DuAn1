@@ -51,11 +51,24 @@ public class ThongKe_ThuChi_DAO {
     public List<Object[]> LichSu_ThuChi(String User) {
         String sql = "{CALL LichSu_ThuChi(?)}";
         String[] cols = {"ID","TenGD", "NgayGD", "SoTien", "LoaiGD"};
+<<<<<<< HEAD
         return this.getListOfArray(sql, cols, User);
     }
     public List<Object[]> Tinh_SoDu(String User) {
         String sql = "{CALL Tinh_SoDu(?)}";
         String[] cols = {"SoDu"};
+=======
+>>>>>>> 08294b6c57b1997650b9dbe98aac31a19b24a8d3
         return this.getListOfArray(sql, cols, User);
+    }
+    public List<Object[]> getLichSu(String User){
+        String sql="{CALL LichSuMTK(?)}";
+        String[] cols={"IDLichSu","TenMT","NgayTK","SoTienTK"};
+        return this.getListOfArray(sql, cols, User);
+    }
+    public List<Object[]> getLichSu1(String User,String TenMTK){
+        String sql="{CALL LichSuMTK2(?,?)}";
+        String[] cols={"IDLichSu","TenMT","NgayTK","SoTienTK"};
+        return this.getListOfArray(sql, cols, User,TenMTK);
     }
 }
