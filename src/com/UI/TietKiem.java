@@ -162,13 +162,8 @@ public class TietKiem extends javax.swing.JFrame {
     private void btnTietKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTietKiemActionPerformed
         if (checkError()) {
             insert();
-<<<<<<< HEAD
             //updateND();
             //  updateTienDu();
-=======
-            updateND();
-            noTif();
->>>>>>> 08294b6c57b1997650b9dbe98aac31a19b24a8d3
         }
     }//GEN-LAST:event_btnTietKiemActionPerformed
 
@@ -273,59 +268,11 @@ public class TietKiem extends javax.swing.JFrame {
         return muctieu;
     }
 
-<<<<<<< HEAD
-//    void updateTienDu() {
-//        NguoiDung nd = nddao.selectByid(Auth.user.getUser());
-//        MucTieu mt = (MucTieu) cboMTK.getSelectedItem();
-//        List<MucTieu> list = mtkdao.selectMTK(mt.getIdMucTieu());
-//        for (MucTieu mt : list) {
-//            if (mt.getSoTienDaTK() >= mt.getGiaTri()) {
-//                System.out.println(mt.getSoTienDaTK() + " " + mt.getGiaTri());
-//                double temp = mt.getSoTienDaTK() - mt.getGiaTri();
-//                double tienDU = nd.getSoDu();
-//                tienDU += temp;
-//                nd.setSoDu(tienDU);
-//                nddao.update(nd);
-//                MsgBox.alert(this, "Bạn đã tiết kiệm đủ");
-//            }
-//        }
-//    }
-//    void updateND() {
-//        NguoiDung nd = updateSoDu();
-//        try {
-//            nddao.update(nd);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-=======
-    NguoiDung updateSoDu() {
-        NguoiDung nd = nddao.selectByid(Auth.user.getUser());
-        double soDu = nd.getSoDu();
-        soDu -= Double.valueOf(txtSoTienTietKiem.getText());
-        nd.setSoDu(soDu);
-        return nd;
-    }
-
-    void updateND() {
-        NguoiDung nd = updateSoDu();
-        try {
-            nddao.update(nd);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
->>>>>>> 08294b6c57b1997650b9dbe98aac31a19b24a8d3
     void insert() {
         MucTieu mt = getInFo();
         QuanLy ql = new QuanLy();
         try {
             mtkdao.update(mt);
-<<<<<<< HEAD
-=======
-            MsgBox.alert(this, "Tiet kiem");
->>>>>>> 08294b6c57b1997650b9dbe98aac31a19b24a8d3
             ql.fillTableChiThu();
             new QuanLy().setVisible(false);
             new QuanLy().setVisible(true);
@@ -336,7 +283,6 @@ public class TietKiem extends javax.swing.JFrame {
     }
 
     boolean checkError() {
-<<<<<<< HEAD
         if (txtSoTienTietKiem.getText().matches(".*[a-zA-Z].*")) {
             MsgBox.alert(this, "Vui lòng điền số!");
             return false;
@@ -345,41 +291,9 @@ public class TietKiem extends javax.swing.JFrame {
             return false;
         } else if (Double.valueOf(txtSoTienTietKiem.getText()) < 0) {
             MsgBox.alert(this, "Không nhập số âm!");
-=======
-        if (txtSoTienTietKiem.getText().equals("")) {
-            MsgBox.alert(this, "So tien can tiet kiem dang bo trong");
-            return false;
-        } else if (Double.valueOf(txtSoTienTietKiem.getText()) < 0) {
-            MsgBox.alert(this, "Khong the nhap so am");
->>>>>>> 08294b6c57b1997650b9dbe98aac31a19b24a8d3
             return false;
         }
         return true;
     }
 
-<<<<<<< HEAD
-    //dư tiền tk
-    void noTif() {
-        List<MucTieu> list = mtkdao.selectMTK(Auth.user.getUser());
-        for (MucTieu mt : list) {
-            //các trường hợp
-            //số dư âm,( tiết kiệm đủ, tiết kiệm dư )
-            if (mt.getSoTienDaTK() >= mt.getGiaTri()) {
-                //add tiền dư vào số dư người dùng
-                double temp = mt.getSoTienDaTK() - mt.getGiaTri();
-                MsgBox.alert(this, "Bạn đã tiết kiệm đủ");
-            }
-        }
-=======
-    boolean noTif() {
-        List<MucTieu> list = mtkdao.selectMTK(Auth.user.getUser());
-        for (MucTieu mt : list) {
-            if (mt.getGiaTri() >= mt.getSoTienDaTK()) {
-                MsgBox.alert(this, "Ban da tiet kiem du");
-                return true;
-            }
-        }
-        return false;
->>>>>>> 08294b6c57b1997650b9dbe98aac31a19b24a8d3
-    }
 }
