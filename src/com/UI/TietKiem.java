@@ -5,8 +5,10 @@
  */
 package com.UI;
 
+import com.dao.LichSuDAO;
 import com.dao.MucTieuTietKiemDAO;
 import com.dao.NguoiDungDAO;
+import com.entity.LichSuTK;
 import com.entity.MucTieu;
 import com.entity.NguoiDung;
 import java.awt.Color;
@@ -29,8 +31,6 @@ public class TietKiem extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        this.setBackground(new Color(0, 0, 0, 0));
-        fillComboBox();
     }
 
     /**
@@ -218,6 +218,7 @@ public class TietKiem extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     MucTieuTietKiemDAO mtkdao = new MucTieuTietKiemDAO();
     NguoiDungDAO nddao = new NguoiDungDAO();
+    LichSuDAO lsDAO=new LichSuDAO();
 
     public void fillComboBox() {
         DefaultComboBoxModel combobox = (DefaultComboBoxModel) cboMTK.getModel();
@@ -268,14 +269,28 @@ public class TietKiem extends javax.swing.JFrame {
         return muctieu;
     }
 
+      LichSuTK getForm(){
+        LichSuTK lstk=new LichSuTK();
+        List<MucTieu> list=(List<MucTieu>) mtkdao.selectByTen_MTTK(cboMTK.getSelectedItem().toString(), Auth.user.getUser());
+        int id = 0;
+        for (MucTieu mt : list) {
+            id=mt.getIdMucTieu();
+        }
+        lstk.setIdMucTieu(id);
+        lstk.setSoTienTK(Double.parseDouble(txtSoTienTietKiem.getText()));
+        return lstk;
+    }
+    
     void insert() {
         MucTieu mt = getInFo();
+        LichSuTK lstk=getForm();
         QuanLy ql = new QuanLy();
         try {
             mtkdao.update(mt);
+            lsDAO.insert(lstk);
             ql.fillTableChiThu();
-            new QuanLy().setVisible(false);
             new QuanLy().setVisible(true);
+            ql.dispose();
         } catch (Exception e) {
             MsgBox.alert(this, "Co loi xay ra");
             System.out.println(e.getMessage());

@@ -23,6 +23,7 @@ public class MucTieuTietKiemDAO extends dadDAO<MucTieu, Integer>{
     String DELETE_SQL = "delete from MucTieuTietKiem where IDMucTieu = ?";
     String SELECT_ALL_SQL = "select * from MucTieuTietKiem where username =?";
     String SELECT_BY_ID_SQL = "select * from MucTieuTietKiem where IDMucTieu = ? and username=?";
+    String SELECT_BY_TEN_SQL = "select * from MucTieuTietKiem where TenMT = ? and username=?";
     
     @Override
     public void insert(MucTieu entity) {
@@ -53,6 +54,14 @@ public class MucTieuTietKiemDAO extends dadDAO<MucTieu, Integer>{
 
     public MucTieu selectByid_MTTK(Integer id,String User) {
         List<MucTieu> list = this.selectBySql(SELECT_BY_ID_SQL,id,User);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
+    
+    public MucTieu selectByTen_MTTK(String tenmtk,String User) {
+        List<MucTieu> list = this.selectBySql(SELECT_BY_TEN_SQL,tenmtk,User);
         if (list.isEmpty()) {
             return null;
         }
