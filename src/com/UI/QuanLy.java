@@ -869,7 +869,7 @@ public class QuanLy extends javax.swing.JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("vcl");
+                xoaGiaoDich();
             }
         });
         popupMenu.add(deleteItem);
@@ -1325,38 +1325,40 @@ public class QuanLy extends javax.swing.JFrame {
         }
         return dataset;
     }
-
-    //Tính số dư
-//    void capNhat_SoDu() {
-//        NguoiDung nd = new NguoiDung();
-//        nd.setSoDu(SoDu());
-//        nd.setUser(Auth.user.getUser());
-//        try {
-//            ndDAO.update(nd);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//    
-//    double SoDu() {
-//        double chi = 0, thu = 0, Du = 0;
-//        try {
-//            List<Object[]> list1 = tkctDAO.getThu(Auth.user.getUser());
-//            for (Object[] qlThu : list1) {
-//                thu += Double.parseDouble(String.valueOf(qlThu[1]));
-//            }
-//            List<Object[]> list2 = tkctDAO.getChi(Auth.user.getUser());
-//            for (Object[] qlChi : list2) {
-//                chi += Double.parseDouble(String.valueOf(qlChi[1]));
-//            }
-//            Du = thu - chi;
-//            lblSoDu.setText(String.valueOf(Du));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return Du;
-//    }
-    //Check tiết kiệm đủ hay chưa--XONG
-    //Check có đủ tiền để tiết kiệm hay k
-    //Delete Giao Dịch
+    
+    void xoaGiaoDich(){
+        Integer ID=(Integer) tblThuChi.getValueAt(tblThuChi.getSelectedRow(), 0);
+        int id=(int)ID;
+        try {
+            capNhat_SoDu();
+            tcDAO.delete(id);
+            fillTableChiThu();
+            MsgBox.alert(this, "XOá thành công!");
+            new QuanLy().setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            MsgBox.alert(this, "Lỗi!");
+        }
+    }
+    void capNhat_SoDu() {
+        NguoiDung nd = getSoDu();
+        try {
+            ndDAO.update(nd);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    NguoiDung getSoDu(){
+        NguoiDung nd = ndDAO.selectByid(Auth.user.getUser());
+        double tien=(double)tblThuChi.getValueAt(tblThuChi.getSelectedRow(),3);
+        double soDu = nd.getSoDu();
+        if(tblThuChi.getValueAt(tblThuChi.getSelectedRow(),4).equals("Thu")){
+            soDu -= tien;
+        } else {
+            soDu += tien;
+        }
+        nd.setSoDu(soDu);
+        return nd;
+    }
 }
