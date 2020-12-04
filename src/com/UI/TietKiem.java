@@ -31,6 +31,7 @@ public class TietKiem extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        fillComboBox();
     }
 
     /**
@@ -218,7 +219,7 @@ public class TietKiem extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     MucTieuTietKiemDAO mtkdao = new MucTieuTietKiemDAO();
     NguoiDungDAO nddao = new NguoiDungDAO();
-    LichSuDAO lsDAO=new LichSuDAO();
+    LichSuDAO lsDAO = new LichSuDAO();
 
     public void fillComboBox() {
         DefaultComboBoxModel combobox = (DefaultComboBoxModel) cboMTK.getModel();
@@ -269,21 +270,22 @@ public class TietKiem extends javax.swing.JFrame {
         return muctieu;
     }
 
-      LichSuTK getForm(){
-        LichSuTK lstk=new LichSuTK();
-        List<MucTieu> list=(List<MucTieu>) mtkdao.selectByTen_MTTK(cboMTK.getSelectedItem().toString(), Auth.user.getUser());
+    LichSuTK getForm() {
+
         int id = 0;
-        for (MucTieu mt : list) {
-            id=mt.getIdMucTieu();
-        }
+        LichSuTK lstk = new LichSuTK();
+        Object temp = cboMTK.getSelectedItem();
+        String tenmt = String.valueOf(temp);
+        MucTieu list = mtkdao.selectByTen_MTTK(tenmt, Auth.user.getUser());
+        id = list.getIdMucTieu();
         lstk.setIdMucTieu(id);
         lstk.setSoTienTK(Double.parseDouble(txtSoTienTietKiem.getText()));
         return lstk;
     }
-    
+
     void insert() {
         MucTieu mt = getInFo();
-        LichSuTK lstk=getForm();
+        LichSuTK lstk = getForm();
         QuanLy ql = new QuanLy();
         try {
             mtkdao.update(mt);
