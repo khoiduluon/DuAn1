@@ -58,4 +58,14 @@ public class ThongKe_ThuChi_DAO {
         String[] cols = {"SoDu"};
         return this.getListOfArray(sql, cols, User);
     }
+        public List<Object[]> getLichSu(String User){
+        String sql="{CALL LichSuMTK(?)}";
+        String[] cols={"IDLichSu","TenMT","NgayTK","SoTienTK"};
+        return this.getListOfArray(sql, cols, User);
+    }
+    public List<Object[]> getLichSu1(String User,String TenMTK){
+        String sql="{CALL LichSuMTK2(?,?)}";
+        String[] cols={"IDLichSu","TenMT","NgayTK","SoTienTK"};
+        return this.getListOfArray(sql, cols, User,TenMTK);
+    }
 }

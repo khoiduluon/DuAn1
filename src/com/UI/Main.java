@@ -13,7 +13,7 @@ public class Main {
 
     public static void main(String args[]) {
 
-//        try {den
+//        try {
 //            UIManager.setLookAndFeel("de.javasoft.plaf.synthetica.SyntheticaSimple2DLookAndFeel");
 //                                     
 //        } catch (Exception e) {

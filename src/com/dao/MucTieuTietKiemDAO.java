@@ -19,7 +19,7 @@ import util.MsgBox;
  */
 public class MucTieuTietKiemDAO extends dadDAO<MucTieu, Integer>{
     String INSERT_SQL = "insert into MucTieuTietKiem(Username,tenMT,GiaTri,ThoiHan) values (?,?,?,?)";
-    String UPDATE_SQL = "update MucTieuTietKiem set TenMT=?, GiaTri=?, ThoiHan=?, SoTienDaTK =? where IDMucTieu = ?";
+    String UPDATE_SQL = "update MucTieuTietKiem set  Username = ?, TenMT=?, GiaTri=?, ThoiHan=?, SoTienDaTK =? where IDMucTieu = ?";
     String DELETE_SQL = "delete from MucTieuTietKiem where IDMucTieu = ?";
     String SELECT_ALL_SQL = "select * from MucTieuTietKiem where username =?";
     String SELECT_BY_ID_SQL = "select * from MucTieuTietKiem where IDMucTieu = ? and username=?";
@@ -36,7 +36,7 @@ public class MucTieuTietKiemDAO extends dadDAO<MucTieu, Integer>{
     @Override
     public void update(MucTieu entity) {
         try {
-            JDBC.update(UPDATE_SQL,entity.getTenMucTieu(),entity.getGiaTri(),entity.getThoiHan(),entity.getSoTienDaTK(),entity.getIdMucTieu());
+            JDBC.update(UPDATE_SQL,entity.getUsername(),entity.getTenMucTieu(),entity.getGiaTri(),entity.getThoiHan(),entity.getSoTienDaTK(),entity.getIdMucTieu());
         } catch (Exception e) {
             e.printStackTrace();
         }
