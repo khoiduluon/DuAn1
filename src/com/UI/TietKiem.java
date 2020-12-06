@@ -271,7 +271,6 @@ public class TietKiem extends javax.swing.JFrame {
     }
 
     LichSuTK getForm() {
-
         int id = 0;
         LichSuTK lstk = new LichSuTK();
         Object temp = cboMTK.getSelectedItem();
