@@ -104,6 +104,9 @@ public class DangNhap extends javax.swing.JFrame {
         lblQuenMK.setForeground(new java.awt.Color(0, 102, 255));
         lblQuenMK.setText("<html>\n<body>\n<u>Quên mật khẩu ?</u>\n</body>\n</html>");
         lblQuenMK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblQuenMKMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblQuenMKMouseEntered(evt);
             }
@@ -341,6 +344,10 @@ public class DangNhap extends javax.swing.JFrame {
         // TODO add your handling code here:
         HienMK();
     }//GEN-LAST:event_lblHienmkMousePressed
+
+    private void lblQuenMKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuenMKMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblQuenMKMouseClicked
 
     /**
      * @param args the command line arguments

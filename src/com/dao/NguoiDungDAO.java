@@ -20,7 +20,7 @@ public class NguoiDungDAO extends dadDAO<NguoiDung, String> {
 
     String INSERT_SQL = "insert into NguoiDung(Username, tenND, gioitinh, pass, soDu) values(?,?,?,?,?)";
     String UPDATE_SQL = "update NguoiDung set soDu = ? where Username = ?";
-    String UPDATE_SQL1 = "update NguoiDung set tenND = ?, gioitinh = ?,pass = ?, soDu = ? where Username = ?";
+    String UPDATE_MatKhau_SQL1 = "update NguoiDung set pass = ? where Username = ?";
     String DELETE_SQL = "delete from NguoiDung where Username=?";
     String SELECT_ALL_SQL = "select * from NguoiDung";
     String SELECT_BY_ID_SQL = "select * from NguoiDung where Username=?";
@@ -45,7 +45,7 @@ public class NguoiDungDAO extends dadDAO<NguoiDung, String> {
     
         public void update1(NguoiDung entity) {
         try {
-            JDBC.update(UPDATE_SQL1, entity.getTenND(), entity.isGioiTinh(), entity.getMatKhau(), entity.getSoDu(),entity.getUser());
+            JDBC.update(UPDATE_MatKhau_SQL1,entity.getMatKhau(),entity.getUser());
         } catch (Exception e) {
             e.printStackTrace();
         }
