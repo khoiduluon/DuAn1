@@ -34,7 +34,7 @@ public class DangNhap extends javax.swing.JFrame {
         //  jPanel1.setBackground(new Color(232,232,232));
         this.mouseHover();
         lblIconAn.setVisible(false);
-
+        lblAnMK.setVisible(false);
     }
 
     /**
@@ -58,7 +58,8 @@ public class DangNhap extends javax.swing.JFrame {
         lblLogin = new javax.swing.JLabel();
         txtMatKhau = new javax.swing.JPasswordField();
         lblIconAn = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblAnMK = new javax.swing.JLabel();
+        lblHienmk = new javax.swing.JLabel();
         lblIconHien = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -83,11 +84,11 @@ public class DangNhap extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblDangNhap.setBackground(new java.awt.Color(102, 102, 102));
-        lblDangNhap.setFont(new java.awt.Font("Quicksand", 0, 14)); // NOI18N
+        lblDangNhap.setFont(new java.awt.Font("Cambria", 0, 16)); // NOI18N
         lblDangNhap.setText("Tên đăng nhập:");
         jPanel1.add(lblDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
 
-        txtTenDN.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtTenDN.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         txtTenDN.setAlignmentX(1.0F);
         txtTenDN.setAlignmentY(1.0F);
         txtTenDN.setBorder(null);
@@ -112,7 +113,7 @@ public class DangNhap extends javax.swing.JFrame {
         });
         jPanel1.add(lblQuenMK, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 360, -1, -1));
 
-        lblMatKhau.setFont(new java.awt.Font("Quicksand", 0, 14)); // NOI18N
+        lblMatKhau.setFont(new java.awt.Font("Cambria", 0, 16)); // NOI18N
         lblMatKhau.setText("Mật khẩu:");
         jPanel1.add(lblMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, -1, -1));
 
@@ -181,9 +182,23 @@ public class DangNhap extends javax.swing.JFrame {
         });
         jPanel1.add(lblIconAn, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, -1, 30));
 
-        jLabel5.setForeground(new java.awt.Color(0, 102, 255));
-        jLabel5.setText("Hiện mật khẩu");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 90, 30));
+        lblAnMK.setForeground(new java.awt.Color(0, 102, 255));
+        lblAnMK.setText("Ẩn mật khẩu");
+        lblAnMK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblAnMKMousePressed(evt);
+            }
+        });
+        jPanel1.add(lblAnMK, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 90, 30));
+
+        lblHienmk.setForeground(new java.awt.Color(0, 102, 255));
+        lblHienmk.setText("Hiện mật khẩu");
+        lblHienmk.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblHienmkMousePressed(evt);
+            }
+        });
+        jPanel1.add(lblHienmk, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 90, 30));
 
         lblIconHien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/eye_24px.png"))); // NOI18N
         lblIconHien.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -309,17 +324,23 @@ public class DangNhap extends javax.swing.JFrame {
 
     private void lblIconHienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIconHienMousePressed
         // TODO add your handling code here:
-        lblIconAn.setVisible(true);
-        lblIconHien.setVisible(false);
-        txtMatKhau.setEchoChar((char)0);
+        HienMK();
     }//GEN-LAST:event_lblIconHienMousePressed
 
     private void lblIconAnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIconAnMousePressed
         // TODO add your handling code here:
-        lblIconHien.setVisible(true);
-        lblIconAn.setVisible(false);
-        txtMatKhau.setEchoChar('*');
+        AnMk();
     }//GEN-LAST:event_lblIconAnMousePressed
+
+    private void lblAnMKMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnMKMousePressed
+        // TODO add your handling code here:
+        AnMk();
+    }//GEN-LAST:event_lblAnMKMousePressed
+
+    private void lblHienmkMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHienmkMousePressed
+        // TODO add your handling code here:
+        HienMK();
+    }//GEN-LAST:event_lblHienmkMousePressed
 
     /**
      * @param args the command line arguments
@@ -330,12 +351,13 @@ public class DangNhap extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblAnMK;
     private javax.swing.JLabel lblDangKy;
     private javax.swing.JLabel lblDangNhap;
     private javax.swing.JLabel lblExit;
+    private javax.swing.JLabel lblHienmk;
     private javax.swing.JLabel lblIconAn;
     private javax.swing.JLabel lblIconHien;
     private javax.swing.JLabel lblLogin;
@@ -370,5 +392,19 @@ public class DangNhap extends javax.swing.JFrame {
             new QuanLy().setVisible(true);
             this.dispose();
         }
+    }
+    void AnMk(){
+        lblIconAn.setVisible(false);
+        lblAnMK.setVisible(false);
+        lblIconHien.setVisible(true);
+        lblHienmk.setVisible(true);
+        txtMatKhau.setEchoChar('*');
+    }
+    void HienMK(){
+        lblIconHien.setVisible(false);
+        lblHienmk.setVisible(false);
+        lblIconAn.setVisible(true);
+        lblAnMK.setVisible(true);
+        txtMatKhau.setEchoChar((char)0);
     }
 }

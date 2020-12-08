@@ -10,9 +10,12 @@ import com.dao.ThongKe_ThuChi_DAO;
 import com.dao.ThuChiDAO;
 import com.entity.NguoiDung;
 import com.entity.ThuChi;
+import java.awt.AWTEvent;
 import java.awt.CardLayout;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 import util.Auth;
 import util.JDBC;
@@ -409,14 +412,13 @@ public class GiaoDich extends javax.swing.JFrame {
     }
     public void insert() {
         ThuChi qltc = getInfoGiaoDich();
-        QuanLy ql = new QuanLy();
+        QuanLy ql = new QuanLy() ;
         try {
             dao.insert(qltc);
             capNhat_SoDu();
             MsgBox.alert(this, "Thêm thành công!");
-            ql.fillTableChiThu();
-            new QuanLy().setVisible(false);
-            new QuanLy().setVisible(true);
+            this.dispose();          
+            ql.setVisible(true);
             clear();
         } catch (Exception e) {
             MsgBox.alert(this, e.toString());

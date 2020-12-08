@@ -5,9 +5,6 @@
  */
 package com.dao;
 import com.entity.LichSuTK;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import util.JDBC;
 /**

@@ -29,6 +29,7 @@ public class TietKiem extends javax.swing.JFrame {
      */
     public TietKiem() {
         initComponents();
+        this.setBackground(new Color(0,0,0,0));
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         fillComboBox();
@@ -54,6 +55,9 @@ public class TietKiem extends javax.swing.JFrame {
         txtSoTienTietKiem = new javax.swing.JTextField();
         btnTietKiem = new javax.swing.JButton();
         lblExit = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -102,23 +106,33 @@ public class TietKiem extends javax.swing.JFrame {
                 btnTietKiemActionPerformed(evt);
             }
         });
-        jPanel1.add(btnTietKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, -1, -1));
+        jPanel1.add(btnTietKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, -1, -1));
 
         lblExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/delete.png"))); // NOI18N
         lblExit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblExitMouseClicked(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblExitMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblExitMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblExitMouseExited(evt);
             }
         });
         jPanel1.add(lblExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, 30));
 
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/background1.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/money.png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 84, 40, 30));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/chronometer.png"))); // NOI18N
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, -1, -1));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/dollar.png"))); // NOI18N
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, -1, -1));
+
+        background.setBackground(new java.awt.Color(219, 246, 233));
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/Path 1_1.png"))); // NOI18N
         jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -208,8 +222,11 @@ public class TietKiem extends javax.swing.JFrame {
     private javax.swing.JButton btnTietKiem;
     private javax.swing.JComboBox<String> cboMTK;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblExit;
     private javax.swing.JLabel lblMucTietKiem;
