@@ -140,6 +140,7 @@ public class QuanLy extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblLichSu = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
+        lblQuenMK = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         txtSoDu = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -599,7 +600,7 @@ public class QuanLy extends javax.swing.JFrame {
                         .addComponent(lblNgayConLai))
                     .addComponent(lblTienDaTK))
                 .addGap(24, 24, 24)
-                .addComponent(pnlPieChart, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
+                .addComponent(pnlPieChart, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -621,7 +622,7 @@ public class QuanLy extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNgayConLai)
                     .addComponent(jLabel2))
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(120, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlPieChart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -698,9 +699,9 @@ public class QuanLy extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTab3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlTab3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
                     .addGroup(pnlTab3Layout.createSequentialGroup()
-                        .addComponent(txtTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnTimKiem)))
                 .addContainerGap())
@@ -713,7 +714,7 @@ public class QuanLy extends javax.swing.JFrame {
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTimKiem))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Lịch sử", pnlTab3);
@@ -722,6 +723,21 @@ public class QuanLy extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(219, 246, 233));
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lblQuenMK.setFont(new java.awt.Font("Arial", 2, 12)); // NOI18N
+        lblQuenMK.setForeground(new java.awt.Color(0, 102, 255));
+        lblQuenMK.setText("<html> <body> <u>Đổi mật khẩu ?</u> </body> </html>");
+        lblQuenMK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblQuenMKMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblQuenMKMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblQuenMKMouseExited(evt);
+            }
+        });
 
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -835,11 +851,13 @@ public class QuanLy extends javax.swing.JFrame {
                         .addGap(32, 32, 32)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
-                        .addComponent(jLabel12))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(lblQuenMK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(110, 110, 110)
                         .addComponent(jLabel11)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -849,8 +867,11 @@ public class QuanLy extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
-                .addContainerGap(29, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblQuenMK, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pnlTabs.add(jPanel5, "card3");
@@ -1072,6 +1093,21 @@ public class QuanLy extends javax.swing.JFrame {
        upDateInFoND();
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    private void lblQuenMKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuenMKMouseClicked
+        // TODO add your handling code here:
+        new DoiMatKhau().setVisible(true);
+    }//GEN-LAST:event_lblQuenMKMouseClicked
+
+    private void lblQuenMKMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuenMKMouseEntered
+        setColorSystem cl = new setColorSystem();
+        cl.setColor(lblQuenMK);
+    }//GEN-LAST:event_lblQuenMKMouseEntered
+
+    private void lblQuenMKMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuenMKMouseExited
+        setColorSystem cl = new setColorSystem();
+        cl.resetColor(lblQuenMK);
+    }//GEN-LAST:event_lblQuenMKMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -1152,6 +1188,7 @@ public class QuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel lblMucTietKiem;
     private javax.swing.JLabel lblNgayConLai;
     private javax.swing.JLabel lblQuanLy;
+    private javax.swing.JLabel lblQuenMK;
     private javax.swing.JLabel lblSoDu;
     private javax.swing.JLabel lblTenMT;
     private javax.swing.JLabel lblTenMT1;

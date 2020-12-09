@@ -8,6 +8,7 @@ package com.UI;
 import com.dao.NguoiDungDAO;
 import com.entity.NguoiDung;
 import util.MsgBox;
+import util.setColorSystem;
 
 /**
  *
@@ -44,7 +45,10 @@ public class DoiMatKhau extends javax.swing.JFrame {
         lblAnMK = new javax.swing.JLabel();
         lblHienmk = new javax.swing.JLabel();
         lblIconHien = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnDoiMatKhau = new javax.swing.JButton();
+        lblExit = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtMKCu = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -94,54 +98,78 @@ public class DoiMatKhau extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("DoiMatKhau");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnDoiMatKhau.setText("Đổi mật khẩu");
+        btnDoiMatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnDoiMatKhauActionPerformed(evt);
             }
         });
+
+        lblExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/delete.png"))); // NOI18N
+        lblExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblExitMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblExitMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblExitMouseExited(evt);
+            }
+        });
+
+        jLabel4.setText("Mật khẩu cũ:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(75, 75, 75)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblIconHien)
-                            .addComponent(lblIconAn))
-                        .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblAnMK, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblHienmk, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(txtTenDN, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMKMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtXacNhanMK, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblExit))
             .addGroup(layout.createSequentialGroup()
-                .addGap(207, 207, 207)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtMKCu, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel2))
+                            .addGap(75, 75, 75)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblIconHien)
+                                        .addComponent(lblIconAn))
+                                    .addGap(6, 6, 6)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblAnMK, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblHienmk, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtMKMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtXacNhanMK, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnDoiMatKhau)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addGap(101, 101, 101)
+                            .addComponent(txtTenDN, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addComponent(lblExit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtTenDN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtMKCu, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -157,8 +185,8 @@ public class DoiMatKhau extends javax.swing.JFrame {
                     .addComponent(lblAnMK, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblHienmk, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(39, 39, 39))
+                .addComponent(btnDoiMatKhau)
+                .addGap(28, 28, 28))
         );
 
         pack();
@@ -197,12 +225,27 @@ public class DoiMatKhau extends javax.swing.JFrame {
         HienMK();
     }//GEN-LAST:event_lblIconHienMousePressed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMatKhauActionPerformed
         // TODO add your handling code here:
         if(checkError()==true){
             DoiMK();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnDoiMatKhauActionPerformed
+
+    private void lblExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseClicked
+        this.dispose();
+        new DangNhap().setVisible(true);
+    }//GEN-LAST:event_lblExitMouseClicked
+
+    private void lblExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseExited
+        setColorSystem cl = new setColorSystem();
+        cl.reSetBorder(lblExit);
+    }//GEN-LAST:event_lblExitMouseExited
+
+    private void lblExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseEntered
+        setColorSystem cl = new setColorSystem();
+        cl.setBorder(lblExit);
+    }//GEN-LAST:event_lblExitMouseEntered
 
     /**
      * @param args the command line arguments
@@ -240,14 +283,17 @@ public class DoiMatKhau extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnDoiMatKhau;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lblAnMK;
+    private javax.swing.JLabel lblExit;
     private javax.swing.JLabel lblHienmk;
     private javax.swing.JLabel lblIconAn;
     private javax.swing.JLabel lblIconHien;
+    private javax.swing.JPasswordField txtMKCu;
     private javax.swing.JPasswordField txtMKMoi;
     private javax.swing.JTextField txtTenDN;
     private javax.swing.JPasswordField txtXacNhanMK;
@@ -274,15 +320,19 @@ public class DoiMatKhau extends javax.swing.JFrame {
         return true;
     }
     void DoiMK(){
+        NguoiDung nguoidung=dao.selectByid(txtTenDN.getText().trim());
         NguoiDung nd=getFrom();
         try {
-            dao.update1(nd);
-            MsgBox.alert(this, "Đổi mật khẩu thành công!");
-            new DangNhap().setVisible(true);
-            this.dispose();
+            if(nguoidung.getUser().equals(nd.getUser()) && nguoidung.getMatKhau().equals(txtMKCu.getText())){
+                dao.update1(nd);
+                MsgBox.alert(this, "Đổi mật khẩu thành công!");
+                new DangNhap().setVisible(true);
+                this.dispose();
+            }else{
+                MsgBox.alert(this, "Đổi mật khẩu thất bại!");
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            MsgBox.alert(this, "Đổi mật khẩu không thành công!");
         }
     }
     NguoiDung getFrom(){
@@ -296,6 +346,7 @@ public class DoiMatKhau extends javax.swing.JFrame {
         lblAnMK.setVisible(false);
         lblIconHien.setVisible(true);
         lblHienmk.setVisible(true);
+        txtMKCu.setEchoChar('*');
         txtMKMoi.setEchoChar('*');
         txtXacNhanMK.setEchoChar('*');
     }
@@ -304,6 +355,7 @@ public class DoiMatKhau extends javax.swing.JFrame {
         lblHienmk.setVisible(false);
         lblIconAn.setVisible(true);
         lblAnMK.setVisible(true);
+        txtMKCu.setEchoChar((char)0);
         txtMKMoi.setEchoChar((char)0);
         txtXacNhanMK.setEchoChar((char)0);
     }

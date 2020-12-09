@@ -102,7 +102,7 @@ public class DangNhap extends javax.swing.JFrame {
 
         lblQuenMK.setFont(new java.awt.Font("Arial", 2, 12)); // NOI18N
         lblQuenMK.setForeground(new java.awt.Color(0, 102, 255));
-        lblQuenMK.setText("<html>\n<body>\n<u>Quên mật khẩu ?</u>\n</body>\n</html>");
+        lblQuenMK.setText("<html> <body> <u>Đổi mật khẩu ?</u> </body> </html>");
         lblQuenMK.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblQuenMKMouseClicked(evt);
@@ -141,11 +141,11 @@ public class DangNhap extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblExitMouseClicked(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblExitMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblExitMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblExitMouseExited(evt);
             }
         });
         jPanel1.add(lblExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, -1, 30));
