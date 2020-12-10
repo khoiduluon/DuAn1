@@ -138,7 +138,8 @@ public class DangKy extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseClicked
-        System.exit(0);
+        this.dispose();
+        new DangNhap().setVisible(true);
     }//GEN-LAST:event_lblExitMouseClicked
 
     private void lblExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseExited

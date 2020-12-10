@@ -347,6 +347,8 @@ public class DangNhap extends javax.swing.JFrame {
 
     private void lblQuenMKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuenMKMouseClicked
         // TODO add your handling code here:
+        this.dispose();
+        new DoiMatKhau().setVisible(true);
     }//GEN-LAST:event_lblQuenMKMouseClicked
 
     /**

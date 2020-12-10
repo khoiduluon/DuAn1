@@ -16,11 +16,11 @@ import util.JDBC;
  * @author Rom
  */
 public class ThuChiDAO extends dadDAO<ThuChi, Integer>{
-    String INSERT_SQL = "insert into QuanLyThuChi(Username,TenGD,SoTien,NgayGD,LoaiGD) values(?,?,?,?,?)";
-    String UPDATE_SQL = "update QuanLyThuChi set TenGD=?, SoTien=?, NgayGD=?, LoaiGD=? where ID = ?";
-    String DELETE_SQL = "delete from QuanLyThuChi where ID=?";
-    String SELECT_ALL_SQL = "select * from QuanLyThuChi";
-    String SELECT_BY_ID_SQL = "select * from QuanLyThuChi where ID=?";
+    String INSERT_SQL = "insert into DoanhMucThuChi(Username,TenGD,SoTien,NgayGD,LoaiGD) values(?,?,?,?,?)";
+    String UPDATE_SQL = "update DoanhMucThuChi set TenGD=?, SoTien=?, NgayGD=?, LoaiGD=? where ID = ?";
+    String DELETE_SQL = "delete from DoanhMucThuChi where ID=?";
+    String SELECT_ALL_SQL = "select * from DoanhMucThuChi";
+    String SELECT_BY_ID_SQL = "select * from DoanhMucThuChi where ID=?";
 
     @Override
     public void insert(ThuChi entity) {

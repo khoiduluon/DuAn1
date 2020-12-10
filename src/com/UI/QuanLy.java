@@ -1328,12 +1328,10 @@ public class QuanLy extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblThuChi.getModel();
         model.setRowCount(0);
         try {
-            List<Object[]> list = tkctDAO.LichSu_ThuChi(Auth.user.getUser());
+            List<Object[]> list = tkctDAO.LichSu_ThuChi(Auth.user.getUser().trim());
             for (Object[] ls : list) {
                 model.addRow(ls);
             }
-//            SoDu();
-//            capNhat_SoDu();
             tblThuChi.setModel(model);
         } catch (Exception e) {
             MsgBox.alert(this, "Loi truy van du lieu");

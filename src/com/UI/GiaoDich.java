@@ -406,11 +406,6 @@ public class GiaoDich extends javax.swing.JFrame {
         return qltc;
     }
 
-    public void clear() {
-        txtSoTien.setText("");
-        rdoThu.setSelected(true);
-        cboThu.setVisible(true);
-    }
     public void insert() {
         ThuChi qltc = getInfoGiaoDich();
         QuanLy ql = new QuanLy() ;
@@ -420,7 +415,6 @@ public class GiaoDich extends javax.swing.JFrame {
             MsgBox.alert(this, "Thêm thành công!");
             this.dispose();          
             ql.setVisible(true);
-            clear();
         } catch (Exception e) {
             MsgBox.alert(this, e.toString());
         }

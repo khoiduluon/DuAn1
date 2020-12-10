@@ -104,7 +104,7 @@ end
 create proc LichSu_ThuChi @User nvarchar(50)
 as
 begin
-	select TenGD,NgayGD,SoTien,LoaiGD from NguoiDung nd
+	select ID,TenGD,NgayGD,SoTien,LoaiGD from NguoiDung nd
 	inner join DoanhMucThuChi tc on nd.Username=tc.Username
 	where nd.Username=@User
 end
