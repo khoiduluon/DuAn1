@@ -20,7 +20,7 @@ create table NguoiDung(
 	TenND nvarchar(50) not null,
 	GioiTinh bit,
 	Pass nvarchar(50) not null,
-	SoDu float not null
+	SoDu float default(0)
 )
 
 create table MucTieuTietKiem(
@@ -40,7 +40,7 @@ create table LichSu(
 	SoTienTK float not null
 )
 
-create table QuanLyThuChi(
+create table DoanhMucThuChi(
 	ID int identity(1,1) primary key,
 	Username nvarchar(50) not null,
 	TenGD nvarchar(100) not null,
@@ -54,18 +54,21 @@ alter table MucTieuTietKiem
 add constraint FK_MTTK_ND
 foreign key (Username)
 references NguoiDung(Username)
+on delete cascade on update cascade
 
 alter table LichSu
 add constraint FK_LS_MTTK
 foreign key (IDMucTieu)
 references MucTieuTietKiem(IDMucTieu)
+on delete cascade on update cascade
 
-alter table QuanLyThuChi
+alter table DoanhMucThuChi
 add constraint FK_QLT_ND
 foreign key (Username)
 references NguoiDung(Username)
+on delete cascade on update cascade
 
-alter proc LichSuMTK @User nvarchar(50)
+create proc LichSuMTK @User nvarchar(50)
 as
 begin
 	select IDLichSu,MucTieuTietKiem.TenMT,NgayTK,SoTienTK from LichSu inner join MucTieuTietKiem on LichSu.IDMucTieu=MucTieuTietKiem.IDMucTieu
@@ -73,7 +76,7 @@ begin
 end;
 exec LichSuMTK 'Ngandhl'
 
-alter proc LichSuMTK2 @User nvarchar(50),@TenMTK nvarchar(50)
+create proc LichSuMTK2 @User nvarchar(50),@TenMTK nvarchar(50)
 as
 begin
 	select IDLichSu,MucTieuTietKiem.TenMT,NgayTK,SoTienTK from LichSu 
@@ -86,23 +89,23 @@ create proc TongThu @User nvarchar(50)
 as
 begin
 	select MONTH(NgayGD) as 'Thang',SUM(SoTien) as 'TongThu'
-	from QuanLyThuChi where LoaiGD='Thu'
+	from DoanhMucThuChi where LoaiGD='Thu'
 	group by MONTH(NgayGD)
 end
 
 create proc TongChi @User nvarchar(50)
 as
 begin
-	select MONTH(NgayGD) as 'Thang',SUM(SoTien) as 'TongThu'
-	from QuanLyThuChi where LoaiGD='Chi'
+	select MONTH(NgayGD) as 'Thang',SUM(SoTien) as 'TongChi'
+	from DoanhMucThuChi where LoaiGD='Chi'
 	group by MONTH(NgayGD)
 end
 
-alter proc LichSu_ThuChi @User nvarchar(50)
+create proc LichSu_ThuChi @User nvarchar(50)
 as
 begin
 	select TenGD,NgayGD,SoTien,LoaiGD from NguoiDung nd
-	inner join QuanLyThuChi qltc on nd.Username=qltc.Username
+	inner join DoanhMucThuChi tc on nd.Username=tc.Username
 	where nd.Username=@User
 end
 
