@@ -310,7 +310,7 @@ public class TietKiem extends javax.swing.JFrame {
             new QuanLy().setVisible(true);
             ql.dispose();
         } catch (Exception e) {
-            MsgBox.alert(this, "Co loi xay ra");
+            MsgBox.alert(this, "Thêm thấy bại!");
             System.out.println(e.getMessage());
         }
     }

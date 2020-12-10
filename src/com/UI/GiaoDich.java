@@ -321,7 +321,7 @@ public class GiaoDich extends javax.swing.JFrame {
 
     private void lblExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseClicked
         this.dispose();
-        new QuanLy().fillTableMucTietKiem();
+        new QuanLy().setVisible(true);
     }//GEN-LAST:event_lblExitMouseClicked
 
     private void lblExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseExited
@@ -413,7 +413,9 @@ public class GiaoDich extends javax.swing.JFrame {
             dao.insert(qltc);
             capNhat_SoDu();
             MsgBox.alert(this, "Thêm thành công!");
-            this.dispose();          
+            this.dispose();
+            ql.init();
+            ql.fillTableChiThu();
             ql.setVisible(true);
         } catch (Exception e) {
             MsgBox.alert(this, e.toString());
@@ -430,6 +432,7 @@ public class GiaoDich extends javax.swing.JFrame {
     }
     
     NguoiDung getSoDu(){
+        NguoiDung nguoidung=new NguoiDung();
         NguoiDung nd = nddao.selectByid(Auth.user.getUser());
         double soDu = nd.getSoDu();
         if(rdoThu.isSelected()){
@@ -437,8 +440,9 @@ public class GiaoDich extends javax.swing.JFrame {
         } else {
             soDu -= Double.valueOf(txtSoTien.getText());
         }
-        nd.setSoDu(soDu);
-        return nd;
+        nguoidung.setSoDu(soDu);
+        nguoidung.setUser(Auth.user.getUser());
+        return nguoidung;
     }
 
     boolean checkError() {

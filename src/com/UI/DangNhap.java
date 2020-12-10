@@ -393,9 +393,9 @@ public class DangNhap extends javax.swing.JFrame {
         String matKhau = txtMatKhau.getText();
         NguoiDung nguoidung = ngdao.selectByid(manv);
         if (nguoidung == null) {
-            MsgBox.alert(this, "Sai ten dang nhap");
+            MsgBox.alert(this, "Sai tên đăng nhập!");
         } else if (!matKhau.equals(nguoidung.getMatKhau())) {
-            MsgBox.alert(this, "Sai mat khau");
+            MsgBox.alert(this, "Sai mật khẩu!");
         } else {
             Auth.user = nguoidung;
             new QuanLy().setVisible(true);

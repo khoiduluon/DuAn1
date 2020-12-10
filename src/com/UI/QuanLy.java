@@ -62,8 +62,7 @@ public class QuanLy extends javax.swing.JFrame {
         tblLichSu.getTableHeader().setBackground(new Color(249, 247, 207));
         tblThuChi.getTableHeader().setOpaque(false);
         tblThuChi.getTableHeader().setBackground(new Color(249, 247, 207));
-        NguoiDung nd = ndDAO.selectByid(Auth.user.getUser());
-        lblSoDu.setText(String.valueOf(nd.getSoDu()));
+        
 
     }
 
@@ -1014,6 +1013,7 @@ public class QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTietKiemMouseExited
 
     private void btnTietKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTietKiemMouseClicked
+        this.dispose();
         new TietKiem().setVisible(true);
     }//GEN-LAST:event_btnTietKiemMouseClicked
 
@@ -1247,6 +1247,8 @@ public class QuanLy extends javax.swing.JFrame {
         fillTableLichSu();
         fillTableChiThu();
         getInFoND();
+        NguoiDung nd = ndDAO.selectByid(Auth.user.getUser());
+        lblSoDu.setText(String.valueOf(nd.getSoDu()));
 
     }
 
@@ -1267,13 +1269,13 @@ public class QuanLy extends javax.swing.JFrame {
     //Kiểm lỗi
     boolean checkError() {
         if (txtGiaTri.getText().matches(".*[a-zA-Z].*")) {
-            MsgBox.alert(this, "Khong dc dien ki tu vao o gia tri");
+            MsgBox.alert(this, "Không được điền chữ vào ô giá trị!");
             return false;
         } else if (txtTenMTK.getText().equals("") || txtGiaTri.getText().equals("")) {
-            MsgBox.alert(this, "khong duoc de trong");
+            MsgBox.alert(this, "Vui lòng nhập tên mục tiết kiệm!");
             return false;
         } else if (Double.valueOf(txtGiaTri.getText()) < 0) {
-            MsgBox.alert(this, "khong duoc nhap so am");
+            MsgBox.alert(this, "Không được nhập số âm!");
             return false;
         }
         return true;
@@ -1292,7 +1294,7 @@ public class QuanLy extends javax.swing.JFrame {
                 model.addRow(row);
             }
         } catch (Exception e) {
-            MsgBox.alert(this, "Loi truy van du lieu");
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
             e.printStackTrace();
         }
     }
@@ -1308,7 +1310,7 @@ public class QuanLy extends javax.swing.JFrame {
                 }
                 tblLichSu.setModel(model);
             } catch (Exception e) {
-                MsgBox.alert(this, "Loi truy van du lieu");
+                MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
                 e.printStackTrace();
             }
         } else {
@@ -1318,7 +1320,7 @@ public class QuanLy extends javax.swing.JFrame {
                     model.addRow(ls);
                 }
             } catch (Exception e) {
-                MsgBox.alert(this, "Loi truy van du lieu");
+                MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
                 e.printStackTrace();
             }
         }
@@ -1334,7 +1336,7 @@ public class QuanLy extends javax.swing.JFrame {
             }
             tblThuChi.setModel(model);
         } catch (Exception e) {
-            MsgBox.alert(this, "Loi truy van du lieu");
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
             e.printStackTrace();
         }
     }
@@ -1357,7 +1359,7 @@ public class QuanLy extends javax.swing.JFrame {
             fillTableMucTietKiem();
             fillComboBoxMTK();
         } catch (Exception e) {
-            MsgBox.alert(this, "Loi roi ku");
+            MsgBox.alert(this,"Lỗi truy vấn dữ liệu!");
         }
     }
 
@@ -1368,22 +1370,23 @@ public class QuanLy extends javax.swing.JFrame {
             fillTableMucTietKiem();
             clear();
         } catch (Exception e) {
-            MsgBox.alert(this, "Loi roi ku");
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
         }
     }
 
     public void deleteMtk() {
         if (Auth.user.getUser().equals("")) {
-            MsgBox.alert(this, "Dang nhap de co the xoa");
-        } else if (MsgBox.confirm(this, "That su muon xoa ?")) {
+            MsgBox.alert(this, "Đăng nhập để có thể xoá");
+        } else if (MsgBox.confirm(this, "Bạn thật sự muốn xoá ?")) {
             try {
                 int row = (int) (tblDanhSach.getValueAt(tblDanhSach.getSelectedRow(), 0));
                 mtkDAO.delete(row);
-                MsgBox.alert(this, "Xoa thanh cong");
+                MsgBox.alert(this, "Xoá thành công!");
                 fillTableMucTietKiem();
                 fillComboBoxMTK();
+                fillTableLichSu();
             } catch (Exception e) {
-                MsgBox.alert(this, "Loi roi ku");
+                MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
                 e.printStackTrace();
             }
         }
