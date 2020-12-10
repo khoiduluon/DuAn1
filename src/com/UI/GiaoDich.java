@@ -413,7 +413,8 @@ public class GiaoDich extends javax.swing.JFrame {
             dao.insert(qltc);
             capNhat_SoDu();
             MsgBox.alert(this, "Thêm thành công!");
-            this.dispose();          
+            this.dispose();
+            ql.fillTableChiThu();
             ql.setVisible(true);
         } catch (Exception e) {
             MsgBox.alert(this, e.toString());
