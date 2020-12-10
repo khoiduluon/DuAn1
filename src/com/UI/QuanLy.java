@@ -62,9 +62,6 @@ public class QuanLy extends javax.swing.JFrame {
         tblLichSu.getTableHeader().setBackground(new Color(249, 247, 207));
         tblThuChi.getTableHeader().setOpaque(false);
         tblThuChi.getTableHeader().setBackground(new Color(249, 247, 207));
-        NguoiDung nd = ndDAO.selectByid(Auth.user.getUser());
-        lblSoDu.setText(String.format("%.0f",nd.getSoDu())+" VNĐ");
-
     }
 
     /**
@@ -99,6 +96,7 @@ public class QuanLy extends javax.swing.JFrame {
         lblThemGiaoDich = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblThuChi = new javax.swing.JTable();
+        jLabel13 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         pnlTab1 = new javax.swing.JPanel();
@@ -311,6 +309,8 @@ public class QuanLy extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tblThuChi);
 
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/cost.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -318,15 +318,19 @@ public class QuanLy extends javax.swing.JFrame {
             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblThemGiaoDich)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
-                .addComponent(lblThemGiaoDich)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblThemGiaoDich, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(12, 12, 12)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -425,7 +429,7 @@ public class QuanLy extends javax.swing.JFrame {
         });
         pnlButton.add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 40, 90, -1));
 
-        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/createMT – 1.png"))); // NOI18N
+        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/ChinhSua.png"))); // NOI18N
         btnSua.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSuaMouseClicked(evt);
@@ -439,7 +443,7 @@ public class QuanLy extends javax.swing.JFrame {
         });
         pnlButton.add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
-        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/createMT – 2.png"))); // NOI18N
+        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background/XoaMTK.png"))); // NOI18N
         btnXoa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnXoaMouseClicked(evt);
@@ -622,7 +626,7 @@ public class QuanLy extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNgayConLai)
                     .addComponent(jLabel2))
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(180, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlPieChart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -714,7 +718,7 @@ public class QuanLy extends javax.swing.JFrame {
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTimKiem))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Lịch sử", pnlTab3);
@@ -851,15 +855,12 @@ public class QuanLy extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)
-                        .addComponent(jLabel12))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(jLabel11)))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel11)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
+                .addComponent(jLabel12)
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -870,7 +871,9 @@ public class QuanLy extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(125, 125, 125)
+                        .addComponent(jLabel12)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
@@ -1014,6 +1017,7 @@ public class QuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTietKiemMouseExited
 
     private void btnTietKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTietKiemMouseClicked
+        this.dispose();
         new TietKiem().setVisible(true);
     }//GEN-LAST:event_btnTietKiemMouseClicked
 
@@ -1159,6 +1163,7 @@ public class QuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1247,6 +1252,8 @@ public class QuanLy extends javax.swing.JFrame {
         fillTableLichSu();
         fillTableChiThu();
         getInFoND();
+        NguoiDung nd = ndDAO.selectByid(Auth.user.getUser());
+        lblSoDu.setText(String.format("%.0f",nd.getSoDu())+" VNĐ");
 
     }
 
@@ -1267,13 +1274,13 @@ public class QuanLy extends javax.swing.JFrame {
     //Kiểm lỗi
     boolean checkError() {
         if (txtGiaTri.getText().matches(".*[a-zA-Z].*")) {
-            MsgBox.alert(this, "Khong dc dien ki tu vao o gia tri");
+            MsgBox.alert(this, "Không được điền chữ vào ô giá trị!");
             return false;
         } else if (txtTenMTK.getText().equals("") || txtGiaTri.getText().equals("")) {
-            MsgBox.alert(this, "khong duoc de trong");
+            MsgBox.alert(this, "Vui lòng nhập tên mục tiết kiệm!");
             return false;
         } else if (Double.valueOf(txtGiaTri.getText()) < 0) {
-            MsgBox.alert(this, "khong duoc nhap so am");
+            MsgBox.alert(this, "Không được nhập số âm!");
             return false;
         }
         return true;
@@ -1292,7 +1299,7 @@ public class QuanLy extends javax.swing.JFrame {
                 model.addRow(row);
             }
         } catch (Exception e) {
-            MsgBox.alert(this, "Loi truy van du lieu");
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
             e.printStackTrace();
         }
     }
@@ -1308,7 +1315,7 @@ public class QuanLy extends javax.swing.JFrame {
                 }
                 tblLichSu.setModel(model);
             } catch (Exception e) {
-                MsgBox.alert(this, "Loi truy van du lieu");
+                MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
                 e.printStackTrace();
             }
         } else {
@@ -1318,7 +1325,7 @@ public class QuanLy extends javax.swing.JFrame {
                     model.addRow(ls);
                 }
             } catch (Exception e) {
-                MsgBox.alert(this, "Loi truy van du lieu");
+                MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
                 e.printStackTrace();
             }
         }
@@ -1334,7 +1341,7 @@ public class QuanLy extends javax.swing.JFrame {
             }
             tblThuChi.setModel(model);
         } catch (Exception e) {
-            MsgBox.alert(this, "Loi truy van du lieu");
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
             e.printStackTrace();
         }
     }
@@ -1357,7 +1364,7 @@ public class QuanLy extends javax.swing.JFrame {
             fillTableMucTietKiem();
             fillComboBoxMTK();
         } catch (Exception e) {
-            MsgBox.alert(this, "Loi roi ku");
+            MsgBox.alert(this,"Lỗi truy vấn dữ liệu!");
         }
     }
 
@@ -1368,22 +1375,23 @@ public class QuanLy extends javax.swing.JFrame {
             fillTableMucTietKiem();
             clear();
         } catch (Exception e) {
-            MsgBox.alert(this, "Loi roi ku");
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
         }
     }
 
     public void deleteMtk() {
         if (Auth.user.getUser().equals("")) {
-            MsgBox.alert(this, "Dang nhap de co the xoa");
-        } else if (MsgBox.confirm(this, "That su muon xoa ?")) {
+            MsgBox.alert(this, "Đăng nhập để có thể xoá");
+        } else if (MsgBox.confirm(this, "Bạn thật sự muốn xoá ?")) {
             try {
                 int row = (int) (tblDanhSach.getValueAt(tblDanhSach.getSelectedRow(), 0));
                 mtkDAO.delete(row);
-                MsgBox.alert(this, "Xoa thanh cong");
+                MsgBox.alert(this, "Xoá thành công!");
                 fillTableMucTietKiem();
                 fillComboBoxMTK();
+                fillTableLichSu();
             } catch (Exception e) {
-                MsgBox.alert(this, "Loi roi ku");
+                MsgBox.alert(this, "Lỗi truy vấn dữ liệu!");
                 e.printStackTrace();
             }
         }
@@ -1578,7 +1586,8 @@ public class QuanLy extends javax.swing.JFrame {
             capNhat_SoDu();
             tcDAO.delete(id);
             fillTableChiThu();
-            MsgBox.alert(this, "XOá thành công!");
+            MsgBox.alert(this, "Xoá thành công!");
+            init();
         } catch (Exception e) {
             e.printStackTrace();
             MsgBox.alert(this, "Lỗi!");

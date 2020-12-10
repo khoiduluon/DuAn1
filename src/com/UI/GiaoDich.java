@@ -72,6 +72,7 @@ public class GiaoDich extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(219, 246, 233));
         jPanel1.setPreferredSize(new java.awt.Dimension(302, 300));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -194,6 +195,7 @@ public class GiaoDich extends javax.swing.JFrame {
         });
         jPanel1.add(lblExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, 30));
 
+        background.setBackground(new java.awt.Color(219, 246, 233));
         background.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 backgroundKeyPressed(evt);
@@ -321,7 +323,7 @@ public class GiaoDich extends javax.swing.JFrame {
 
     private void lblExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseClicked
         this.dispose();
-        new QuanLy().fillTableMucTietKiem();
+        new QuanLy().setVisible(true);
     }//GEN-LAST:event_lblExitMouseClicked
 
     private void lblExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseExited
@@ -414,6 +416,7 @@ public class GiaoDich extends javax.swing.JFrame {
             capNhat_SoDu();
             MsgBox.alert(this, "Thêm thành công!");
             this.dispose();
+            ql.init();
             ql.fillTableChiThu();
             ql.setVisible(true);
         } catch (Exception e) {
@@ -431,6 +434,7 @@ public class GiaoDich extends javax.swing.JFrame {
     }
     
     NguoiDung getSoDu(){
+        NguoiDung nguoidung=new NguoiDung();
         NguoiDung nd = nddao.selectByid(Auth.user.getUser());
         double soDu = nd.getSoDu();
         if(rdoThu.isSelected()){
@@ -438,8 +442,9 @@ public class GiaoDich extends javax.swing.JFrame {
         } else {
             soDu -= Double.valueOf(txtSoTien.getText());
         }
-        nd.setSoDu(soDu);
-        return nd;
+        nguoidung.setSoDu(soDu);
+        nguoidung.setUser(Auth.user.getUser());
+        return nguoidung;
     }
 
     boolean checkError() {
