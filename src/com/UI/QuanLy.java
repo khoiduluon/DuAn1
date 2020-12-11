@@ -1387,6 +1387,7 @@ public class QuanLy extends javax.swing.JFrame {
                 int row = (int) (tblDanhSach.getValueAt(tblDanhSach.getSelectedRow(), 0));
                 mtkDAO.delete(row);
                 MsgBox.alert(this, "Xoá thành công!");
+                tienxoamtk();
                 fillTableMucTietKiem();
                 fillComboBoxMTK();
                 fillTableLichSu();
@@ -1647,5 +1648,26 @@ public class QuanLy extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    void tienxoamtk(){
+        NguoiDung nd=getTienDaTK();
+        try {
+            ndDAO.update(nd);
+            NguoiDung nguoidung= ndDAO.selectByid(Auth.user.getUser());
+            lblSoDu.setText(String.valueOf(nguoidung.getSoDu()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+    NguoiDung getTienDaTK(){
+        NguoiDung nguoidung=new NguoiDung();
+        double tien=(double)tblDanhSach.getValueAt(tblDanhSach.getSelectedRow(), 4);
+        NguoiDung nd = ndDAO.selectByid(Auth.user.getUser());
+        double soDu=nd.getSoDu();
+        soDu+=tien;
+        nguoidung.setSoDu(soDu);
+        nguoidung.setUser(Auth.user.getUser());
+        return nguoidung;
     }
 }

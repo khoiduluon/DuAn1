@@ -157,7 +157,7 @@ public class TietKiem extends javax.swing.JFrame {
 
     private void lblExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseClicked
         this.dispose();
-        new QuanLy().fillTableMucTietKiem();
+        new QuanLy().setVisible(true);
     }//GEN-LAST:event_lblExitMouseClicked
 
     private void lblExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblExitMouseExited
@@ -307,6 +307,7 @@ public class TietKiem extends javax.swing.JFrame {
             mtkdao.update(mt);
             lsDAO.insert(lstk);
             ql.fillTableChiThu();
+            this.dispose();
             new QuanLy().setVisible(true);
             ql.dispose();
         } catch (Exception e) {
